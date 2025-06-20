@@ -23,11 +23,10 @@ gem "config"
 # ユーザー認証を提供する
 gem "devise"
 
+gem "devise-jwt"
+
 # devise を日本語化する
 gem "devise-i18n"
-
-# ユーザーのトークン認証を提供する
-gem "devise_token_auth"
 
 # ページネーション機能を提供する
 gem "kaminari"

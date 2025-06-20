@@ -52,9 +52,10 @@ RUN apt-get update -qq && \
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
-# 7) 非 root ユーザーで実行
+# 7) 非 root ユーザーで実行 & 所有権を修正
 RUN useradd -m rails && \
-    chown -R rails:rails /rails
+    chown -R rails:rails /rails /usr/local/bundle
+
 USER rails
 
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
