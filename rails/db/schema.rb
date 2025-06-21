@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_183725) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_21_184422) do
   create_table "diagnoses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "診断したユーザーID"
     t.bigint "weed_id", null: false, comment: "推定された雑草ID"
@@ -24,6 +24,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_183725) do
     t.index ["user_id"], name: "index_diagnoses_on_user_id"
     t.index ["vegetable_id"], name: "index_diagnoses_on_vegetable_id"
     t.index ["weed_id"], name: "index_diagnoses_on_weed_id"
+  end
+
+  create_table "feedbacks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "diagnosis_id", null: false, comment: "診断ID"
+    t.text "feedback_text", null: false, comment: "フリーフォームの意見・感想"
+    t.integer "rating", null: false, comment: "評価"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diagnosis_id"], name: "index_feedbacks_on_diagnosis_id"
   end
 
   create_table "soil_vegetable_relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
