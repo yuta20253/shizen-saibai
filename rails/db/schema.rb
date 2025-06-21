@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_142714) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_21_175207) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false, comment: "名前"
     t.integer "role", default: 0, null: false, comment: "管理者区分"
@@ -29,6 +29,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_142714) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false, comment: "雑草名"
+    t.string "scientific_name", null: false, comment: "学名"
+    t.text "image_url", null: false, comment: "代表画像URL"
+    t.text "description", null: false, comment: "雑草の説明"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
