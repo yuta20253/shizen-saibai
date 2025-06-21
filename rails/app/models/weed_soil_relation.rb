@@ -1,0 +1,2 @@
+class WeedSoilRelation < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class Soil < ApplicationRecord
+end
