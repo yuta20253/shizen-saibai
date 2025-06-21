@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_175207) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_21_180108) do
+  create_table "soils", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "pH_level", default: 1, null: false, comment: "pH分類"
+    t.integer "drainage", default: 1, null: false, comment: "水はけ"
+    t.integer "fertility", default: 1, null: false, comment: "肥沃度"
+    t.text "description", null: false, comment: "土壌環境の特徴"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false, comment: "名前"
     t.integer "role", default: 0, null: false, comment: "管理者区分"
