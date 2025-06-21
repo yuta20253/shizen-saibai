@@ -1,0 +1,2 @@
+class SoilVegetableRelation < ApplicationRecord
+end

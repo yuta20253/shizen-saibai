@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_181225) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_21_182044) do
+  create_table "soil_vegetable_relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "soil_id", null: false, comment: "土壌ID"
+    t.bigint "vegetable_id", null: false, comment: "野菜ID"
+    t.integer "suitability", default: 1, null: false, comment: "適性度"
+    t.text "reason", null: false, comment: "選定理由(表示用)"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["soil_id"], name: "index_soil_vegetable_relations_on_soil_id"
+    t.index ["vegetable_id"], name: "index_soil_vegetable_relations_on_vegetable_id"
+  end
+
   create_table "soils", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "pH_level", default: 1, null: false, comment: "pH分類"
     t.integer "drainage", default: 1, null: false, comment: "水はけ"
@@ -59,4 +70,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_181225) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "soil_vegetable_relations", "soils"
+  add_foreign_key "soil_vegetable_relations", "vegetables"
 end
