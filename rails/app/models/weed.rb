@@ -1,0 +1,2 @@
+class Weed < ApplicationRecord
+end
