@@ -24,16 +24,14 @@ Rails.application.routes.draw do
       }
       # 診断履歴（マイページ）
       resources :histories, only: [:index, :show, :create]
-      # 画像アップロード処理
-      resources :uploads, only: [:create]
-      # 診断結果（雑草→土壌→野菜）
-      resources :diagnoses, only: [:show]
+      # 画像アップロード・診断結果（雑草→土壌→野菜）
+      resource :diagnosis, only: [:create]
       # 野菜詳細情報
       resources :vegetables, only: [:index, :show]
       # 管理者用：知識ベース管理
-      namespace :admin do
-        resources :knowledges, only: [:index, :create, :update, :destroy]
-      end
+      # namespace :admin do
+      #   resources :knowledges, only: [:index, :create, :update, :destroy]
+      # end
     end
   end
 end
