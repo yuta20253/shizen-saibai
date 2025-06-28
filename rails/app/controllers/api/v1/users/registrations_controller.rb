@@ -1,4 +1,4 @@
-class API::V1::UsersRegistrationsController < Devise::RegistrationsController
+class API::V1::Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
   private
@@ -7,7 +7,7 @@ class API::V1::UsersRegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       render json: {
         status: { code: 200, message: 'Signed up successfully.' },
-        data: resource
+        data: resource.slice(:id, :email, :name)
       }, status: :ok
     else
       render json: {
