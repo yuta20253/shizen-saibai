@@ -1,4 +1,4 @@
 class Api::V1::DiagnosesController < ApplicationController
-  def show
+  def create
   end
 end
