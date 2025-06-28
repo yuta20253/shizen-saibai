@@ -5,10 +5,10 @@ class API::V1::Users::SessionsController < Devise::SessionsController
   private
 
   # ログイン成功時のレスポンス
-  def respond_with(resource, _opts = {})
+  def respond_with(_resource, _opts = {})
     render json: {
-      status: { code: 200, message: 'Logged in successfully.' },
-      data:   resource
+      status: { code: 200 },
+      message: "'Logged in successfully.",
     }, status: :ok
   end
 
