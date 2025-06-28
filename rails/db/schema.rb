@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_184422) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_23_143450) do
   create_table "diagnoses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "診断したユーザーID"
     t.bigint "weed_id", null: false, comment: "推定された雑草ID"
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_184422) do
     t.datetime "confirmation_sent_at", comment: "メール確認送信日時"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unconfirmed_email"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
