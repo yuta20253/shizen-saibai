@@ -9,6 +9,11 @@ class API::V1::Users::SessionsController < Devise::SessionsController
     render json: {
       status: { code: 200 },
       message: "'Logged in successfully.",
+      user: {
+        id: resource.id,
+        name: resource.name,
+        email: resource.email
+      }
     }, status: :ok
   end
 
