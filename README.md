@@ -26,23 +26,28 @@
 docker compose exec rails bash
 ```
 2. railsのコマンドを使用するとき
+
+(例 controller作成)
 ```
-bin/rails g controller todos (例 controller作成)
+bin/rails g controller todos 
 ```
+(例 model作成)
 ```
-bin/rails g model Todo (例 model作成)
+bin/rails g model Todo 
 ```
 
 * Next.js
 
-1. frontendディレクトリで
+ frontendディレクトリで
 ```
 npm run dev
 ```
 
 * FastAPI
+
+ アクセスするだけ
 ```
-http://localhost:8000/ にアクセスするだけ
+http://localhost:8000/ 
 ```
 # Note
 
