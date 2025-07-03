@@ -1,5 +1,4 @@
-# shizen-saibai
-雑草から見るお薦めお野菜
+# shizen-saibakidouhouhouから見るお薦めお野菜
 
 # DEMO
 
@@ -39,6 +38,11 @@ bin/rails g model Todo (例 model作成)
 1. frontendディレクトリで
 ```
 npm run dev
+```
+
+* FastAPI
+```
+http://localhost:8000/ にアクセスするだけ
 ```
 # Note
 
