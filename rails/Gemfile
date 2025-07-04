@@ -28,6 +28,8 @@ gem "devise-jwt"
 # devise を日本語化する
 gem "devise-i18n"
 
+gem "rswag"
+
 # ページネーション機能を提供する
 gem "kaminari"
 
