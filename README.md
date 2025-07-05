@@ -1,4 +1,4 @@
-# shizen-saibakidouhouhouから見るお薦めお野菜
+# shizen-saibai
 
 # DEMO
 
@@ -19,15 +19,28 @@
 * MySQL: 8.0.32
 
 # 使い方
-* Rails
+* インストール方法
+```
+https://github.com/yuta20253/shizen-saibai.git
+```
+## Rails
+* サーバー立ち上げ
+```
+docker compose up -d # ※up -d後、localhost:3000でOK
+```
 
-1. railsディレクトリでコンテナへ入る
 ```
 docker compose exec rails bash
 ```
-2. railsのコマンドを使用するとき
 
-(例 controller作成)
+コンテナ内での操作
+```
+bin/rails db:prepare # DB作成＋マイグレーション実行
+```
+```
+bin/rails db:seed # 初期データ投入
+```
+railsのコマンドを使用するとき(例 controller作成)
 ```
 bin/rails g controller todos 
 ```
@@ -36,18 +49,57 @@ bin/rails g controller todos
 bin/rails g model Todo 
 ```
 
-* Next.js
+## Next.js
 
  frontendディレクトリで
 ```
+cd frontend
 npm run dev
 ```
 
-* FastAPI
+## FastAPI
 
- アクセスするだけ
 ```
-http://localhost:8000/ 
+http://localhost:8000/ # アクセスするだけ
+```
+# プロジェクト構成
+```
+.
+├── README.md
+├── api
+│   ├── Dockerfile
+│   ├── app
+│   └── requirements.txt
+├── docker-compose.yml
+├── frontend
+│   ├── README.md
+│   ├── app
+│   ├── next-env.d.ts
+│   ├── next.config.ts
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   └── tsconfig.json
+└── rails
+    ├── Dockerfile
+    ├── Gemfile
+    ├── Gemfile.lock
+    ├── README.md
+    ├── Rakefile
+    ├── app
+    ├── bin
+    ├── config
+    ├── config.ru
+    ├── db
+    ├── entrypoint.sh
+    ├── lib
+    ├── log
+    ├── public
+    ├── spec
+    ├── storage
+    ├── tmp
+    └── vendor
 ```
 # Note
 
