@@ -21,7 +21,7 @@
 # 使い方
 * インストール方法
 ```
-https://github.com/yuta20253/shizen-saibai.git
+git clone git@github.com:yuta20253/shizen-saibai.git
 ```
 ## Rails
 * サーバー立ち上げ
