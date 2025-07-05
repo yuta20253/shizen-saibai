@@ -4,7 +4,4 @@ class Api::V1::HistoriesController < ApplicationController
 
   def show
   end
-
-  def create
-  end
 end

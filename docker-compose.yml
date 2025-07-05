@@ -6,8 +6,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: myapp_development
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
       TZ: Asia/Tokyo
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -25,14 +23,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./rails:/myapp
+      - ./rails:/rails
     depends_on:
       - db
     environment:
       DATABASE_HOST: db
       DATABASE_PORT: 3306
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: password
       RAILS_ENV: development
     tty: true
     stdin_open: true

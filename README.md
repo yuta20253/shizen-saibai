@@ -1,5 +1,4 @@
-# shizen-saibai
-雑草から見るお薦めお野菜
+# shizen-saibakidouhouhouから見るお薦めお野菜
 
 # DEMO
 
@@ -9,9 +8,7 @@
 
 "hoge"のセールスポイントや差別化などを説明する
 
-# Requirement
-
-"hoge"を動かすのに必要なライブラリなどを列挙する
+# 使用バージョン
 
 * Next.js: 15.3.3
 * React: 19.1.0
@@ -19,26 +16,39 @@
 * Ruby: 3.4.4
 * Python: 3.13
 * FastAPI: 0.115.12
-* MySQL: 8.0.43
+* MySQL: 8.0.32
 
-# Installation
+# 使い方
+* Rails
 
-Requirementで列挙したライブラリなどのインストール方法を説明する
+1. railsディレクトリでコンテナへ入る
+```
+docker compose exec rails bash
+```
+2. railsのコマンドを使用するとき
 
-```bash
-pip install huga_package
+(例 controller作成)
+```
+bin/rails g controller todos 
+```
+(例 model作成)
+```
+bin/rails g model Todo 
 ```
 
-# Usage
+* Next.js
 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
-
-```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
+ frontendディレクトリで
+```
+npm run dev
 ```
 
+* FastAPI
+
+ アクセスするだけ
+```
+http://localhost:8000/ 
+```
 # Note
 
 注意点などがあれば書く
