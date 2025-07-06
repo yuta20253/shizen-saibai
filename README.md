@@ -54,6 +54,7 @@ bin/rails g model Todo
  frontendディレクトリで
 ```
 cd frontend
+npm ci
 npm run dev
 ```
 
