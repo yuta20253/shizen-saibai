@@ -24,9 +24,13 @@
 git clone git@github.com:yuta20253/shizen-saibai.git
 ```
 ## Rails
+
+- 開発者から.envファイルをもらう
+
+
 * サーバー立ち上げ
 ```
-docker compose up -d # ※up -d後、localhost:3000でOK
+docker compose up -d # ※up -d後、localhost:5000でOK
 ```
 
 ```
