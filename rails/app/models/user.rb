@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
+
+  has_many :diagnoses
 end
