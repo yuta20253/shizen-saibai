@@ -21,7 +21,7 @@ services:
     build: ./rails
     command: bash -c "bundle exec rails s -b '0.0.0.0'"
     ports:
-      - "3000:3000"
+      - "5000:3000"
     volumes:
       - ./rails:/rails
     depends_on:
