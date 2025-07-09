@@ -1,5 +1,13 @@
 class API::V1::Users::RegistrationsController < Devise::RegistrationsController
+  include ApiV1UserHelpers
   respond_to :json
+
+  def destroy
+    resource = current_user
+    resource.soft_delete! # 論理削除＋メールマスキング処理
+    sign_out(resource) # JWTなどのサインアウト処理
+    render json: { message: '退会が完了しました。' }, status: :ok
+  end
 
   private
 
