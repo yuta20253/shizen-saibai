@@ -80,6 +80,7 @@ group :development, :test do
 
   # テストフレームワーク rspec を導入する
   gem "rspec-rails"
+  gem 'rspec'
 
   # rubocop を使えるようにする。
   gem "rubocop", "~> 1.0" # Or a compatible version
