@@ -21,7 +21,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     resource = current_user
     resource.soft_delete! # 論理削除＋メールマスキング処理
     sign_out(resource) # JWTなどのサインアウト処理
-    render json: { message: 'サインアウトができました。' }, status: :ok
+    render json: { message: '退会しました。' }, status: :ok
   end
 
   private
