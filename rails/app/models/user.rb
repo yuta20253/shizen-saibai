@@ -1,11 +1,10 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # JTIMatcherを使うなら、revocation_strategyはJTIMatcherにする
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: self
-
-  include Devise::JWT::RevocationStrategies::JTIMatcher
+         :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::JTIMatcher
 
   has_many :diagnoses
 
@@ -16,6 +15,10 @@ class User < ApplicationRecord
                     uniqueness: { scope: :deleted_at, message: 'は既に登録されています' },
                     format: { with: URI::MailTo::EMAIL_REGEXP }
 
+  # JWT認証用
+  def self.find_for_jwt_authentication(sub:)
+    find_by(id: sub)
+  end
 
   def generate_masked_email
     loop do
@@ -23,6 +26,7 @@ class User < ApplicationRecord
       break email unless User.exists?(email: email)
     end
   end
+
   # 論理削除＋メールマスキング
   def soft_delete!
     update!(
