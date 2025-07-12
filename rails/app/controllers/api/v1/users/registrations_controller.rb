@@ -1,7 +1,10 @@
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   include ApiV1UserHelpers
   respond_to :json
+  skip_before_action :verify_authenticity_token, raise: false
   skip_before_action :require_no_authentication, only: [:create]
+  skip_before_action :authenticate_user!, only: [:create], raise: false
+
   def create
     user = User.new(sign_up_params)
 
