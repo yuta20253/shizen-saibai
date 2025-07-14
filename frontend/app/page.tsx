@@ -5,7 +5,7 @@ import { Box, Button } from '@mui/material';
 import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect } from 'react';
-import FeatureCarousel from './components/FeatureCarousel';
+import FeatureCarousel from './FeatureCarousel/home';
 
 export default function Home() {
   useEffect(() => {
