@@ -1,95 +1,119 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import Typography from '@mui/material/Typography';
+import { Box, Button } from '@mui/material';
+import GrassIcon from '@mui/icons-material/Grass';
+import SearchIcon from '@mui/icons-material/Search';
+import { useEffect } from 'react';
+import FeatureCarousel from './components/FeatureCarousel';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('http://localhost:5000', {
+        cache: 'no-store',
+      });
+      const data = await res.json();
+      console.log(data);
+    };
+    fetchData();
+  }, []);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    <Box>
+      <Typography
+        variant="h5"
+        component="p"
+        textAlign="center"
+        sx={{ fontWeight: 'medium', mt: 4, mb: 2 }}
+      >
+        あなたの畑を味方に。
+        <br />
+        雑草解析で最適野菜を。
+        <br />
+        スマホひとつで発見！
+      </Typography>
+      <Box
+        component="div"
+        sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center', mt: 4 }}
+      >
+        <Button color="inherit" variant="outlined">
+          いますぐ解析する
+        </Button>
+      </Box>
+      <Box sx={{ mt: 6 }}>
+        <Typography textAlign="center" sx={{ mb: 2 }}>
+          使える機能
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              border: '1px solid #ccc',
+              borderRadius: 1,
+              padding: 1,
+              gap: 1,
+              mb: 4,
+              width: '80%',
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <GrassIcon />
+              <Typography>雑草撮影×土壌診断</Typography>
+            </Box>
+            <Box>
+              雑草写真からAIが
+              <br />
+              畑の土壌コンディションを解析
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              border: '1px solid #ccc',
+              borderRadius: 1,
+              padding: 1,
+              gap: 1,
+              mb: 4,
+              width: '80%',
+            }}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <SearchIcon />
+              <Typography>最適野菜レコメンド</Typography>
+            </Box>
+            <Box>
+              あなたの土壌に合う
+              <br />
+              野菜品種を自動提案
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box>
+        <Typography textAlign="center">はじめての方へ</Typography>
+        <FeatureCarousel />
+      </Box>
+    </Box>
   );
 }
