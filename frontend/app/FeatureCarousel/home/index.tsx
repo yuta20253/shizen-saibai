@@ -6,54 +6,60 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { Box, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { useState, useEffect } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const features = [
   {
-    icon: <CameraAltIcon />,
+    icon: <CameraAltIcon fontSize="small" />,
     title: '雑草の撮影・選択',
     description: (
       <>
-        スマホで雑草をその場で撮影、
+        スマホで雑草を撮影、
         <br />
-        またはフォトライブラリから
-        <br />
-        アップロードしてください
+        または画像を選択
       </>
     ),
   },
   {
-    icon: <GrassIcon />,
-    title: '雑草撮影×土壌診断',
+    icon: <GrassIcon fontSize="small" />,
+    title: '雑草×土壌診断',
     description: (
       <>
         雑草写真からAIが
         <br />
-        畑の土壌コンディションを解析
+        土壌を解析
       </>
     ),
   },
   {
-    icon: <SearchIcon />,
-    title: '最適野菜レコメンド',
+    icon: <SearchIcon fontSize="small" />,
+    title: '野菜レコメンド',
     description: (
       <>
-        あなたの土壌に合う
+        土壌に合う
         <br />
-        野菜品種を自動提案
+        野菜を提案
       </>
     ),
   },
 ];
 
 export default function FeatureCarousel() {
+  const [isClient, setIsClient] = useState<boolean>(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, mx: 'auto', mt: 4 }}>
+    <Box sx={{ width: '100%', maxWidth: 320, mx: 'auto', mt: 3, pb: 6 }}>
       <Swiper
         modules={[Pagination, Navigation]}
-        spaceBetween={20}
+        spaceBetween={12}
         slidesPerView={1}
         pagination={{ clickable: true }}
         navigation
@@ -68,17 +74,17 @@ export default function FeatureCarousel() {
                 justifyContent: 'center',
                 border: '1px solid #ccc',
                 borderRadius: 2,
-                padding: 3,
-                minHeight: 200,
+                padding: 2,
+                minHeight: 160,
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
                 {feature.icon}
-                <Typography variant="subtitle1" fontWeight="bold">
+                <Typography variant="subtitle2" fontWeight="bold">
                   {feature.title}
                 </Typography>
               </Box>
-              <Typography variant="body2" textAlign="center">
+              <Typography variant="caption" textAlign="center" lineHeight={1.4}>
                 {feature.description}
               </Typography>
             </Box>
