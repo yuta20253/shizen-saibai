@@ -1,7 +1,7 @@
 import './globals.css';
 import 'swiper/css';
 import { Inter } from 'next/font/google';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme/theme';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -15,13 +15,15 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" style={{ height: '100%', margin: 0 }}>
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Header />
-          {children}
-          <Footer />
+          <Box display="flex" flexDirection="column" minHeight="100vh">
+            <Header />
+            {children}
+            <Footer />
+          </Box>
         </ThemeProvider>
       </body>
     </html>
