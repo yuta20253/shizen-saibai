@@ -7,8 +7,8 @@ import Toolbar from '@mui/material/Toolbar';
 
 export default function Header() {
   return (
-    <Box>
-      <AppBar position="static">
+    <>
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             ロゴ
@@ -23,6 +23,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-    </Box>
+      <Toolbar />
+    </>
   );
 }
