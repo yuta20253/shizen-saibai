@@ -4,21 +4,9 @@ import Typography from '@mui/material/Typography';
 import { Box, Button } from '@mui/material';
 import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
-import { useEffect } from 'react';
 import FeatureCarousel from './FeatureCarousel/home';
 
 export default function Home() {
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('http://localhost:5000', {
-        cache: 'no-store',
-      });
-      const data = await res.json();
-      console.log(data);
-    };
-    fetchData();
-  }, []);
-
   return (
     <Box>
       <Typography
