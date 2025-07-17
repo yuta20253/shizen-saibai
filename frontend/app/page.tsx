@@ -4,9 +4,9 @@ import Typography from '@mui/material/Typography';
 import { Box, Button } from '@mui/material';
 import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
-import FeatureCarousel from './FeatureCarousel/home';
+import { FeatureCarousel } from '../components/FeatureCarousel';
 
-export default function Home() {
+export const Home = () => {
   return (
     <Box>
       <Typography
@@ -104,4 +104,4 @@ export default function Home() {
       </Box>
     </Box>
   );
-}
+};
