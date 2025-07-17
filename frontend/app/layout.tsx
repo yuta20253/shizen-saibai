@@ -3,9 +3,8 @@ import 'swiper/css';
 import { Inter } from 'next/font/google';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme/theme';
-import Header from './components/Header';
-import Footer from './components/Footer';
-
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
