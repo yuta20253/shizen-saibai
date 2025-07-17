@@ -6,7 +6,7 @@ import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
 import { FeatureCarousel } from '../components/FeatureCarousel';
 
-export const Home = () => {
+const Home = () => {
   return (
     <Box>
       <Typography
@@ -105,3 +105,5 @@ export const Home = () => {
     </Box>
   );
 };
+
+export default Home;
