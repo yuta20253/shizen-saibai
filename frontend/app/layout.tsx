@@ -1,5 +1,3 @@
-import './globals.css';
-import 'swiper/css';
 import { Inter } from 'next/font/google';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme/theme';

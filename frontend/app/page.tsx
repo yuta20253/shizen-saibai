@@ -1,5 +1,7 @@
 'use client';
 
+import './globals.css';
+import 'swiper/css';
 import Typography from '@mui/material/Typography';
 import { Box, Button } from '@mui/material';
 import GrassIcon from '@mui/icons-material/Grass';
