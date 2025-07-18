@@ -12,7 +12,7 @@ export const Footer = () => {
           bottom: 0,
           left: 0,
           width: '100%',
-          height: 60,
+          height: 50,
           zIndex: 999,
           pointerEvents: 'none',
         }}
@@ -55,7 +55,7 @@ export const Footer = () => {
       <Box
         sx={{
           position: 'fixed',
-          bottom: 28,
+          bottom: 16,
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 1000,
