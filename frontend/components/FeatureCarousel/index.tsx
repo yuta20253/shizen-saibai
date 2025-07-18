@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 
 const features = [
   {
-    icon: <CameraAltIcon fontSize="small" />,
+    icon: <CameraAltIcon sx={{ fontSize: 64 }} />,
     title: '雑草の撮影・選択',
     description: (
       <>
@@ -21,7 +21,7 @@ const features = [
     ),
   },
   {
-    icon: <GrassIcon fontSize="small" />,
+    icon: <GrassIcon sx={{ fontSize: 64 }} />,
     title: '雑草×土壌診断',
     description: (
       <>
@@ -32,7 +32,7 @@ const features = [
     ),
   },
   {
-    icon: <SearchIcon fontSize="small" />,
+    icon: <SearchIcon sx={{ fontSize: 64 }} />,
     title: '野菜レコメンド',
     description: (
       <>
@@ -62,15 +62,24 @@ export const FeatureCarousel = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '1px solid #ccc',
+                border: 1,
+                borderColor: 'grey.300',
                 borderRadius: 2,
                 padding: 2,
                 minHeight: 160,
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 1,
+                  mb: 0.5,
+                }}
+              >
                 {feature.icon}
-                <Typography variant="subtitle2" fontWeight="bold">
+                <Typography variant="subtitle1" fontWeight="bold">
                   {feature.title}
                 </Typography>
               </Box>

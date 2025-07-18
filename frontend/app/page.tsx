@@ -8,13 +8,8 @@ import { FeatureCarousel } from '../components/FeatureCarousel';
 
 const Home = () => {
   return (
-    <Box>
-      <Typography
-        variant="h5"
-        component="p"
-        textAlign="center"
-        sx={{ fontWeight: 'medium', mt: 4, mb: 2 }}
-      >
+    <Box sx={{ padding: 2, maxWidth: '960px', margin: '0 auto' }}>
+      <Typography variant="h5" component="p" textAlign="center" sx={{ fontWeight: 'bold', mt: 4 }}>
         あなたの畑を味方に。
         <br />
         雑草解析で最適野菜を。
@@ -25,81 +20,77 @@ const Home = () => {
         component="div"
         sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center', mt: 4 }}
       >
-        <Button color="inherit" variant="outlined">
+        <Button
+          size="large"
+          variant="contained"
+          sx={{
+            backgroundColor: 'primary.main',
+            color: '#fff',
+            fontWeight: 'bold',
+            borderColor: 'primary.main',
+          }}
+        >
           いますぐ解析する
         </Button>
       </Box>
-      <Box sx={{ mt: 6 }}>
-        <Typography textAlign="center" sx={{ mb: 2 }}>
+      <Box sx={{ mt: 4 }}>
+        <Typography
+          variant="h6"
+          textAlign="center"
+          sx={{ fontWeight: 'bold', textDecoration: 'underline' }}
+        >
           使える機能
         </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 2,
-          }}
-        >
+        <Box mt={2} gap={2}>
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              border: '1px solid #ccc',
+              border: 1,
+              borderColor: 'grey.300',
               borderRadius: 1,
               padding: 1,
               gap: 1,
               mb: 4,
-              width: '80%',
+              width: '100%',
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <GrassIcon />
-              <Typography>雑草撮影×土壌診断</Typography>
+              <GrassIcon sx={{ fontSize: '4rem' }} />
+              <Typography variant="h6">雑草撮影×土壌診断</Typography>
             </Box>
-            <Box>
-              雑草写真からAIが
-              <br />
-              畑の土壌コンディションを解析
-            </Box>
+            <Typography fontSize="small">雑草写真からAIが畑の土壌コンディションを解析</Typography>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 2,
-          }}
-        >
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              border: '1px solid #ccc',
+              border: 1,
+              borderColor: 'grey.300',
               borderRadius: 1,
               padding: 1,
               gap: 1,
-              mb: 4,
-              width: '80%',
+              width: '100%',
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <SearchIcon />
-              <Typography>最適野菜レコメンド</Typography>
+              <SearchIcon sx={{ fontSize: '4rem' }} />
+              <Typography variant="h6">最適野菜レコメンド</Typography>
             </Box>
-            <Box>
-              あなたの土壌に合う
-              <br />
-              野菜品種を自動提案
-            </Box>
+            <Box fontSize="small">あなたの土壌に合う野菜品種を自動提案</Box>
           </Box>
         </Box>
       </Box>
-      <Box>
-        <Typography textAlign="center">はじめての方へ</Typography>
+      <Box my={4}>
+        <Typography
+          variant="h6"
+          textAlign="center"
+          sx={{ fontWeight: 'bold', textDecoration: 'underline' }}
+        >
+          はじめての方へ
+        </Typography>
         <FeatureCarousel />
       </Box>
     </Box>
