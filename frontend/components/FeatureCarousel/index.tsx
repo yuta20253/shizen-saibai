@@ -44,7 +44,7 @@ const features = [
   },
 ];
 
-export const FeatureCarousel = () => {
+export const FeatureCarousel = (): React.JSX.Element => {
   return (
     <Box sx={{ width: '100%', maxWidth: 320, mx: 'auto', mt: 3, pb: 6 }}>
       <Swiper

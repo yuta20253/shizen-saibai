@@ -8,7 +8,7 @@ import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
 import { FeatureCarousel } from '../components/FeatureCarousel';
 
-const Home = () => {
+const Home = (): React.JSX.Element => {
   return (
     <Box sx={{ padding: 2, maxWidth: '960px', margin: '0 auto' }}>
       <Typography variant="h5" component="p" textAlign="center" sx={{ fontWeight: 'bold', mt: 4 }}>

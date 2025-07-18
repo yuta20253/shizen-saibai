@@ -5,7 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import { Box, Button } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 
-export const Header = () => {
+export const Header = (): React.JSX.Element => {
   return (
     <>
       <AppBar position="fixed">
