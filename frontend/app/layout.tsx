@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Box display="flex" flexDirection="column" minHeight="100vh">
-            <Header showAuthButton={true} user={mockUser} />
+            <Header showAuthButton={true} user={undefined} />
             {children}
             <Footer />
           </Box>
