@@ -25,21 +25,23 @@ export const Header = ({ showAuthButton = false, user }: Props): React.JSX.Eleme
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             ロゴ
           </Typography>
-          {showAuthButton && user ? (
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <AccountCircleIcon />
-              {user.name}
-            </Box>
-          ) : (
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <Button color="inherit" variant="outlined">
-                ログイン
-              </Button>
-              <Button color="inherit" variant="outlined">
-                新規登録
-              </Button>
-            </Box>
-          )}
+          {showAuthButton ? (
+            user ? (
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <AccountCircleIcon />
+                {user.name}
+              </Box>
+            ) : (
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <Button color="inherit" variant="outlined" href="/login">
+                  ログイン
+                </Button>
+                <Button color="inherit" variant="outlined">
+                  新規登録
+                </Button>
+              </Box>
+            )
+          ) : null}
         </Toolbar>
       </AppBar>
       <Toolbar />
