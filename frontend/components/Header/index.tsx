@@ -19,9 +19,11 @@ export const Header = (): React.JSX.Element => {
     <>
       <AppBar position="fixed">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            ロゴ
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <Button component="a" href='/' sx={{ backgroundColor: '#013220', color: '#ffffff' }}>
+              ロゴ
+            </Button>
+          </Box>
           {!isLoginPage ? (
             user ? (
               <Box sx={{ display: 'flex', gap: 2 }}>
