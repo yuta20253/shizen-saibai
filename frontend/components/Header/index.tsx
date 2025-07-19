@@ -5,19 +5,16 @@ import AppBar from '@mui/material/AppBar';
 import { Box, Button } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth } from '@/context/AuthContext';
+import { usePathname } from 'next/navigation';
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-};
+export const Header = (): React.JSX.Element => {
+  const { user } = useAuth();
+  console.log(user);
+  const pathName = usePathname();
 
-type Props = {
-  showAuthButton?: boolean;
-  user?: User;
-};
+  const isLoginPage = pathName === '/login';
 
-export const Header = ({ showAuthButton = false, user }: Props): React.JSX.Element => {
   return (
     <>
       <AppBar position="fixed">
@@ -25,7 +22,7 @@ export const Header = ({ showAuthButton = false, user }: Props): React.JSX.Eleme
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             ロゴ
           </Typography>
-          {showAuthButton ? (
+          {!isLoginPage ? (
             user ? (
               <Box sx={{ display: 'flex', gap: 2 }}>
                 <AccountCircleIcon />
