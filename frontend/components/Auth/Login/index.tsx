@@ -18,11 +18,11 @@ export const LoginForm = (): React.JSX.Element => {
       <Box component="form" sx={{ width: '100%', maxWidth: 600, mx: 'auto', mt: 5 }} onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ mb: 2 }}>
           <Typography>メールアドレス</Typography>
-          <TextField fullWidth variant="outlined" {...register('email', { required: 'メールアドレスを入力してください' })} />
+          <TextField fullWidth variant="outlined" {...register('email', { required: 'メールアドレスを入力してください', pattern: { value: /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/, message: 'メールアドレスの形式が正しくありません'} })} error={!!errors.email} helperText={errors.email?.message} />
         </Box>
         <Box sx={{ mb: 2 }}>
           <Typography>パスワード</Typography>
-          <TextField fullWidth variant="outlined" {...register('password', { required: 'パスワードを入力してください' })} />
+          <TextField type='password' fullWidth variant="outlined" {...register('password', { required: 'パスワードを入力してください', minLength: { value: 8, message: '8文字以上で入力してください' } })} error={!!errors.password} helperText={errors.password?.message} />
         </Box>
         <Box sx={{ my: 4 }}>
           <Button type='submit' sx={{ width: '100%', backgroundColor: '#000000', color: '#ffffff', p: 2, fontSize: 'large' }}>ログイン</Button>
