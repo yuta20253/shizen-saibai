@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
 
   # Defines the root path route ("/")
-  # root "posts#index"
+
+  get "/", to: "health_check#index"
   namespace :api do
     namespace :v1 do
-      get "health_check", to: "health_check#index"
       devise_for :users,
       path: "",
       controllers: {
