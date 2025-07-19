@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Box, Button } from '@mui/material';
 import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
-import { FeatureCarousel } from '../components/FeatureCarousel';
+import { FeatureCarousel } from '@components/FeatureCarousel';
 
 const Home = (): React.JSX.Element => {
   return (
