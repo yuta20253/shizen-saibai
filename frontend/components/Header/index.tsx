@@ -20,7 +20,7 @@ export const Header = (): React.JSX.Element => {
       <AppBar position="fixed">
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-            <Button component="a" href='/' sx={{ backgroundColor: '#013220', color: '#ffffff' }}>
+            <Button component="a" href="/" sx={{ backgroundColor: '#013220', color: '#ffffff' }}>
               ロゴ
             </Button>
           </Box>
