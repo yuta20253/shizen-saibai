@@ -2,6 +2,9 @@ import { Button, Typography } from '@mui/material';
 import { Box, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Link from 'next/link';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 type UserForm = {
   email: string;
@@ -9,13 +12,42 @@ type UserForm = {
 };
 
 export const LoginForm = (): React.JSX.Element => {
+  const router = useRouter();
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserForm>();
   const onSubmit: SubmitHandler<UserForm> = (data: UserForm) => {
-    console.log(data);
+    const url = 'http://localhost:5000/api/v1/login';
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    const formData = {
+      email: data.email,
+      password: data.password,
+    };
+
+    console.log('formData:', formData);
+
+    axios({ method: 'POST', headers: headers, url: url, data: formData })
+      .then((res: AxiosResponse) => {
+        console.log(res);
+        const token = res.headers['authorization']?.split(' ')[1];
+        console.log('JWT Token:', token);
+        localStorage.setItem('token', token || '');
+        if (res.data.user) {
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          login(res.data.user);
+        }
+        router.push('/');
+      })
+      .catch((e: AxiosError<{ error: string }>) => {
+        console.log(e.message);
+      });
   };
   return (
     <Box sx={{ padding: 2, width: '100%' }}>
