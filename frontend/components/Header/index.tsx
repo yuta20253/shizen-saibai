@@ -27,7 +27,7 @@ export const Header = (): React.JSX.Element => {
             user ? (
               <Box sx={{ display: 'flex', gap: 2 }}>
                 <AccountCircleIcon />
-                {user.name}
+                {user ? user.name : 'ユーザー情報取得中'}
               </Box>
             ) : (
               <Box sx={{ display: 'flex', gap: 2 }}>
