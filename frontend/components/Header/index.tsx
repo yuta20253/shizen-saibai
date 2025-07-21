@@ -12,7 +12,8 @@ export const Header = (): React.JSX.Element => {
   console.log(user);
   const pathName = usePathname();
 
-  const isLoginPage = pathName === '/login';
+  const hideAuthButtonPaths = ['/login', '/signup'];
+  const showAuth = !hideAuthButtonPaths.includes(pathName);
 
   return (
     <>
@@ -23,7 +24,7 @@ export const Header = (): React.JSX.Element => {
               ロゴ
             </Button>
           </Box>
-          {!isLoginPage ? (
+          {showAuth ? (
             user ? (
               <Box sx={{ display: 'flex', gap: 2 }}>
                 <AccountCircleIcon />
