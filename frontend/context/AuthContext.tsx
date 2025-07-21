@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 type User = {
   id: number;
@@ -10,26 +10,22 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
-  login: () => void;
+  login: (user: User) => void;
   logout: () => void;
 };
 
-const mockUser = {
-  id: 1,
-  name: 'テストユーザー',
-  email: 'test.sample@example.com',
-};
+// const mockUser = {
+//   id: 1,
+//   name: 'テストユーザー',
+//   email: 'test.sample@example.com',
+// };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    // setUser(mockUser);
-  }, []);
-
-  const login = () => setUser(mockUser);
+  const login = (user: User) => setUser(user);
   const logout = () => setUser(null);
 
   return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
