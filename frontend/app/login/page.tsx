@@ -1,6 +1,6 @@
 'use client';
 
-import { LoginForm } from '@/components/Auth/Login';
+import { LoginForm } from '@/features/Login';
 import { Box, Typography } from '@mui/material';
 
 const LoginPage = (): React.JSX.Element => {
