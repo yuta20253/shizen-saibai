@@ -41,5 +41,6 @@ module Myapp
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.i18n.default_locale = :ja
+    config.enable_reloading = true
   end
 end
