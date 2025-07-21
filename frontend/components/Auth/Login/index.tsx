@@ -43,7 +43,7 @@ export const LoginForm = (): React.JSX.Element => {
           localStorage.setItem('user', JSON.stringify(res.data.user));
           login(res.data.user);
         }
-        router.push('/');
+        router.push('/mypage');
       })
       .catch((e: AxiosError<{ error: string }>) => {
         console.log(e.message);
