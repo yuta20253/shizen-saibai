@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type User = {
   id: number;
@@ -14,18 +14,26 @@ type AuthContextType = {
   logout: () => void;
 };
 
-// const mockUser = {
-//   id: 1,
-//   name: 'テストユーザー',
-//   email: 'test.sample@example.com',
-// };
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = (user: User) => setUser(user);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error('ユーザー情報の復元に失敗:', error);
+      }
+    }
+  }, []);
+
+  const login = (user: User) => {
+    setUser(user);
+  };
   const logout = () => setUser(null);
 
   return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
