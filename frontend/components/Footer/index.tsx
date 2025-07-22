@@ -7,10 +7,10 @@ import { usePathname } from 'next/navigation';
 
 export const Footer = (): React.JSX.Element | null => {
   const pathName = usePathname();
-  const hideAuthButtonPaths = ['/login', '/signup'];
-  const showAuth = !hideAuthButtonPaths.includes(pathName);
+  const hiddenPaths = ['/login', '/signup'];
+  const hidden = !hiddenPaths.includes(pathName);
 
-  if (!showAuth) return null;
+  if (!hidden) return null;
 
   return (
     <Box
