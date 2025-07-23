@@ -1,5 +1,6 @@
 'use client';
 
+import { loginAuth } from '@/libs/services/auth';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type User = {
@@ -10,7 +11,7 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
-  login: (user: User) => void;
+  login: ({ email, password }: { email: string; password: string }) => Promise<void>;
   logout: () => void;
 };
 
@@ -31,9 +32,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = (user: User) => {
+  const login = async ({ email, password }: { email: string; password: string }) => {
+    const { token, user } = await loginAuth({ email, password });
+
+    // ローカルストレージに保存
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     setUser(user);
   };
+
   const logout = () => setUser(null);
 
   return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;

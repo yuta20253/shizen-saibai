@@ -19,35 +19,13 @@ export const LoginForm = (): React.JSX.Element => {
     handleSubmit,
     formState: { errors },
   } = useForm<UserForm>();
-  const onSubmit: SubmitHandler<UserForm> = (data: UserForm) => {
-    const url = 'http://localhost:5000/api/v1/login';
-    const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
+  const onSubmit: SubmitHandler<UserForm> = async (data: UserForm) => {
+    const { email, password } = data;
 
-    const formData = {
-      email: data.email,
-      password: data.password,
-    };
+    await login({ email, password });
 
-    console.log('formData:', formData);
-
-    axios({ method: 'POST', headers: headers, url: url, data: formData })
-      .then((res: AxiosResponse) => {
-        console.log(res);
-        const token = res.headers['authorization']?.split(' ')[1];
-        console.log('JWT Token:', token);
-        localStorage.setItem('token', token || '');
-        if (res.data.user) {
-          localStorage.setItem('user', JSON.stringify(res.data.user));
-          login(res.data.user);
-        }
-        router.push('/mypage');
-      })
-      .catch((e: AxiosError<{ error: string }>) => {
-        console.log(e.message);
-      });
+    // マイページへ遷移
+    router.push('/mypage');
   };
   return (
     <Box sx={{ padding: 2, width: '100%' }}>
