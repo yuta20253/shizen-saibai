@@ -7,8 +7,9 @@ export const loginAuth = async ({
   email: string;
   password: string;
 }): Promise<{ token: string; user: { id: number; name: string; email: string } }> => {
+  const url = 'http://localhost:5000/api/v1/login';
+
   try {
-    const url = 'http://localhost:5000/api/v1/login';
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -27,6 +28,12 @@ export const loginAuth = async ({
     return { token, user: response.data.user };
   } catch (error) {
     console.error(error);
+
+    if (axios.isAxiosError(error) && error.response) {
+      const message = (error.response.data as any).message ?? 'ログインに失敗しました';
+      throw new Error(message);
+    }
+
     throw error;
   }
 };
