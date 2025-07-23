@@ -2,7 +2,6 @@ import { Alert, Button, Typography } from '@mui/material';
 import { Box, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Link from 'next/link';
-import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
@@ -12,7 +11,7 @@ type UserForm = {
   password: string;
 };
 
-export const LoginForm = (): React.JSX.Element => {
+export const Login = (): React.JSX.Element => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
   const { login } = useAuth();
@@ -41,12 +40,17 @@ export const LoginForm = (): React.JSX.Element => {
   };
 
   return (
-    <>
+    <Box sx={{ padding: 2, maxWidth: '960px', width: '100%', margin: '0 auto' }}>
+      <Typography variant="h4" component="p" textAlign="center" sx={{ fontWeight: 'bold', mt: 4 }}>
+        ログイン
+      </Typography>
+
       {errorMessage && (
         <Alert severity="error" sx={{ mt: 2 }}>
           {errorMessage}
         </Alert>
       )}
+
       <Box sx={{ padding: 2, width: '100%' }}>
         <Box
           component="form"
@@ -102,6 +106,6 @@ export const LoginForm = (): React.JSX.Element => {
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
