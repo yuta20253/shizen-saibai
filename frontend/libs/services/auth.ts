@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+type ErrorResponseData = {
+  message?: string;
+};
+
 export const loginAuth = async ({
   email,
   password,
@@ -30,8 +34,14 @@ export const loginAuth = async ({
     console.error(error);
 
     if (axios.isAxiosError(error) && error.response) {
-      const message = (error.response.data as any).message ?? 'ログインに失敗しました';
-      throw new Error(message);
+      // const message = (error.response.data as any).message ?? 'ログインに失敗しました';
+      // throw new Error(message);
+      const data = error.response.data as unknown;
+      if (typeof data === 'object' && data !== null && 'message' in data) {
+        const { message } = data as ErrorResponseData;
+        throw new Error(message ?? 'ログインに失敗しました');
+      }
+      throw new Error('ログインに失敗しました');
     }
 
     throw error;
