@@ -1,5 +1,5 @@
-import { generateApiTypes } from './ApiTypeGenerator.ts';
+// import generateApi from './ApiTypeGenerator.js';
 
-async () => {
-  await generateApiTypes();
-};
+// async () => {
+//   await generateApi();
+// };
