@@ -6,7 +6,8 @@
     "dev": "next dev -p 3000 ",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-types": "ts-node --loader ts-node/esm scripts/ApiTypeGenerator.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/prettier": "^2.7.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -31,6 +33,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.2.5",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
