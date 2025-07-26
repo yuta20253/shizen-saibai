@@ -1,6 +1,6 @@
 'use client';
 
-import { loginAuth } from '@/libs/services/auth';
+import { loginAuth, signUpAuth } from '@/libs/services/auth';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type User = {
@@ -13,6 +13,17 @@ type AuthContextType = {
   user: User | null;
   login: ({ email, password }: { email: string; password: string }) => Promise<void>;
   logout: () => void;
+  signUp: ({
+    email,
+    password,
+    password_confirmation,
+    name,
+  }: {
+    email: string;
+    password: string;
+    password_confirmation: string;
+    name: string;
+  }) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,7 +54,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => setUser(null);
 
-  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
+  const signUp = async ({
+    email,
+    password,
+    password_confirmation,
+    name,
+  }: {
+    email: string;
+    password: string;
+    password_confirmation: string;
+    name: string;
+  }) => {
+    const { token, user } = await signUpAuth({ email, password, password_confirmation, name });
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    setUser(user);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, signUp }}>{children}</AuthContext.Provider>
+  );
 };
 
 export const useAuth = (): AuthContextType => {
