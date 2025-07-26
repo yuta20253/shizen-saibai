@@ -283,6 +283,8 @@ export class Api<
         password: string;
         /** @example "password123" */
         password_confirmation: string;
+        /** @example "test" */
+        name: string;
       },
       params: RequestParams = {},
     ) =>

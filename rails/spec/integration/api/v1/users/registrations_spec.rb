@@ -9,11 +9,12 @@ RSpec.describe "Api::V1::Users::Registration", type: :request do
 
       parameter name: :credentials, in: :body, schema: {
         type: :object,
-        required: ['email', 'password', 'password_confirmation'],
+        required: ['email', 'password', 'password_confirmation', 'name'],
         properties: {
           email: { type: :string, example: 'test@example.com' },
           password: { type: :string, example: 'password123' },
-          password_confirmation: { type: :string, example: 'password123' }
+          password_confirmation: { type: :string, example: 'password123' },
+          name: { type: :string, example: 'test'}
         }
       }
 

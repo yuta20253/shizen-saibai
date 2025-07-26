@@ -68,6 +68,7 @@ paths:
               - email
               - password
               - password_confirmation
+              - name
               properties:
                 email:
                   type: string
@@ -78,6 +79,9 @@ paths:
                 password_confirmation:
                   type: string
                   example: password123
+                name:
+                  type: string
+                  example: test
   "/api/v1/login":
     post:
       summary: ユーザーのログイン
