@@ -41,7 +41,11 @@ export const Login = (): React.JSX.Element => {
 
   return (
     <Box sx={{ padding: 2, maxWidth: '960px', width: '100%', margin: '0 auto' }}>
-      <Typography variant="h4" component="p" textAlign="center" sx={{ fontWeight: 'bold', mt: 4 }}>
+      <Typography
+        variant="h4"
+        component="p"
+        sx={{ fontWeight: 'bold', mt: 4, textAlign: 'center' }}
+      >
         ログイン
       </Typography>
 
