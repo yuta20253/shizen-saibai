@@ -25,6 +25,7 @@ RSpec.describe "Api::V1::Users::Registration", type: :request do
           message: { type: :string, example: 'サインアップに成功しました' },
           user: {
             type: :object,
+            required: ['id, email', 'name'],
             properties: {
               id: { type: :integer, example: 1 },
               email: { type: :string, example: 'test@example.com' },
