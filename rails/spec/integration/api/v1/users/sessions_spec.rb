@@ -23,6 +23,7 @@ RSpec.describe 'Api::V1::Users::Sessions', type: :request do
             message: { type: :string, example: 'ログインに成功しました' },
             user: {
               type: :object,
+              required: ['id, email', 'name'],
               properties: {
                 id: { type: :integer, example: 1 },
                 email: { type: :string, example: 'test@example.com' },

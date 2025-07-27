@@ -104,6 +104,9 @@ paths:
                     example: ログインに成功しました
                   user:
                     type: object
+                    required:
+                    - id, email
+                    - name
                     properties:
                       id:
                         type: integer

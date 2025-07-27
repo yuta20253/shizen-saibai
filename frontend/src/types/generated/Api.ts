@@ -348,7 +348,7 @@ export class Api<
             /** @example "test@example.com" */
             email?: string;
             /** @example "テストユーザー" */
-            name?: string;
+            name: string;
           };
         },
         {
