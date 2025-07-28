@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       # namespace :admin do
       #   resources :knowledges, only: [:index, :create, :update, :destroy]
       # end
+      resources :chats, only: [:create]
     end
   end
   mount Rswag::Ui::Engine => '/api-docs'
