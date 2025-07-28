@@ -4,7 +4,7 @@ async function main() {
   try {
     await generateApi({
       url: 'http://localhost:5000/api-docs/v1/swagger.yaml',
-      output: './src/types/generated',
+      output: './types/generated',
       fileName: 'Api.ts',
     });
     console.log('API生成成功');
