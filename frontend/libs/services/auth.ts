@@ -19,8 +19,10 @@ export const loginAuth = async ({
       Accept: 'application/json',
     };
     const data = {
-      email,
-      password,
+      user: {
+        email,
+        password,
+      },
     };
 
     const response = await axios.post(url, data, { headers });
