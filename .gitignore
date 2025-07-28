@@ -1,5 +1,5 @@
 *.icloud
 
 # Python cache
-__pycache__/
+api/app/__pycache__/
 *.pyc
