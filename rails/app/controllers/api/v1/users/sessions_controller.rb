@@ -1,23 +1,13 @@
 class Api::V1::Users::SessionsController < ActionController::API
   def create
-    email = params.dig(:user, :email) || params[:email]
-    password = params.dig(:user, :password) || params[:password]
-
-    user = User.find_by(email: email)
-
-    if user&.valid_password?(password)
-      payload = {
-        user_id: user.id,
-        exp: 24.hours.from_now.to_i,
-        jti: SecureRandom.uuid
-      }
-      token = JWT.encode(payload, Rails.application.credentials.devise[:jwt_secret_key], 'HS256')
-      response.set_header('Authorization', "Bearer #{token}")
+    result = User::LoginService.new(login_params).call
+    if result
+      response.set_header('Authorization', "Bearer #{result[:token]}")
       render json: {
         status: 200,
         message: 'ログインに成功しました',
-        token: token,
-        user: user.as_json(only: [:id, :email, :name, :role])
+        token: result[:token],
+        user: result[:user].as_json(only: [:id, :email, :name, :role])
       }
     else
       render json: { status: 401, message: 'メールアドレスか、パスワードが不正です' }, status: :unauthorized
@@ -32,7 +22,7 @@ class Api::V1::Users::SessionsController < ActionController::API
     end
 
     begin
-      jwt_payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, algorithm: 'HS256').first
+      JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, algorithm: 'HS256').first
 
       render json: { status: 200, message: 'ログアウトに成功しました' }, status: :ok
     rescue JWT::ExpiredSignature
@@ -40,5 +30,11 @@ class Api::V1::Users::SessionsController < ActionController::API
     rescue JWT::DecodeError
       render json: { status: 401, message: '無効なトークンです' }, status: :unauthorized
     end
+  end
+
+  private
+
+  def login_params
+    params.require(:user).permit(:email, :password)
   end
 end

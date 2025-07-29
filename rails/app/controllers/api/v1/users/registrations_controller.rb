@@ -1,26 +1,19 @@
 class Api::V1::Users::RegistrationsController < ActionController::API
   def create
-    user = User.new(sign_up_params)
-
-    if user.save
-      payload = {
-        user_id: user.id,
-        exp: 24.hours.from_now.to_i,
-        jti: SecureRandom.uuid
-      }
-      token = JWT.encode(payload, Rails.application.credentials.devise[:jwt_secret_key], 'HS256')
-      response.set_header('Authorization', "Bearer #{token}")
+    result = User::SignUpService.new(sign_up_params).call
+    if result
+      response.set_header('Authorization', "Bearer #{result[:token]}")
       render json: {
         status: 200,
         message: 'サインアップに成功しました',
-        token: token,
-        user: user.as_json(only: [:id, :email, :name])
+        token: result[:token],
+        user: result[:user].as_json(only: [:id, :email, :name])
       }
     else
       render json: {
         status: 422,
         message: 'サインアップに失敗しました',
-        errors: user.errors.full_messages
+        errors: result[:user].errors.full_messages
       }, status: :unprocessable_entity
     end
   end
