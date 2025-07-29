@@ -1,5 +1,4 @@
 class Api::V1::BaseController < ApplicationController
-  # include ApiV1UserHelpers
   before_action :authenticate_user!
 
   private
@@ -21,7 +20,6 @@ class Api::V1::BaseController < ApplicationController
     end
   end
 
-  # current_userヘルパーを使いたい場合はここで定義
   def current_user
     @current_user
   end
