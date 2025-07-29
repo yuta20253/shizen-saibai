@@ -9,6 +9,10 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     user = User.new(sign_up_params)
 
     if user.save
+      payload = { user_id: user.id, exp: 24.hours.from_now.to_i }
+      token = JWT.encode(payload, Rails.application.secrets.secret_key_base)
+
+      response.set_header('Authorization', "Bearer #{token}")
       render json: {
         status: { code: 200, message: 'サインアップできました' },
         user: user.slice(:id, :email, :name)

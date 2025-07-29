@@ -53,7 +53,7 @@ export const Header = (): React.JSX.Element => {
                 <Button LinkComponent={Link} color="inherit" variant="outlined" href="/login">
                   ログイン
                 </Button>
-                <Button LinkComponent={Link} color="inherit" variant="outlined">
+                <Button LinkComponent={Link} color="inherit" variant="outlined" href="/signup">
                   新規登録
                 </Button>
               </Box>

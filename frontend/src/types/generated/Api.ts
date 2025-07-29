@@ -271,6 +271,58 @@ export class Api<
      * No description
      *
      * @tags Users
+     * @name V1UserCreate
+     * @summary ユーザーのサインアップ
+     * @request POST:/api/v1/user
+     */
+    v1UserCreate: (
+      data: {
+        /** @example "test@example.com" */
+        email: string;
+        /** @example "password123" */
+        password: string;
+        /** @example "password123" */
+        password_confirmation: string;
+        /** @example "test" */
+        name: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          /** @example 200 */
+          status?: number;
+          /** @example "サインアップに成功しました" */
+          message?: string;
+          user?: {
+            /** @example 1 */
+            id?: number;
+            /** @example "test@example.com" */
+            email?: string;
+            /** @example "test" */
+            name?: string;
+          };
+        },
+        {
+          /** @example 422 */
+          status?: number;
+          /** @example "サインアップできませんでした。" */
+          message?: string;
+          errors?: string[];
+        }
+      >({
+        path: `/api/v1/user`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
      * @name V1LoginCreate
      * @summary ユーザーのログイン
      * @request POST:/api/v1/login

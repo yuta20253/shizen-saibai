@@ -10,6 +10,78 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
+  "/api/v1/user":
+    post:
+      summary: ユーザーのサインアップ
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: サインアップ成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: サインアップに成功しました
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      email:
+                        type: string
+                        example: test@example.com
+                      name:
+                        type: string
+                        example: test
+        '422':
+          description: サインアップ失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 422
+                  message:
+                    type: string
+                    example: サインアップできませんでした。
+                  errors:
+                    type: array
+                    items:
+                      type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              - password_confirmation
+              - name
+              properties:
+                email:
+                  type: string
+                  example: test@example.com
+                password:
+                  type: string
+                  example: password123
+                password_confirmation:
+                  type: string
+                  example: password123
+                name:
+                  type: string
+                  example: test
   "/api/v1/login":
     post:
       summary: ユーザーのログイン
