@@ -327,4 +327,5 @@ Devise.setup do |config|
       user: [:json]
     }
   end
+  config.navigational_formats = []
 end

@@ -1,43 +1,52 @@
-class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  include ApiV1UserHelpers
-  respond_to :json
-  skip_before_action :verify_authenticity_token, raise: false
-  skip_before_action :require_no_authentication, only: [:create]
-  skip_before_action :authenticate_user!, only: [:create], raise: false
-
+class Api::V1::Users::RegistrationsController < ActionController::API
   def create
-    user = User.new(sign_up_params)
-
-    if user.save
-      payload = { user_id: user.id, exp: 24.hours.from_now.to_i }
-      token = JWT.encode(payload, Rails.application.secrets.secret_key_base)
-
-      response.set_header('Authorization', "Bearer #{token}")
+    result = User::SignUpService.new(sign_up_params).call
+    if result
+      response.set_header('Authorization', "Bearer #{result[:token]}")
       render json: {
-        status: { code: 200, message: 'サインアップできました' },
-        user: user.slice(:id, :email, :name)
-      }, status: :ok
+        status: 200,
+        message: 'サインアップに成功しました',
+        token: result[:token],
+        user: result[:user].as_json(only: [:id, :email, :name])
+      }
     else
       render json: {
-        status: { code: 422, message: "サインアップできませんでした。", errors: user.errors.full_messages }
+        status: 422,
+        message: 'サインアップに失敗しました',
+        errors: result[:user].errors.full_messages
       }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    resource = current_user
-    resource.soft_delete! # 論理削除＋メールマスキング処理
-    sign_out(resource) # JWTなどのサインアウト処理
-    render json: { message: '退会しました。' }, status: :ok
+    token = request.headers['Authorization']&.split(' ')&.last
+
+    if token.blank?
+      render json: { status: 401, message: 'Authorizationヘッダーがありません' }, status: :unauthorized and return
+    end
+
+    begin
+      payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, algorithm: 'HS256').first
+      user = User.find_by(id: payload['user_id'])
+
+      if user.nil?
+        render json: { status: 401, message: 'ユーザーが見つかりません' }, status: :unauthorized and return
+      end
+
+      # 論理削除＆メールマスキング処理（soft_delete! はUserモデルに実装済み前提）
+      user.soft_delete!
+
+      render json: { status: 200, message: '退会処理が完了しました' }, status: :ok
+    rescue JWT::ExpiredSignature
+      render json: { status: 401, message: 'トークンの有効期限が切れています' }, status: :unauthorized
+    rescue JWT::DecodeError
+      render json: { status: 401, message: '無効なトークンです' }, status: :unauthorized
+    end
   end
 
   private
 
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name)
-  end
-
-  def after_sign_out_path_for(resource_or_scope)
-    nil # リダイレクトを無効化
   end
 end
