@@ -14,36 +14,26 @@ import { RequireAuth } from '@/components/RequireAuth';
 export const MyPageContent = (): React.JSX.Element | null => {
   const { user } = useAuth();
 
+  const iconStyle = { position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' };
+
   const links = [
     {
       href: '/mypage/diagnoses',
-      icon: (
-        <ArticleIcon
-          sx={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }}
-        />
-      ),
+      icon: <ArticleIcon sx={iconStyle} />,
       title: '診断結果一覧を見る',
     },
     {
       href: '/mypage/edit',
-      icon: (
-        <EditIcon
-          sx={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }}
-        />
-      ),
+      icon: <EditIcon sx={iconStyle} />,
       title: 'ユーザー情報を編集する',
     },
     {
       href: '/logout',
-      icon: (
-        <LogoutIcon
-          sx={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }}
-        />
-      ),
+      icon: <LogoutIcon sx={iconStyle} />,
       title: 'ログアウト',
     },
     {
-      href: '/',
+      href: '/mypage/delete',
       icon: (
         <PersonOffIcon
           sx={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }}
@@ -64,6 +54,7 @@ export const MyPageContent = (): React.JSX.Element | null => {
           maxWidth: '960px',
           width: '100%',
           margin: '0 auto',
+          padding: 2,
         }}
       >
         <Box sx={{ gap: 2, padding: 2, mb: 3, width: '100%' }}>
@@ -95,8 +86,8 @@ export const MyPageContent = (): React.JSX.Element | null => {
         </Box>
         <Divider />
         {links.map((link, i) => (
-          <Box key={i} sx={{ width: '80%', textAlign: 'center', mb: 3 }}>
-            <Link href="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Box key={i} sx={{ width: '100%', textAlign: 'center', mb: 3, px: 2 }}>
+            <Link href={link.href} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box
                 sx={{
                   position: 'relative',
