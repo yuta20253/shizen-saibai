@@ -1,7 +1,7 @@
 'use client';
 
-import { MyPage } from '@/features/MyPage';
+import { MyPageContent } from '@/features/MyPage';
 
-const MyPagePage = (): React.JSX.Element => <MyPage />;
+const MyPage = (): React.JSX.Element => <MyPageContent />;
 
-export default MyPagePage;
+export default MyPage;
