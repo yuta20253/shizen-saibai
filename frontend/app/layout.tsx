@@ -21,7 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AuthProvider>
             <Box display="flex" flexDirection="column" minHeight="100vh">
               <Header />
-              {children}
+              <Box p={2} maxWidth="960px" width="100%" margin="0 auto">
+                {children}
+              </Box>
               <Footer />
             </Box>
           </AuthProvider>
