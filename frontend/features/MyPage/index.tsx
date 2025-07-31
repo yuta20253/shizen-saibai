@@ -50,26 +50,26 @@ export const MyPageContent = (): React.JSX.Element | null => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          minHeight: '100vh',
+          mt: 6,
+          mb: 8,
         }}
       >
-        <Box sx={{ gap: 2, padding: 2, mb: 3, width: '100%' }}>
-          <Box sx={{ width: '100%', textAlign: 'center', p: 2 }}>
+        <Box sx={{ gap: 2, mb: 3, width: '100%' }}>
+          <Box sx={{ textAlign: 'center' }}>
             <AccountCircleIcon sx={{ fontSize: '4rem' }} />
           </Box>
-          <Box sx={{ width: '100%', textAlign: 'center' }}>
+          <Box sx={{ textAlign: 'center' }}>
             <Typography variant="h4">{user?.name}</Typography>
           </Box>
-          <Box sx={{ width: '100%', textAlign: 'center' }}>
+          <Box sx={{ textAlign: 'center' }}>
             <Typography variant="h6">{user?.email}</Typography>
           </Box>
         </Box>
-        <Box sx={{ width: '100%', textAlign: 'center', mb: 3 }}>
+        <Box sx={{ width: '100%', textAlign: 'center' }}>
           <Button
             sx={{
-              width: '80%',
-              backgroundColor: '#999999',
-              color: '#ffffff',
+              backgroundColor: '#999',
+              color: '#fff',
               fontWeight: 'bold',
               p: 2,
               gap: 2,
@@ -78,30 +78,30 @@ export const MyPageContent = (): React.JSX.Element | null => {
             <CameraAlt />
             <Typography variant="h6">雑草画像をアップロード</Typography>
           </Button>
-          <Divider sx={{ mt: 2 }} />
+          <Divider sx={{ mt: 4 }} />
         </Box>
-        <Divider />
         {links.map((link, i) => (
-          <Box key={i} sx={{ width: '100%', textAlign: 'center', mb: 3, px: 2 }}>
-            <Link href={link.href} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Box
-                sx={{
-                  position: 'relative',
-                  width: '100%',
-                  height: 48,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {link.icon}
-                <Typography variant="h6">{link.title}</Typography>
-              </Box>
-            </Link>
-            <Divider sx={{ mt: 2 }} />
-          </Box>
+          <>
+            <Box key={i} sx={{ width: '100%', textAlign: 'center', p: 2 }}>
+              <Link href={link.href} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Box
+                  sx={{
+                    position: 'relative',
+                    width: '100%',
+                    height: 48,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {link.icon}
+                  <Typography variant="h6">{link.title}</Typography>
+                </Box>
+              </Link>
+            </Box>
+            <Divider sx={{ width: '100%' }} />
+          </>
         ))}
-        <Divider sx={{ mt: 2 }} />
       </Box>
     </RequireAuth>
   );
