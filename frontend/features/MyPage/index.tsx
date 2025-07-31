@@ -51,10 +51,6 @@ export const MyPageContent = (): React.JSX.Element | null => {
           flexDirection: 'column',
           alignItems: 'center',
           minHeight: '100vh',
-          maxWidth: '960px',
-          width: '100%',
-          margin: '0 auto',
-          padding: 2,
         }}
       >
         <Box sx={{ gap: 2, padding: 2, mb: 3, width: '100%' }}>
