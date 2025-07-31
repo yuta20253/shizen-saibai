@@ -24,7 +24,24 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     # soil_vegetable_relationモデル
     #   適性度(suitability)
 
+    file_type = ['image/jpeg', 'image/png']
+    # max_size = 5.megabytes
+
     image = params[:image]
+
+    # ファイル形式が不正
+    # raise ActionController::ParameterMissing, :image if params[:image].blank?
+    # unless file_type.include?(image.content_type)
+    #   render json: {message: "ファイル形式が不正です", code: :invalid_file_type, status: "error"}
+    #   return
+    # end
+
+    # ファイルサイズ超過
+    # if image.size > max_size
+    #   render json: { status: 'error', code: :file_size_exceeded, message: 'ファイルサイズが大きすぎます' }, status: :bad_request
+    #   return
+    # end
+
     soils = Soil.all.map do |soil|
       {
         pH_level: soil.pH_level,
@@ -106,7 +123,19 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     json_start_index = data_str.index('{')
     json_string = data_str[json_start_index..]
 
-    data = JSON.parse(json_string)
+    # OpenAIの出力が不完全/JSONの形式が不正
+    begin
+      data = JSON.parse(json_string)
+      %w[vegetable weed soil diagnosis weed_soil_relation soil_vegetable_relation].each do |key|
+        unless data[key]
+          render json: { message: "OpenAIの出力が不完全です（#{key} がありません）", code: :invalid_json_response, status: "error" }, status: 400
+          return
+        end
+      end
+    rescue JSON::ParserError
+      raise
+    end
+
     vegetable_name = data["vegetable"]["name"]
     weed_name = data["weed"]["name"]
     soil_data = data["soil"]
@@ -117,26 +146,37 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     # puts weed_name
     # puts soil_data
     # puts diagnosis_result
+
+    # 該当する野菜データが存在しない
     vegetable = Vegetable.find_by(name: vegetable_name)
+    raise ActiveRecord::RecordNotFound, "野菜データ、#{vegetable_name}が見つかりません。" unless vegetable
+
+    # 該当する雑草データが存在しない
     weed = Weed.find_by(name: weed_name)
+    raise ActiveRecord::RecordNotFound, "雑草データ、#{weed_name}が見つかりません。" unless weed
+
+    # 該当する土壌データが存在しない
     soil = Soil.where(pH_level: soil_data["pH_level"]).where(drainage: soil_data["drainage"]).where(fertility: soil_data["fertility"]).first
+    raise ActiveRecord::RecordNotFound, "土壌データが見つかりません。" unless soil
 
     # puts "id: #{vegetable.id}, name: #{vegetable.name}"
     # puts "id: #{weed.id}, name: #{weed.name}"
     # puts "id: #{soil.id}, pH_level: #{soil.pH_level}, drainage: #{soil.drainage}, fertility: #{soil.fertility} "
-    SoilVegetableRelation.create!(
-      soil_id: soil.id,
-      vegetable_id: vegetable.id,
-      suitability: soil_vegetable_relation["suitability"],
-      reason: soil_vegetable_relation["reason"]
-    )
 
-    WeedSoilRelation.create!(
-      weed_id: weed.id,
-      soil_id: soil.id,
-      confidence: weed_soil_relation["confidence"],
-      notes: weed_soil_relation["notes"]
-    )
+    ActiveRecord::Base.transaction do
+      SoilVegetableRelation.create!(
+        soil_id: soil.id,
+        vegetable_id: vegetable.id,
+        suitability: soil_vegetable_relation["suitability"],
+        reason: soil_vegetable_relation["reason"]
+      )
+      WeedSoilRelation.create!(
+        weed_id: weed.id,
+        soil_id: soil.id,
+        confidence: weed_soil_relation["confidence"],
+        notes: weed_soil_relation["notes"]
+      )
+    end
     render json: { message: data }
   end
 end
