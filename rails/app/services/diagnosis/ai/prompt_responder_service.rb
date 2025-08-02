@@ -99,7 +99,7 @@ class Diagnosis::Ai::PromptResponderService
 
     response = client.chat(
       parameters: {
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [
           { role: "system", content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。説明文や補足、余計な文章は一切含めてはいけません。" },
           { role: "user", content: [
