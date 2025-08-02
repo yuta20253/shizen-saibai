@@ -10,7 +10,7 @@ import { FeatureCarousel } from '@components/FeatureCarousel';
 
 const Home = (): React.JSX.Element => {
   return (
-    <Box sx={{ padding: 2, maxWidth: '960px', margin: '0 auto' }}>
+    <>
       <Typography variant="h5" component="p" textAlign="center" sx={{ fontWeight: 'bold', mt: 4 }}>
         あなたの畑を味方に。
         <br />
@@ -95,7 +95,7 @@ const Home = (): React.JSX.Element => {
         </Typography>
         <FeatureCarousel />
       </Box>
-    </Box>
+    </>
   );
 };
 

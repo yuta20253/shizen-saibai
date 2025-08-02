@@ -11,6 +11,7 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
+  loading: boolean;
   login: ({ email, password }: { email: string; password: string }) => Promise<void>;
   logout: () => void;
   signUp: ({
@@ -30,6 +31,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -41,6 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.error('ユーザー情報の復元に失敗:', error);
       }
     }
+    setLoading(false);
   }, []);
 
   const login = async ({ email, password }: { email: string; password: string }) => {
@@ -72,7 +75,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, signUp }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, loading, login, logout, signUp }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
