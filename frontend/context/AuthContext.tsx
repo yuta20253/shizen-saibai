@@ -1,6 +1,6 @@
 'use client';
 
-import { loginAuth, signUpAuth } from '@/libs/services/auth';
+import { loginAuth, signUpAuth, logOutAuth } from '@/libs/services/auth';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type User = {
@@ -55,7 +55,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(user);
   };
 
-  const logout = () => setUser(null);
+  const logout = async () => {
+    try {
+      await logOutAuth();
+    } catch (error) {
+      console.error('ログアウト API 呼び出しに失敗:', error);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setUser(null);
+    }
+  };
 
   const signUp = async ({
     email,

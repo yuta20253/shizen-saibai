@@ -94,3 +94,27 @@ export const signUpAuth = async ({
     throw error;
   }
 };
+
+export const logOutAuth = async () => {
+  const token = localStorage.getItem('token');
+  const url = 'http://localhost:5000/api/v1/logout';
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    };
+    await axios.delete(url, { headers });
+  } catch (error) {
+    console.error(error);
+    if (axios.isAxiosError(error) && error.response) {
+      const data = error.response.data as unknown;
+      if (typeof data === 'object' && data !== null && 'message' in data) {
+        const { message } = data as ErrorResponseData;
+        throw new Error(message ?? 'ログアウトに失敗しました');
+      }
+      throw new Error('ログアウトに失敗しました');
+    }
+    throw error;
+  }
+};
