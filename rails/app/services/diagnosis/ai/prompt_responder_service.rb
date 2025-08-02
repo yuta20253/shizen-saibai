@@ -1,8 +1,9 @@
 class Diagnosis::Ai::PromptResponderService
-  def initialize(vegetables_json:, weeds_json:, soils_json:)
+  def initialize(vegetables_json:, weeds_json:, soils_json:, image:)
     @vegetables_json = vegetables_json
     @weeds_json = weeds_json
     @soils_json = soils_json
+    @image = image
   end
 
   def call
@@ -14,30 +15,6 @@ class Diagnosis::Ai::PromptResponderService
       access_token: Rails.application.credentials.chatgpt_api_key
     )
 
-    # user_prompt = <<~TEXT
-    #   分析指示
-    #   入力：画像の雑草
-    #   出力（以下の8項目を含む分析結果）：
-
-    #   1. おすすめの野菜名(日本名)
-
-    #   2. 雑草名(日本名)
-
-    #   3. 土壌のpH分類(pH_level)（0〜9段階）
-
-    #   4. 土壌の水はけ(drainage)（3段階：良好: 0, 普通: 1, 悪い: 2）
-
-    #   5. 土壌の肥沃度(fertility)（3段階：高: 0, 中: 1, 低: 2）
-
-    #   6. おすすめ理由(result・notes・reason)（根拠）
-
-    #   7. 雑草と土壌の対応度（0.0〜1.0の間）
-
-    #   8. 土壌と野菜の適性度(suitability)（3段階：高: 0, 中: 1, 低: 2）
-
-    # Rails.logger.debug("#{format_weed_list(weed)}")
-    # Rails.logger.debug("#{format_soil_list(soil)}")
-    # Rails.logger.debug("#{format_vegetable_list(vegetable)}")
     user_prompt = <<~TEXT
       受け取った画像に対して、
       その画像に写っている雑草の種類、その雑草が生えている土壌環境、その土壌環境で栽培するのに適している野菜を出力してください。
@@ -99,12 +76,12 @@ class Diagnosis::Ai::PromptResponderService
 
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o",
         messages: [
           { role: "system", content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。説明文や補足、余計な文章は一切含めてはいけません。" },
           { role: "user", content: [
-              { type: "text", text: user_prompt }
-              # { type: "image_url", image_url: { url: image_url } }
+              { type: "text", text: user_prompt },
+              { type: "image_url", image_url: { url: image_url } }
             ]
           }
         ]

@@ -4,7 +4,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     file_type = ['image/jpeg', 'image/png']
     # max_size = 5.megabytes
 
-    image = params[:image]
+    image = "https://www.google.com/search?sca_esv=87f102440c8210d8&sxsrf=AE3TifP6FJodp3pln1k3DnACt9XSfM6fXA:1754176147332&udm=2&fbs=AIIjpHzQki16q-8Z7j6aseYi2jA_awT46aeCpCIps-CmKmRFQnye5ZCZ-joo3KzReil4N40QrqWZdLtqYZcrC12sd5RRjC38EHLHO6A0CnHavpwLTiJ-ckXqcav9y-eXIg8IfNrI9XUpM3ALEobobagXOJglX0WFqzRZJrdgpmiIZOuVOPMHVXZPOINQcNjGQlOqPuh7rA56sWmDiUasxyzE8KAJSNi9j-46SgWI1P1oirZJjUMinc0poFVM2CYe5iWxXeTuYt6A&q=%E3%82%B9%E3%82%BA%E3%83%A1%E3%83%8E%E3%82%AB%E3%82%BF%E3%83%93%E3%83%A9&sa=X&ved=2ahUKEwipnYqxn-2OAxVEna8BHUBGEzUQtKgLegQIERAB&biw=1440&bih=812&dpr=2#vhid=UyneVnNBtatKlM&vssid=mosaic"
 
     # ファイル形式が不正
     # raise ActionController::ParameterMissing, :image if params[:image].blank?
@@ -20,13 +20,12 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     # end
 
     data_json = Diagnosis::Json::JsonExportService.new.call
-    # Rails.logger.debug("JsonExportServiceの出力: #{data_json.inspect}")
     vegetables_json = data_json[:vegetables_to_json]
     weeds_json = data_json[:weeds_to_json]
     soils_json = data_json[:soils_to_json]
 
     begin
-      data = Diagnosis::Ai::PromptResponderService.new(vegetables_json: vegetables_json, weeds_json: weeds_json, soils_json: soils_json).call
+      data = Diagnosis::Ai::PromptResponderService.new(vegetables_json: vegetables_json, weeds_json: weeds_json, soils_json: soils_json, image: image).call
     rescue => e
       Rails.logger.error("OpenAI呼び出しエラー: #{e.class} - #{e.message}")
       Rails.logger.error(e.backtrace.join("\n"))
