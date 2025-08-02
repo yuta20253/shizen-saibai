@@ -1,4 +1,5 @@
-class Api::V1::Users::SessionsController < ActionController::API
+class Api::V1::Users::SessionsController < Api::V1::BaseController
+  skip_before_action :authenticate_user!, only: [:create]
   def create
     result = User::LoginService.new(login_params).call
     if result
