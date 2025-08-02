@@ -10,6 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { CameraAlt } from '@mui/icons-material';
 import { RequireAuth } from '@/components/RequireAuth';
+import { Fragment } from 'react';
 
 export const MyPageContent = (): React.JSX.Element | null => {
   const { user } = useAuth();
@@ -81,7 +82,7 @@ export const MyPageContent = (): React.JSX.Element | null => {
           <Divider sx={{ mt: 4 }} />
         </Box>
         {links.map((link, i) => (
-          <>
+          <Fragment key={i}>
             <Box key={i} sx={{ width: '100%', textAlign: 'center', p: 2 }}>
               <Link href={link.href} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Box
@@ -100,7 +101,7 @@ export const MyPageContent = (): React.JSX.Element | null => {
               </Link>
             </Box>
             <Divider sx={{ width: '100%' }} />
-          </>
+          </Fragment>
         ))}
       </Box>
     </RequireAuth>
