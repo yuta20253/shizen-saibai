@@ -42,5 +42,7 @@ module Myapp
     config.api_only = true
     config.i18n.default_locale = :ja
     config.enable_reloading = true
+    config.middleware.delete Warden::JWTAuth::Middleware
+    config.middleware.delete Warden::JWTAuth::Middleware::RevocationManager
   end
 end
