@@ -96,7 +96,7 @@ export const MyPageContent = (): React.JSX.Element | null => {
         </Box>
         {links.map((link, i) => (
           <Fragment key={i}>
-            <Box key={i} sx={{ width: '100%', textAlign: 'center', p: 2 }}>
+            <Box sx={{ width: '100%', textAlign: 'center', p: 2 }}>
               <Link href={link.href} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Box
                   sx={{
