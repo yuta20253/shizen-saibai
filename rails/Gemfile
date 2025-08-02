@@ -25,6 +25,8 @@ gem 'devise'
 
 gem 'devise-jwt'
 
+gem 'warden-jwt_auth', '~> 0.10.0'
+
 # devise を日本語化する
 gem 'devise-i18n'
 
