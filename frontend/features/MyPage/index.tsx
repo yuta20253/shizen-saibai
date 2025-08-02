@@ -10,11 +10,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { CameraAlt } from '@mui/icons-material';
 import { RequireAuth } from '@/components/RequireAuth';
-<<<<<<< HEAD
 import axios from 'axios';
-=======
 import { Fragment } from 'react';
->>>>>>> feature/14
 
 export const MyPageContent = (): React.JSX.Element | null => {
   const { user } = useAuth();
