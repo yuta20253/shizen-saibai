@@ -1,4 +1,4 @@
-class Diagnosis::Db::SaveRecordService
+class Diag::Db::SaveRecordService
   def initialize(vegetable_name:, weed_name:, soil_data:, weed_soil_relation:, soil_vegetable_relation:)
     # 該当する野菜データが存在しない
     @vegetable = Vegetable.find_by(name: vegetable_name)
