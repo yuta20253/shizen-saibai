@@ -74,19 +74,28 @@ class Diagnosis::Ai::PromptResponderService
 
     # Rails.logger.debug("Prompt内容:\n#{user_prompt}")
 
-    response = client.chat(
-      parameters: {
-        model: "gpt-4o",
-        messages: [
-          { role: "system", content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。説明文や補足、余計な文章は一切含めてはいけません。" },
-          { role: "user", content: [
-              { type: "text", text: user_prompt },
-              { type: "image_url", image_url: { url: image_url } }
-            ]
-          }
-        ]
-      }
-    )
+    begin
+      response = client.chat(
+        parameters: {
+          model: "gpt-4o",
+          messages: [
+            { role: "system", content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。説明文や補足、余計な文章は一切含めてはいけません。" },
+            { role: "user", content: [
+                { type: "text", text: user_prompt },
+                { type: "image_url", image_url: { url: @image} }
+              ]
+            }
+          ]
+        }
+      )
+    rescue Faraday::TooManyRequestsError => e
+      Rails.logger.warn("OpenAI APIのレート制限を超えました: #{e.message}")
+      raise Diagnosis::Errors::RateLimitExceeded, e.message
+    rescue StandardError => e
+      Rails.logger.error("OpenAI API呼び出しに失敗しました: #{e.class} - #{e.message}")
+      raise Diagnosis::Errors::OpenAiCallFailed, "#{e.class}: #{e.message}"
+    end
+
     # Rails.logger.debug("OpenAIレスポンス全体: #{response.inspect}")
 
     data_str = response.dig("choices", 0, "message", "content")
@@ -103,11 +112,11 @@ class Diagnosis::Ai::PromptResponderService
       data = JSON.parse(json_string)
       %w[vegetable weed soil diagnosis weed_soil_relation soil_vegetable_relation].each do |key|
         # render json: { message: "OpenAIの出力が不完全です（#{key} がありません）", code: :invalid_json_response, status: "error" }, status: 400
-        raise StandardError, "OpenAIの出力が不完全です" unless data[key]
+        raise Diagnosis::Errors::InvalidResponseFormat, "OpenAIの出力が不完全です" unless data[key]
       end
     rescue JSON::ParserError => e
       Rails.logger.error("[JSONパースエラー] #{e.class}: #{e.message}")
-      raise StandardError, "OpenAIの出力が不正なJSON形式です: #{e.message}"
+      raise Diagnosis::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #{e.message}"
     end
 
     return data
