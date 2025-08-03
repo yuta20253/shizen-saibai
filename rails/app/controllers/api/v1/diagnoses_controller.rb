@@ -1,10 +1,8 @@
 class Api::V1::DiagnosesController < Api::V1::BaseController
-  require 'openai'
+  require "openai"
   def create
-    file_type = ['image/jpeg', 'image/png']
     # max_size = 5.megabytes
-    base64_image = File.read(Rails.root.join('lib', 'diagnosis_image.txt')).strip
-    image = 'data:image/jpeg;base64,' + base64_image
+    image = read_image
     # ファイル形式が不正
     # raise ActionController::ParameterMissing, :image if params[:image].blank?
     # unless file_type.include?(image.content_type)
@@ -23,25 +21,41 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     weeds_json = data_json[:weeds_to_json]
     soils_json = data_json[:soils_to_json]
 
-    begin
-      data = Diagnosis::Ai::PromptResponderService.new(vegetables_json: vegetables_json, weeds_json: weeds_json, soils_json: soils_json, image: image).call
-    rescue Diagnosis::Errors::RateLimitExceeded => e
-      render json: { error: "OpenAIの利用制限を超えました" }, status: 429
+    data = begin
+      Diagnosis::Ai::PromptResponderService.new(
+        vegetables_json: vegetables_json,
+        weeds_json: weeds_json,
+        soils_json: soils_json,
+        image: image,
+      ).call
+    rescue Diagnosis::Errors::RateLimitExceeded
+      render json: { error: "OpenAIの利用制限を超えました" }, status: :too_many_requests and return
     rescue Diagnosis::Errors::InvalidResponseFormat => e
-      render json: { error: "OpenAIの応答が不正です: #{e.message}" }, status: 400
+      render json: { error: "OpenAIの応答が不正です: #{e.message}" }, status: :bad_request and return
     rescue Diagnosis::Errors::OpenAiCallFailed => e
-      render json: { error: "OpenAI呼び出しエラー: #{e.message}" }, status: 500
+      render json: { error: "OpenAI呼び出しエラー: #{e.message}" }, status: :internal_server_error and return
     end
 
-    vegetable_name = data["vegetable"]["name"]
-    weed_name = data["weed"]["name"]
-    soil_data = data["soil"]
-    diagnosis_result = data["diagnosis"]["result"]
-    weed_soil_relation = data["weed_soil_relation"]
-    soil_vegetable_relation = data["soil_vegetable_relation"]
-
-    Diagnosis::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, weed_soil_relation: weed_soil_relation, soil_vegetable_relation: soil_vegetable_relation).call
-
+    parsed_data = parse_data_response(data)
+    Diagnosis::Db::SaveRecordService.new(**parsed_data).call
     render json: { message: data }, status: :ok
   end
+
+  private
+
+    def read_image
+      base64_image = File.read(Rails.root.join("lib", "diagnosis_image.txt")).strip
+      "data:image/jpeg;base64,#{base64_image}"
+    end
+
+    def parse_data_response(data)
+      {
+        vegetable_name: data["vegetable"]["name"],
+        weed_name: data["weed"]["name"],
+        soil_data: data["soil"],
+        diagnosis_result: data["diagnosis"]["result"],
+        weed_soil_relation: data["weed_soil_relation"],
+        soil_vegetable_relation: data["soil_vegetable_relation"],
+      }
+    end
 end

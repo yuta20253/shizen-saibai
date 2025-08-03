@@ -22,13 +22,13 @@ class Diagnosis::Db::SaveRecordService
         soil_id: @soil.id,
         vegetable_id: @vegetable.id,
         suitability: @soil_vegetable_relation["suitability"].to_i,
-        reason: @soil_vegetable_relation["reason"]
+        reason: @soil_vegetable_relation["reason"],
       )
       WeedSoilRelation.create!(
         weed_id: @weed.id,
         soil_id: @soil.id,
         confidence: @weed_soil_relation["confidence"],
-        notes: @weed_soil_relation["notes"]
+        notes: @weed_soil_relation["notes"],
       )
     end
   end

@@ -3,24 +3,22 @@ class Api::V1::BaseController < ApplicationController
 
   private
 
-  def authenticate_user!
-    token = request.headers['Authorization']&.split(' ')&.last
+    def authenticate_user!
+      token = request.headers["Authorization"]&.split(" ")&.last
 
-    if token.blank?
-      render json: { error: 'Unauthorized: token missing' }, status: :unauthorized and return
+      if token.blank?
+        render json: { error: "Unauthorized: token missing" }, status: :unauthorized and return
+      end
+
+      begin
+        payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, { algorithm: "HS256" }).first
+        @current_user = User.find(payload["user_id"])
+      rescue JWT::ExpiredSignature
+        render json: { error: "Unauthorized: token expired" }, status: :unauthorized and return
+      rescue JWT::DecodeError, ActiveRecord::RecordNotFound
+        render json: { error: "Unauthorized: invalid token" }, status: :unauthorized and return
+      end
     end
 
-    begin
-      payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, { algorithm: 'HS256' }).first
-      @current_user = User.find(payload['user_id'])
-    rescue JWT::ExpiredSignature
-      render json: { error: 'Unauthorized: token expired' }, status: :unauthorized and return
-    rescue JWT::DecodeError, ActiveRecord::RecordNotFound
-      render json: { error: 'Unauthorized: invalid token' }, status: :unauthorized and return
-    end
-  end
-
-  def current_user
-    @current_user
-  end
+    attr_reader :current_user
 end

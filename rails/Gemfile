@@ -1,47 +1,47 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-ruby '3.4.4'
+ruby "3.4.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1.5', '>= 7.1.5.1'
+gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5'
+gem "mysql2", "~> 0.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '>= 5.0'
+gem "puma", ">= 5.0"
 
 # cors設定を管理する
-gem 'rack-cors'
+gem "rack-cors"
 
 # メッセージを日本語化
-gem 'rails-i18n'
+gem "rails-i18n"
 
 # 環境毎の設定管理を行う
-gem 'config'
+gem "config"
 
 # ユーザー認証を提供する
-gem 'devise'
+gem "devise"
 
-gem 'devise-jwt'
+gem "devise-jwt"
 
-gem 'warden-jwt_auth', '~> 0.10.0'
+gem "warden-jwt_auth", "~> 0.10.0"
 
 # devise を日本語化する
-gem 'devise-i18n'
+gem "devise-i18n"
 
-gem 'rswag'
+gem "rswag"
 
 # ページネーション機能を提供する
-gem 'kaminari'
+gem "kaminari"
 
 # メールアドレスのバリデーション
-gem 'valid_email2'
+gem "valid_email2"
 
 # enum を日本語化する
-gem 'enum_help'
+gem "enum_help"
 
-gem 'ruby-openai'
+gem "ruby-openai"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -53,10 +53,10 @@ gem 'ruby-openai'
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[windows jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -66,33 +66,33 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri windows]
+  gem "debug", platforms: %i[mri windows]
   # N+1発生時にアラートを表示する
-  gem 'bullet'
+  gem "bullet"
 
   # テスト用データを作成する
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'gimei'
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "gimei"
   # 開発環境でメール送信をテストする
-  gem 'letter_opener_web'
+  gem "letter_opener_web"
 
   # pry コンソールを使えるようにする。
-  gem 'pry-byebug'
-  gem 'pry-doc'
-  gem 'pry-rails'
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-rails"
 
   # テストフレームワーク rspec を導入する
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem "rspec"
+  gem "rspec-rails"
 
   # rubocop を使えるようにする。
-  gem 'rubocop', '~> 1.0' # Or a compatible version
-  gem 'rubocop-faker'
-  gem 'rubocop-rails'
-  gem 'rubocop-rspec'
+  gem "rubocop", "~> 1.0" # Or a compatible version
+  gem "rubocop-faker"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
   # shoulda-matchers
-  gem 'shoulda-matchers', '~> 6.0'
+  gem "shoulda-matchers", "~> 6.0"
 end
 
 group :development do

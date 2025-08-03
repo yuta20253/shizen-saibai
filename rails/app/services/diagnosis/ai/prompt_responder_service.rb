@@ -12,7 +12,7 @@ class Diagnosis::Ai::PromptResponderService
     soil = @soils_json
 
     client = OpenAI::Client.new(
-      access_token: Rails.application.credentials.chatgpt_api_key
+      access_token: Rails.application.credentials.chatgpt_api_key,
     )
 
     user_prompt = <<~TEXT
@@ -24,10 +24,8 @@ class Diagnosis::Ai::PromptResponderService
 
       ## 雑草一覧
       #{format_weed_list(weed)}
-
       ## 土壌環境一覧
       #{format_soil_list(soil)}
-
       ## 野菜一覧
       #{format_vegetable_list(vegetable)}
 
@@ -72,8 +70,6 @@ class Diagnosis::Ai::PromptResponderService
       }
     TEXT
 
-    # Rails.logger.debug("Prompt内容:\n#{user_prompt}")
-
     begin
       response = client.chat(
         parameters: {
@@ -81,37 +77,32 @@ class Diagnosis::Ai::PromptResponderService
           messages: [
             { role: "system", content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。説明文や補足、余計な文章は一切含めてはいけません。" },
             { role: "user", content: [
-                { type: "text", text: user_prompt },
-                { type: "image_url", image_url: { url: @image} }
-              ]
-            }
-          ]
-        }
+              { type: "text", text: user_prompt },
+              { type: "image_url", image_url: { url: @image } },
+            ] },
+          ],
+        },
       )
     rescue Faraday::TooManyRequestsError => e
       Rails.logger.warn("OpenAI APIのレート制限を超えました: #{e.message}")
       raise Diagnosis::Errors::RateLimitExceeded, e.message
-    rescue StandardError => e
+    rescue => e
       Rails.logger.error("OpenAI API呼び出しに失敗しました: #{e.class} - #{e.message}")
       raise Diagnosis::Errors::OpenAiCallFailed, "#{e.class}: #{e.message}"
     end
-
-    # Rails.logger.debug("OpenAIレスポンス全体: #{response.inspect}")
 
     data_str = response.dig("choices", 0, "message", "content")
     Rails.logger.debug("GPTの生データ: #{data_str}")
     raise StandardError, "OpenAIからのレスポンスが空です" unless data_str
 
-    json_start_index = data_str.index('{')
-
+    json_start_index = data_str.index("{")
     raise StandardError, "OpenAIの出力が不完全です（JSONの開始が見つかりません）" unless json_start_index
+
     json_string = data_str[json_start_index..]
 
-    # OpenAIの出力が不完全/JSONの形式が不正
     begin
       data = JSON.parse(json_string)
       %w[vegetable weed soil diagnosis weed_soil_relation soil_vegetable_relation].each do |key|
-        # render json: { message: "OpenAIの出力が不完全です（#{key} がありません）", code: :invalid_json_response, status: "error" }, status: 400
         raise Diagnosis::Errors::InvalidResponseFormat, "OpenAIの出力が不完全です" unless data[key]
       end
     rescue JSON::ParserError => e
@@ -119,24 +110,25 @@ class Diagnosis::Ai::PromptResponderService
       raise Diagnosis::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #{e.message}"
     end
 
-    return data
+    data
   end
 
   def format_weed_list(json)
-    return "" if json.nil? || json.empty?
-    JSON.parse(json).map { |w| "・#{w['name']}" }.join("\n")
+    return "" if json.blank?
+
+    JSON.parse(json).map {|w| "・#{w["name"]}" }.join("\n")
   end
 
   def format_vegetable_list(json)
-    return "" if json.nil? || json.empty?
-    JSON.parse(json).map { |v| "・#{v['name']}" }.join("\n")
+    return "" if json.blank?
+
+    JSON.parse(json).map {|v| "・#{v["name"]}" }.join("\n")
   end
 
   def format_soil_list(json)
-    return "" if json.nil? || json.empty?
-    soils = JSON.parse(json)
-    soils.map.with_index do |s, i|
-      "・pH: #{s['pH_level']}, 水はけ: #{s['drainage']}, 肥沃度: #{s['fertility']}"
-    end.join("\n")
+    lines = JSON.parse(json).map_with_index do |s, _i|
+      "・pH: #{s["pH_level"]}, 水はけ: #{s["drainage"]}, 肥沃度: #{s["fertility"]}"
+    end
+    lines.join("\n")
   end
 end
