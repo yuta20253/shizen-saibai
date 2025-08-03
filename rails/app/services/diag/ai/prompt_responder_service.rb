@@ -127,7 +127,7 @@ class Diag::Ai::PromptResponderService
   end
 
   def format_soil_list(json)
-    lines = JSON.parse(json).map_with_index do |s, _i|
+    lines = JSON.parse(json).map.with_index do |s, _i|
       "・pH: #{s["pH_level"]}, 水はけ: #{s["drainage"]}, 肥沃度: #{s["fertility"]}"
     end
     lines.join("\n")
