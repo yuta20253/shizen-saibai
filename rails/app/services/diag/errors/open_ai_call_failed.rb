@@ -1,4 +1,4 @@
-module Diagnosis
+module Diag
   module Errors
     class OpenAiCallFailed < StandardError; end
   end
