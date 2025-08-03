@@ -1,4 +1,4 @@
-class Diagnosis::Ai::PromptResponderService
+class Diag::Ai::PromptResponderService
   def initialize(vegetables_json:, weeds_json:, soils_json:, image:)
     @vegetables_json = vegetables_json
     @weeds_json = weeds_json
@@ -85,10 +85,10 @@ class Diagnosis::Ai::PromptResponderService
       )
     rescue Faraday::TooManyRequestsError => e
       Rails.logger.warn("OpenAI APIのレート制限を超えました: #{e.message}")
-      raise Diagnosis::Errors::RateLimitExceeded, e.message
-    rescue => e
+      raise Diag::Errors::RateLimitExceeded, e.message
+    rescue StandardError => e
       Rails.logger.error("OpenAI API呼び出しに失敗しました: #{e.class} - #{e.message}")
-      raise Diagnosis::Errors::OpenAiCallFailed, "#{e.class}: #{e.message}"
+      raise Diag::Errors::OpenAiCallFailed, "#{e.class}: #{e.message}"
     end
 
     data_str = response.dig("choices", 0, "message", "content")
@@ -103,11 +103,12 @@ class Diagnosis::Ai::PromptResponderService
     begin
       data = JSON.parse(json_string)
       %w[vegetable weed soil diagnosis weed_soil_relation soil_vegetable_relation].each do |key|
-        raise Diagnosis::Errors::InvalidResponseFormat, "OpenAIの出力が不完全です" unless data[key]
+        # render json: { message: "OpenAIの出力が不完全です（#{key} がありません）", code: :invalid_json_response, status: "error" }, status: 400
+        raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不完全です" unless data[key]
       end
     rescue JSON::ParserError => e
       Rails.logger.error("[JSONパースエラー] #{e.class}: #{e.message}")
-      raise Diagnosis::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #{e.message}"
+      raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #{e.message}"
     end
 
     data

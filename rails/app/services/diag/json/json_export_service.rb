@@ -1,4 +1,4 @@
-class Diagnosis::Json::JsonExportService
+class Diag::Json::JsonExportService
   def call
     vegetables = Vegetable.all.map do |vegetable|
       {
