@@ -69,7 +69,7 @@ vegetables = [
   { name: "のざわな", season: 3, region: "長野県, 新潟県, 山形県, 群馬県, 福島県", difficulty: 1, description: "漬物に用いられる信州の伝統野菜。" },
   { name: "関西しろな", season: 3, region: "大阪府, 兵庫県, 奈良県, 和歌山県, 京都府", difficulty: 1, description: "関西で人気の冬野菜。汁物や鍋に。" },
   { name: "ちぢみほうれん草", season: 3, region: "北海道, 青森県, 埼玉県, 茨城県, 群馬県", difficulty: 1, description: "寒さで甘くなる冬ほうれん草。" },
-  { name: "赤軸ほうれん草", season: 3, region: "千葉県, 茨城県, 群馬県, 北海道, 長野県", difficulty: 1, description: "赤い茎が特徴。彩りと栄養が豊富。" }
+  { name: "赤軸ほうれん草", season: 3, region: "千葉県, 茨城県, 群馬県, 北海道, 長野県", difficulty: 1, description: "赤い茎が特徴。彩りと栄養が豊富。" },
 ]
 
 vegetables.each do |vegetable|

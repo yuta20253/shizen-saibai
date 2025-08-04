@@ -5,6 +5,6 @@ class SoilVegetableRelation < ApplicationRecord
   enum suitability: {
     high: 0, # 高
     middle: 1, # 中
-    low: 2 # 低
+    low: 2, # 低
   }
 end

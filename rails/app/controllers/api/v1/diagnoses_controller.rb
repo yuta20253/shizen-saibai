@@ -1,10 +1,8 @@
 class Api::V1::DiagnosesController < Api::V1::BaseController
-  require 'openai'
+  require "openai"
   def create
-    file_type = ['image/jpeg', 'image/png']
     # max_size = 5.megabytes
-    base64_image = File.read(Rails.root.join('lib', 'diagnosis_image.txt')).strip
-    image = 'data:image/jpeg;base64,' + base64_image
+    image = read_image
     # ファイル形式が不正
     # raise ActionController::ParameterMissing, :image if params[:image].blank?
     # unless file_type.include?(image.content_type)
@@ -48,4 +46,22 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
 
     render json: { message: data }, status: :ok
   end
+
+  private
+
+    def read_image
+      base64_image = File.read(Rails.root.join("lib", "diagnosis_image.txt")).strip
+      "data:image/jpeg;base64,#{base64_image}"
+    end
+
+    def parse_data_response(data)
+      {
+        vegetable_name: data["vegetable"]["name"],
+        weed_name: data["weed"]["name"],
+        soil_data: data["soil"],
+        diagnosis_result: data["diagnosis"]["result"],
+        weed_soil_relation: data["weed_soil_relation"],
+        soil_vegetable_relation: data["soil_vegetable_relation"],
+      }
+    end
 end
