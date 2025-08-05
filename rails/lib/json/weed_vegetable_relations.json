@@ -1,0 +1,1466 @@
+[
+  {
+    "weed_name": "ヨウシュヤマゴボウ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の排水性と肥沃度を好み、ほうれんそうが適した酸性〜中性の土壌でよく育つため。"
+  },
+  {
+    "weed_name": "ユウゲショウ",
+    "pH_level": 5,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "だいこん",
+    "reason": "良好な排水性と肥沃度が高い中性土壌を好み、だいこんの生育に適している。"
+  },
+  {
+    "weed_name": "ヤマブキ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "やや湿り気のある土壌を好み、肥沃度中程度のため、キャベツの栽培に適している。"
+  },
+  {
+    "weed_name": "ヤマノイモ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性でpH6前後のやや酸性の土壌を好み、さつまいもが育ちやすいため。"
+  },
+  {
+    "weed_name": "ヤマトリカブト",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "中性の土壌と適度な肥沃度がにんじんの根の発育に良く合う。"
+  },
+  {
+    "weed_name": "ヤブマオ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "排水はやや悪いが肥沃度が中、レタスは多少湿気のある土壌でも育ちやすい。"
+  },
+  {
+    "weed_name": "ヤブツルアズキ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と肥沃度の高い土壌がエンドウ豆の生育に最適。"
+  },
+  {
+    "weed_name": "ヤブジラミ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ブロッコリー",
+    "reason": "中性の土壌で肥沃度が中程度、適度な水はけの土壌がブロッコリー栽培に向く。"
+  },
+  {
+    "weed_name": "ヤブカンゾウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "きゅうり",
+    "reason": "やや酸性で良好な排水性の土壌、肥沃度もあり、きゅうりの根張りに適する。"
+  },
+  {
+    "weed_name": "ヤブガラシ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "トマト",
+    "reason": "中性の土壌で排水は普通だが肥沃度は低め、トマトは多少低肥沃でも育ちやすい。"
+  },
+  {
+    "weed_name": "ヤハズエンドウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と肥沃度の高い土壌が適しており、豆類の栽培に向く。"
+  },
+  {
+    "weed_name": "ヤエムグラ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中性〜やや酸性の土壌で肥沃度中程度、キャベツの栽培に適している。"
+  },
+  {
+    "weed_name": "メヒシバ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "排水は普通で肥沃度中程度の土壌がほうれんそうの成長に適する。"
+  },
+  {
+    "weed_name": "ムラサキツユクサ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "やや排水悪く肥沃度中、レタスは湿り気のある土壌でも育ちやすい。"
+  },
+  {
+    "weed_name": "ムラサキツメクサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と肥沃度の高い土壌で豆類の栽培に適す。"
+  },
+  {
+    "weed_name": "ムラサキサギゴケ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "やや湿り気のある中性土壌を好み、ほうれんそうの生育に適している。"
+  },
+  {
+    "weed_name": "ムラサキケマン",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性と肥沃度の高いやや酸性土壌がさつまいもの成長に向く。"
+  },
+  {
+    "weed_name": "ムラサキカタバミ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中性〜やや酸性の土壌で育ちやすく、キャベツに適している。"
+  },
+  {
+    "weed_name": "ミヤコグサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と肥沃度の高い土壌が豆類に最適。"
+  },
+  {
+    "weed_name": "ミチヤナギ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "やや排水が悪い湿った土壌でも育ちやすく、レタスに向く。"
+  },
+  {
+    "weed_name": "ミゾソバ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "湿り気のある中性土壌でほうれんそうがよく育つ。"
+  },
+  {
+    "weed_name": "ミズヒキ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "やや湿った土壌で肥沃度が中程度、キャベツに適している。"
+  },
+  {
+    "weed_name": "ミズバショウ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 2,
+    "vegetable": "レタス",
+    "reason": "湿った排水不良の土壌でも育つレタスに適している。"
+  },
+  {
+    "weed_name": "ミズオオバコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "適度な湿り気のある中性土壌でほうれんそうが育ちやすい。"
+  },
+  {
+    "weed_name": "マメグンバイナズナ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と肥沃度の高い土壌が豆類の栽培に向いている。"
+  },
+  {
+    "weed_name": "マツヨイグサ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "排水は普通だが肥沃度中程度の土壌がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "マツバウンラン",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "湿った排水悪い土壌でもレタスは育ちやすい。"
+  },
+  {
+    "weed_name": "ホトケノザ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の湿り気のある土壌がキャベツの成長に適している。"
+  },
+  {
+    "weed_name": "ホソバワダン",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性と肥沃度がさつまいもに向く。"
+  },
+  {
+    "weed_name": "ホソバアカザ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "湿り気のある中性土壌でほうれんそうが育ちやすい。"
+  },
+  {
+    "weed_name": "ホソアオゲイトウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と肥沃度の高い土壌が豆類に適している。"
+  },
+  {
+    "weed_name": "ヘビイチゴ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "やや湿った土壌で肥沃度中程度、キャベツに向く。"
+  },
+  {
+    "weed_name": "ヘクソカズラ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 2,
+    "vegetable": "レタス",
+    "reason": "湿気の多い排水悪い土壌でもレタスが育つ。"
+  },
+  {
+    "weed_name": "フユノハナワラビ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の湿り気と肥沃度のある土壌でほうれんそうが育つ。"
+  },
+  {
+    "weed_name": "ブタクサ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と肥沃度の土壌がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "ヒロハノカワラサイコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "適度な湿り気のある土壌でキャベツの生育に適している。"
+  },
+  {
+    "weed_name": "ヒルムシロ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 2,
+    "vegetable": "レタス",
+    "reason": "湿った排水不良の土壌でもレタスが育ちやすい。"
+  },
+  {
+    "weed_name": "ヒルザキツキミソウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性で肥沃度の高い土壌がさつまいもに適する。"
+  },
+  {
+    "weed_name": "ヒルガオ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と肥沃度がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "ヒメムカシヨモギ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の湿り気と肥沃度の土壌でキャベツがよく育つ。"
+  },
+  {
+    "weed_name": "ヒメヒマワリ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と肥沃度の高い土壌が豆類に適している。"
+  },
+  {
+    "weed_name": "ヒメツルソバ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "やや湿り気のある土壌でほうれんそうの生育に適している。"
+  },
+  {
+    "weed_name": "ヒメシロザ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性と肥沃度がさつまいも栽培に向く。"
+  },
+  {
+    "weed_name": "ヒメジョオンモドキ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の肥沃度の土壌でキャベツの成長を促進する。"
+  },
+  {
+    "weed_name": "ヒメジョオン",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "適度な湿り気の土壌がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "ヒメジソ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度の土壌で豆類がよく育つ。"
+  },
+  {
+    "weed_name": "ヒメオドリコソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "湿り気のある中性土壌でキャベツの栽培に適している。"
+  },
+  {
+    "weed_name": "ヒナタイノコズチ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "排水悪い湿った土壌でもレタスは育ちやすい。"
+  },
+  {
+    "weed_name": "ヒナゲシ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の湿り気の土壌がほうれんそうに適する。"
+  },
+  {
+    "weed_name": "ヒガンバナ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と肥沃度の土壌でほうれんそうがよく育つ。"
+  },
+  {
+    "weed_name": "ヒエ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 2,
+    "vegetable": "レタス",
+    "reason": "湿った排水不良の土壌でもレタスが育つ。"
+  },
+  {
+    "weed_name": "ハルジオン",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中性の湿り気のある土壌でキャベツに適している。"
+  },
+  {
+    "weed_name": "ハマスゲ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性と高肥沃度の土壌でさつまいもが育つ。"
+  },
+  {
+    "weed_name": "ハハコグサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "適度な湿り気のある土壌でほうれんそうの生育に適している。"
+  },
+  {
+    "weed_name": "ハコベ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "やや湿った中性土壌でキャベツが育ちやすい。"
+  },
+  {
+    "weed_name": "ハキダメギク",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の排水性と肥沃度の土壌でキャベツがよく育つため。"
+  },
+  {
+    "weed_name": "ノビル",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "たまねぎ",
+    "reason": "良好な排水性と高肥沃度の土壌がたまねぎの生育に適している。"
+  },
+  {
+    "weed_name": "ノコンギク",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ブロッコリー",
+    "reason": "中性の土壌と中程度の肥沃度でブロッコリーが育ちやすい。"
+  },
+  {
+    "weed_name": "ノゲシ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "排水性が悪い湿り気のある土壌でもレタスは育つ。"
+  },
+  {
+    "weed_name": "ノアザミ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "普通の排水性と肥沃度の土壌でにんじんの根の発育に適している。"
+  },
+  {
+    "weed_name": "ネズミムギ",
+    "pH_level": 5,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "じゃがいも",
+    "reason": "良好な排水性と肥沃度の高い土壌がじゃがいもに最適。"
+  },
+  {
+    "weed_name": "ネジバナ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中性土壌で適度な肥沃度の土壌がキャベツの生育に良い。"
+  },
+  {
+    "weed_name": "ヌスビトハギ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度の土壌で豆類の栽培に向いている。"
+  },
+  {
+    "weed_name": "ヌカキビ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "さつまいも",
+    "reason": "排水性は普通だが肥沃度が中程度でさつまいもに適している。"
+  },
+  {
+    "weed_name": "ニワゼキショウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の湿り気と肥沃度のある土壌がほうれんそうに向く。"
+  },
+  {
+    "weed_name": "ナヨクサフジ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度の土壌で豆類に適している。"
+  },
+  {
+    "weed_name": "ナズナ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "だいこん",
+    "reason": "中性の土壌と適度な肥沃度でだいこんの生育に良い。"
+  },
+  {
+    "weed_name": "ナギナタコウジュ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と肥沃度の土壌がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "ナガミヒナゲシ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "湿り気の多い排水悪い土壌でもレタスが育ちやすい。"
+  },
+  {
+    "weed_name": "ナガエツルノゲイトウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と肥沃度の高い土壌が豆類の生育に向いている。"
+  },
+  {
+    "weed_name": "ドクダミ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の湿り気と肥沃度の土壌でキャベツが育ちやすい。"
+  },
+  {
+    "weed_name": "トキワハゼ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "適度な湿り気のある土壌がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "ツルムラサキ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "つるむらさき",
+    "reason": "良好な排水性と高肥沃度の土壌がつるむらさきの栽培に適している。"
+  },
+  {
+    "weed_name": "ツルマメ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と肥沃度の高い土壌が豆類の成長に向く。"
+  },
+  {
+    "weed_name": "ツルニチニチソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の湿り気と肥沃度のある土壌でキャベツの生育に良い。"
+  },
+  {
+    "weed_name": "ツリガネニンジン",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "にんじん",
+    "reason": "良好な排水性と高肥沃度の土壌がにんじんの根の発育に適している。"
+  },
+  {
+    "weed_name": "ツユクサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中性で適度な湿り気のある土壌がほうれんそうに適している。"
+  },
+  {
+    "weed_name": "ツボミオオバコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "普通の排水性と肥沃度の土壌がレタスの生育に向いている。"
+  },
+  {
+    "weed_name": "チドメグサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "キャベツ",
+    "reason": "良好な排水と肥沃度の高い土壌がキャベツの栽培に適する。"
+  },
+  {
+    "weed_name": "チチコグサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "適度な湿り気のある土壌でほうれんそうがよく育つ。"
+  },
+  {
+    "weed_name": "チガヤ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性と高肥沃度がさつまいもの成長を促進する。"
+  },
+  {
+    "weed_name": "タンポポ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "中性の土壌と適度な肥沃度でにんじんの育成に適している。"
+  },
+  {
+    "weed_name": "タビラコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と肥沃度の土壌でキャベツが育ちやすい。"
+  },
+  {
+    "weed_name": "タネツケバナ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "排水性がやや悪い湿った土壌でもレタスの生育に適する。"
+  },
+  {
+    "weed_name": "タチイヌノフグリ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "適度な湿り気の土壌がほうれんそうの成長に良い影響を与える。"
+  },
+  {
+    "weed_name": "センダングサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中性で適度な湿度の土壌がキャベツに適している。"
+  },
+  {
+    "weed_name": "セリ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 2,
+    "vegetable": "レタス",
+    "reason": "湿った排水不良の土壌でもレタスが生育しやすい環境であるため。"
+  },
+  {
+    "weed_name": "セイヨウタンポポ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "普通の排水性と肥沃度がにんじんの生育に適している。"
+  },
+  {
+    "weed_name": "セイバンモロコシ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "良好な排水性と高肥沃度の土壌がさつまいもに適している。"
+  },
+  {
+    "weed_name": "セイタカアワダチソウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "良好な排水性と中程度の肥沃度がにんじんの育成に向く。"
+  },
+  {
+    "weed_name": "スベリヒユ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と肥沃度の土壌でほうれんそうがよく育つ。"
+  },
+  {
+    "weed_name": "スズメノテッポウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "じゃがいも",
+    "reason": "良好な排水性と高肥沃度の土壌がじゃがいもに適する。"
+  },
+  {
+    "weed_name": "スズメノカタビラ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中性の土壌で適度な肥沃度がキャベツの生育に良い。"
+  },
+  {
+    "weed_name": "スズメノエンドウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と肥沃度の高い土壌で豆類に適している。"
+  },
+  {
+    "weed_name": "ススキ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "やや排水が普通で肥沃度が低い土壌に適応し、さつまいももこうした条件に強い。"
+  },
+  {
+    "weed_name": "スギナ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "じゃがいも",
+    "reason": "中性土壌で中程度の肥沃度の条件がじゃがいもの生育に適しているため。"
+  },
+  {
+    "weed_name": "スイバ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "だいこん",
+    "reason": "良好な排水性と中程度の肥沃度の土壌がだいこんに適している。"
+  },
+  {
+    "weed_name": "シロバナタンポポ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "適度な排水と肥沃度の土壌がにんじんの根の発育に良い影響を与える。"
+  },
+  {
+    "weed_name": "シロツメクサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度の土壌が豆類の栽培に適している。"
+  },
+  {
+    "weed_name": "シロザ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の湿り気がある土壌でほうれんそうの生育が促進される。"
+  },
+  {
+    "weed_name": "シラヤマギク",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "適度な排水性と肥沃度がレタスの生育に適している。"
+  },
+  {
+    "weed_name": "シナガワハギ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度の土壌が豆類の成長に適している。"
+  },
+  {
+    "weed_name": "シソ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "パプリカ",
+    "reason": "良好な排水性と肥沃度がパプリカの生育に良い環境を作るため。"
+  },
+  {
+    "weed_name": "コメツブツメクサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度が豆類の成長に最適であるため。"
+  },
+  {
+    "weed_name": "コメツブウマゴヤシ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と肥沃度の高い土壌で豆類がよく育つため。"
+  },
+  {
+    "weed_name": "コマツヨイグサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と肥沃度の土壌がキャベツの生育に適している。"
+  },
+  {
+    "weed_name": "コバンソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の肥沃度の土壌でほうれんそうが育ちやすい。"
+  },
+  {
+    "weed_name": "コニシキソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "肥沃度が低めでも育つさつまいもに適した土壌環境であるため。"
+  },
+  {
+    "weed_name": "コセンダングサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "中性の土壌で適度な肥沃度がにんじんの成長に良い影響を与える。"
+  },
+  {
+    "weed_name": "コカラスムギ",
+    "pH_level": 5,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "じゃがいも",
+    "reason": "良好な排水性と肥沃度の高い土壌がじゃがいもの生育に適している。"
+  },
+  {
+    "weed_name": "コオニタビラコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "中程度の湿り気がありレタスの生育に適した土壌環境のため。"
+  },
+  {
+    "weed_name": "コウガイゼキショウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "やや肥沃度が低い土壌でもさつまいもは育つため。"
+  },
+  {
+    "weed_name": "コアカザ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と肥沃度がほうれんそうの生育に適している。"
+  },
+  {
+    "weed_name": "クルマバザクロソウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "ほうれんそう",
+    "reason": "良好な排水と高肥沃度がほうれんそうの成長を促進します。"
+  },
+  {
+    "weed_name": "クズ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 0,
+    "vegetable": "さつまいも",
+    "reason": "中程度の排水性で肥沃度が高い土壌はさつまいもに適しています。"
+  },
+  {
+    "weed_name": "クサフジ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と高肥沃度が豆類の栽培に適しています。"
+  },
+  {
+    "weed_name": "クサネム",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水性と高肥沃度の環境が豆類の生育を助けます。"
+  },
+  {
+    "weed_name": "クサギ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と中程度の肥沃度がキャベツの生育に適しています。"
+  },
+  {
+    "weed_name": "キランソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "中程度の肥沃度と排水性がレタスに好適な環境を提供します。"
+  },
+  {
+    "weed_name": "キュウリグサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "きゅうり",
+    "reason": "良好な排水性と中程度の肥沃度がきゅうりの成長を支えます。"
+  },
+  {
+    "weed_name": "キツネノマゴ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "トマト",
+    "reason": "普通の排水性と中程度の肥沃度はトマトに適した条件です。"
+  },
+  {
+    "weed_name": "キツネノボタン",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "肥沃度が低い土壌でもさつまいもは育ちやすいです。"
+  },
+  {
+    "weed_name": "ギシギシ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "中程度の排水性と肥沃度がにんじんの生育に向いています。"
+  },
+  {
+    "weed_name": "キクイモモドキ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "じゃがいも",
+    "reason": "良好な排水性と中程度の肥沃度がじゃがいもに適しています。"
+  },
+  {
+    "weed_name": "キクイモ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "普通の排水性と肥沃度はにんじんの生育に良い条件です。"
+  },
+  {
+    "weed_name": "カントウタンポポ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "タンポポ菜",
+    "reason": "同じような土壌環境を好み、栽培に適しています。"
+  },
+  {
+    "weed_name": "カワラナデシコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "普通の排水性と肥沃度の土壌がレタスに適しています。"
+  },
+  {
+    "weed_name": "カワラケツメイ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と肥沃度が豆類の生育を促します。"
+  },
+  {
+    "weed_name": "カラムシ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と肥沃度がキャベツの成長に好ましいです。"
+  },
+  {
+    "weed_name": "カラスムギ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "じゃがいも",
+    "reason": "良好な排水性と中程度の肥沃度はじゃがいも栽培に適しています。"
+  },
+  {
+    "weed_name": "カラスノエンドウ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 0,
+    "vegetable": "エンドウ豆らい",
+    "reason": "良好な排水と高肥沃度の土壌が豆類の成長を促進します。"
+  },
+  {
+    "weed_name": "カラクサナズナ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の肥沃度と排水性はキャベツの生育に適しています。"
+  },
+  {
+    "weed_name": "カヤツリグサ",
+    "pH_level": 5,
+    "drainage": 2,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "やや悪い排水性の土壌でもほうれんそうは育ちやすいです。"
+  },
+  {
+    "weed_name": "カモジグサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "良好な排水性と中程度の肥沃度がにんじんの生育に良い環境です。"
+  },
+  {
+    "weed_name": "カモガヤ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "ラディッシュ",
+    "reason": "良好な排水性がラディッシュの根の発育を助けます。"
+  },
+  {
+    "weed_name": "カナムグラ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "中程度の肥沃度と排水性がキャベツに適した環境を提供します。"
+  },
+  {
+    "weed_name": "カタヒバリ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "肥沃度が低めの土壌でもさつまいもはよく育ちます。"
+  },
+  {
+    "weed_name": "カタバミモドキ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "中程度の肥沃度と排水性はほうれんそうに良い環境です。"
+  },
+  {
+    "weed_name": "カタバミ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と肥沃度はキャベツ栽培に向いています。"
+  },
+  {
+    "weed_name": "カゼクサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "低肥沃度の土壌でもさつまいもは育ちやすいです。"
+  },
+  {
+    "weed_name": "カキドオシ",
+    "pH_level": 5,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "良好な排水と中程度の肥沃度がレタスの成長に適しています。"
+  },
+  {
+    "weed_name": "オランダミミナグサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "ミニトマト",
+    "reason": "良好な排水性と中肥沃度がミニトマトに好ましい条件です。"
+  },
+  {
+    "weed_name": "オヒシバ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "肥沃度の低い土壌でもさつまいもは育成可能です。"
+  },
+  {
+    "weed_name": "オニノゲシ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "中程度の排水性と肥沃度はにんじんの生育に適しています。"
+  },
+  {
+    "weed_name": "オオブタクサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "トマト",
+    "reason": "良好な排水と中程度の肥沃度はトマトの生育に適しています。"
+  },
+  {
+    "weed_name": "オオバナノエンレイソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水と中程度の肥沃度がキャベツに適しています。"
+  },
+  {
+    "weed_name": "オオバコモドキ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "良好な排水性がレタスの成長を促進します。"
+  },
+  {
+    "weed_name": "オオバコ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と中程度の肥沃度はほうれんそうに向いています。"
+  },
+  {
+    "weed_name": "オオチドメ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "低肥沃度の土壌でもさつまいもは育ちます。"
+  },
+  {
+    "weed_name": "オオジシバリ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "良好な排水と中程度の肥沃度がにんじんの生育に適しています。"
+  },
+  {
+    "weed_name": "オオキンケイギク",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ブロッコリー",
+    "reason": "普通の排水性と肥沃度はブロッコリーに適しています。"
+  },
+  {
+    "weed_name": "オオカワヂシャ",
+    "pH_level": 5,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "良好な排水と中程度の肥沃度がキャベツの成長に好適です。"
+  },
+  {
+    "weed_name": "オオイヌノフグリモドキ",
+    "pH_level": 6,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ラディッシュ",
+    "reason": "適度な排水性と肥沃度がラディッシュに適しています。"
+  },
+  {
+    "weed_name": "オオイヌノフグリ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "ミニトマト",
+    "reason": "良好な排水性と中肥沃度がミニトマトの成長に適しています。"
+  },
+  {
+    "weed_name": "オオアワガエリ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "肥沃度が低い土壌でもさつまいもは育ちやすいです。"
+  },
+  {
+    "weed_name": "オオアレチノギク",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と中程度の肥沃度がキャベツ栽培に向きます。"
+  },
+  {
+    "weed_name": "エノコログサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "とうもろこし",
+    "reason": "良好な排水性と中程度の肥沃度が適しています。"
+  },
+  {
+    "weed_name": "ウラジロチチコグサ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "低肥沃度の土壌でも育つため、さつまいもと相性が良いです。"
+  },
+  {
+    "weed_name": "ウシハコベ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "だいこん",
+    "reason": "良好な排水性と肥沃度はだいこんの生育に好ましいです。"
+  },
+  {
+    "weed_name": "イノコヅチ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "じゃがいも",
+    "reason": "良好な排水と中程度の肥沃度はじゃがいもに適しています。"
+  },
+  {
+    "weed_name": "イヌムギ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "普通の排水と中程度の肥沃度がにんじんに向いています。"
+  },
+  {
+    "weed_name": "イヌホオズキ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "トマト",
+    "reason": "良好な排水性と肥沃度はトマトの生育に適しています。"
+  },
+  {
+    "weed_name": "イヌビユ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "低肥沃度の土壌でもさつまいもは育ちやすいです。"
+  },
+  {
+    "weed_name": "イヌビエ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "良好な排水と中程度の肥沃度はキャベツに適しています。"
+  },
+  {
+    "weed_name": "イヌトウバナ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水性と中肥沃度がほうれんそうに向いています。"
+  },
+  {
+    "weed_name": "イヌタデ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "良好な排水性と肥沃度はレタスに適しています。"
+  },
+  {
+    "weed_name": "イヌガラシ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ブロッコリー",
+    "reason": "普通の排水と肥沃度がブロッコリーの生育に適します。"
+  },
+  {
+    "weed_name": "イタドリ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "だいこん",
+    "reason": "良好な排水性と中程度の肥沃度がだいこんに適しています。"
+  },
+  {
+    "weed_name": "アレチヌスビトハギ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "肥沃度の低い土壌でも育つため、さつまいもが適しています。"
+  },
+  {
+    "weed_name": "アレチウリ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "きゅうり",
+    "reason": "良好な排水性と肥沃度はきゅうりの生育に適しています。"
+  },
+  {
+    "weed_name": "アメリカフウロ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ピーマン",
+    "reason": "普通の排水と中肥沃度がピーマンに向いています。"
+  },
+  {
+    "weed_name": "アメリカセンダングサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "オクラ",
+    "reason": "良好な排水性と肥沃度がオクラに適しています。"
+  },
+  {
+    "weed_name": "アメリカアゼナ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "低肥沃度の土壌でも育つさつまいもに適しています。"
+  },
+  {
+    "weed_name": "アシタバ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "モロヘイヤ",
+    "reason": "良好な排水と中程度の肥沃度はモロヘイヤの生育に適しています。"
+  },
+  {
+    "weed_name": "アキノノゲシ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "だいこん",
+    "reason": "良好な排水性と中程度の肥沃度はだいこんに適しています。"
+  },
+  {
+    "weed_name": "アキノタムラソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ほうれんそう",
+    "reason": "普通の排水と肥沃度はほうれんそうの生育に向いています。"
+  },
+  {
+    "weed_name": "アキノゲシ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "にんじん",
+    "reason": "良好な排水性と中肥沃度はにんじんに適しています。"
+  },
+  {
+    "weed_name": "アキノキリンソウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "普通の排水性と肥沃度がキャベツの育成に良いです。"
+  },
+  {
+    "weed_name": "アキノウナギツカミ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "レタス",
+    "reason": "良好な排水性と中程度の肥沃度はレタスに適しています。"
+  },
+  {
+    "weed_name": "アカバナユウゲショウ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 2,
+    "vegetable": "さつまいも",
+    "reason": "低肥沃度でも育つさつまいもに向いています。"
+  },
+  {
+    "weed_name": "アカツメクサ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "トマト",
+    "reason": "良好な排水性と中肥沃度はトマトに適しています。"
+  },
+  {
+    "weed_name": "アカザ",
+    "pH_level": 5,
+    "drainage": 1,
+    "fertility": 1,
+    "vegetable": "ブロッコリー",
+    "reason": "普通の排水と肥沃度がブロッコリーに向いています。"
+  },
+  {
+    "weed_name": "アオビユ",
+    "pH_level": 6,
+    "drainage": 0,
+    "fertility": 1,
+    "vegetable": "キャベツ",
+    "reason": "良好な排水性と中肥沃度はキャベツに適しています。"
+  }
+]
