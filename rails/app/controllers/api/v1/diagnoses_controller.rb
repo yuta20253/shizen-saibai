@@ -3,7 +3,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
   def create
     file_type = ['image/jpeg', 'image/png']
     # max_size = 5.megabytes
-    base64_image = File.read(Rails.root.join('lib', 'diagnosis_image.txt')).strip
+    base64_image = File.read(Rails.root.join('lib', 'diagnosis_image1.txt')).strip
     image = 'data:image/jpeg;base64,' + base64_image
     # ファイル形式が不正
     # raise ActionController::ParameterMissing, :image if params[:image].blank?
