@@ -1,5 +1,5 @@
 class Diag::Db::SaveRecordService
-  def initialize(vegetable_name:, weed_name:, soil_data:, reason:)
+  def initialize(vegetable_name:, weed_name:, soil_data:, reason:, current_user:)
     @vegetable = Vegetable.find_by(name: vegetable_name)
     raise ActiveRecord::RecordNotFound, "野菜データ、#{vegetable_name}が見つかりません。" unless @vegetable
 
@@ -10,6 +10,8 @@ class Diag::Db::SaveRecordService
     raise ActiveRecord::RecordNotFound, "土壌データが見つかりません。" unless @soil
 
     @reason = reason
+
+    @user = current_user
   end
 
   def call
@@ -23,6 +25,14 @@ class Diag::Db::SaveRecordService
         weed_id: @weed.id,
         soil_id: @soil.id,
         notes: @reason
+      )
+      Diagnosis.create(
+        user_id: @user.id,
+        weed_id: @weed.id,
+        soil_id: @soil.id,
+        vegetable_id: @vegetable.id,
+        image_url: "",
+        result: @reason
       )
     end
   rescue => e
