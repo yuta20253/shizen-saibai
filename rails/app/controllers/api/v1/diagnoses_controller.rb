@@ -37,7 +37,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
 
     vegetable_name, weed_name, soil_data, reason = Diag::Json::SearchWeedService.new(data).call
 
-    Diag::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, reason: reason).call
+    Diag::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, reason: reason, current_user: current_user).call
 
     render json: { message: data }, status: :ok
   end
