@@ -16,7 +16,7 @@ class Diag::Ai::WeedIdentificationService
       なお、雑草は「雑草一覧」から選択してください。
 
       ## 雑草一覧（以下から1つ選んでください）
-      #{format_weed_list(weed)}
+      #{format_weed_list(weeds)}
 
     【重要】
       - 出力する雑草名は、必ず「雑草一覧」にある **1種類** のみ。
