@@ -22,7 +22,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     weeds_json = data_json[:weeds_to_json]
 
     begin
-      data = Diag::Ai::PromptResponderService.new(weeds_json: weeds_json, image: image).call
+      data = Diag::Ai::WeedIdentificationService.new(weeds_json: weeds_json, image: image).call
     rescue Diag::Errors::RateLimitExceeded => e
       render json: { error: "OpenAIの利用制限を超えました" }, status: 429 and return
     rescue Diag::Errors::InvalidResponseFormat => e
