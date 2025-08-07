@@ -26,6 +26,6 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
 
     id = Diag::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, reason: reason, current_user: current_user).call
 
-    render json: { message: id }, status: :ok
+    render json: id, status: :ok
   end
 end
