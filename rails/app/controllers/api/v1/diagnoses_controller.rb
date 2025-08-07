@@ -6,7 +6,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
     image = 'data:image/jpeg;base64,' + base64_image
 
     data_json = Diag::Json::JsonExportService.new.call
-    weeds_json = data_json[:weeds_to_json]
+    weeds_json = data_json[:weeds_name_to_json]
 
     begin
       data = Diag::Ai::WeedIdentificationService.new(weeds_json: weeds_json, image: image).call
@@ -24,8 +24,8 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
 
     vegetable_name, weed_name, soil_data, reason = Diag::Json::SearchWeedService.new(data).call
 
-    Diag::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, reason: reason, current_user: current_user).call
+    id = Diag::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, reason: reason, current_user: current_user).call
 
-    render json: { message: data }, status: :ok
+    render json: { message: id }, status: :ok
   end
 end
