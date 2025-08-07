@@ -26,7 +26,7 @@ class Diag::Db::SaveRecordService
         soil_id: @soil.id,
         notes: @reason
       )
-      Diagnosis.create(
+      @diagnosis = Diagnosis.create!(
         user_id: @user.id,
         weed_id: @weed.id,
         soil_id: @soil.id,
@@ -35,6 +35,7 @@ class Diag::Db::SaveRecordService
         result: @reason
       )
     end
+    return { id: @diagnosis.id }
   rescue => e
     Rails.logger.error("SaveRecordService エラー発生: #{e.class} - #{e.message}")
     Rails.logger.error(e.backtrace.join("\n"))
