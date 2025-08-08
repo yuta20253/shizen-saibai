@@ -42,8 +42,6 @@ module Myapp
     config.api_only = true
     config.i18n.default_locale = :ja
     config.enable_reloading = true
-    config.middleware.delete Warden::JWTAuth::Middleware
-    config.middleware.delete Warden::JWTAuth::Middleware::RevocationManager
     config.autoload_paths << Rails.root.join('app/errors')
     config.eager_load_paths << Rails.root.join('app/errors')
   end
