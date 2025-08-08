@@ -2,6 +2,7 @@ class Api::V1::Users::SessionsController < Api::V1::BaseController
   skip_before_action :authenticate_user!, only: [:create]
   def create
     result = User::LoginService.new(login_params).call
+
     if result
       response.set_header("Authorization", "Bearer #{result[:token]}")
       render json: {
@@ -23,7 +24,7 @@ class Api::V1::Users::SessionsController < Api::V1::BaseController
     end
 
     begin
-      JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, algorithm: "HS256").first
+      JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, { algorithms: ['HS256'] }).first
 
       render json: { status: 200, message: "ログアウトに成功しました" }, status: :ok
     rescue JWT::ExpiredSignature
