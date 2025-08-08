@@ -311,21 +311,22 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 
-  config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.devise[:jwt_secret_key] || ENV['DEVISE_JWT_SECRET_KEY']
-    jwt.dispatch_requests = [
-      ['POST', %r{^/api/v1/login$}],
-      ['POST', %r{^/api/v1/signup$}],
-      ['POST', %r{^/api/v1/user$}],
-    ]
-    jwt.revocation_requests = [
-      ['DELETE', %r{^/api/v1/logout$}],
-      ['DELETE', %r{^/api/v1/user$}],
-    ]
-    jwt.expiration_time = 1.day.to_i
-    jwt.request_formats = {
-      user: [:json]
-    }
-  end
+  # config.jwt do |jwt|
+  #   jwt.secret = Rails.application.credentials.devise[:jwt_secret_key] || ENV['DEVISE_JWT_SECRET_KEY']
+  #   jwt.dispatch_requests = [
+  #     ['POST', %r{^/api/v1/login$}],
+  #     ['POST', %r{^/api/v1/signup$}],
+  #     ['POST', %r{^/api/v1/user$}],
+  #   ]
+  #   jwt.revocation_requests = [
+  #     ['DELETE', %r{^/api/v1/logout$}],
+  #     ['DELETE', %r{^/api/v1/user$}],
+  #   ]
+  #   jwt.revocation_strategy = JwtDenylist
+  #   jwt.expiration_time = 1.day.to_i
+  #   jwt.request_formats = {
+  #     user: [:json]
+  #   }
+  # end
   config.navigational_formats = []
 end
