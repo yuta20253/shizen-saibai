@@ -31,7 +31,7 @@ soils = [
   { pH_level: 2, drainage: 2, fertility: 0, description: "強酸性で水はけ良好、肥沃度低い。良排水の酸性土壌。" },
   { pH_level: 2, drainage: 2, fertility: 1, description: "強酸性で水はけ良好、肥沃度普通。排水良好な酸性耐性土壌。" },
   { pH_level: 2, drainage: 2, fertility: 2, description: "強酸性で水はけ良好、肥沃度高い。肥沃で良排水の酸性土壌。" },
- # pH_level: 3 (やや強い酸性)
+  # pH_level: 3 (やや強い酸性)
   { pH_level: 3, drainage: 0, fertility: 0, description: "やや強い酸性で水はけ悪く肥沃度低い。酸性植物の湿地環境。" },
   { pH_level: 3, drainage: 0, fertility: 1, description: "やや強い酸性で水はけ悪く肥沃度普通。湿潤な酸性耐性植物向け。" },
   { pH_level: 3, drainage: 0, fertility: 2, description: "やや強い酸性で水はけ悪く肥沃度高い。肥沃な酸性湿地土壌。" },
@@ -64,7 +64,7 @@ soils = [
   { pH_level: 5, drainage: 2, fertility: 1, description: "弱アルカリ性で水はけ良好、肥沃度普通。幅広い作物に適応可能。" },
   { pH_level: 5, drainage: 2, fertility: 2, description: "弱アルカリ性で水はけ良好、肥沃度高い。肥沃で良排水の石灰質土壌。" },
 
- # pH_level: 6 (中程度のアルカリ性)
+  # pH_level: 6 (中程度のアルカリ性)
   { pH_level: 6, drainage: 0, fertility: 0, description: "中程度のアルカリ性で水はけ悪く肥沃度低い。石灰岩地域の湿地環境。" },
   { pH_level: 6, drainage: 0, fertility: 1, description: "中程度のアルカリ性で水はけ悪く肥沃度普通。湿潤な石灰岩土壌。" },
   { pH_level: 6, drainage: 0, fertility: 2, description: "中程度のアルカリ性で水はけ悪く肥沃度高い。肥沃な石灰岩湿地土壌。" },
@@ -106,7 +106,7 @@ soils = [
   { pH_level: 9, drainage: 1, fertility: 2, description: "極端なアルカリ性で水はけ普通、肥沃度高い。肥沃な過酷石灰岩農耕地。" },
   { pH_level: 9, drainage: 2, fertility: 0, description: "極端なアルカリ性で水はけ良好、肥沃度低い。乾燥良排水土壌。" },
   { pH_level: 9, drainage: 2, fertility: 1, description: "極端なアルカリ性で水はけ良好、肥沃度普通。乾燥肥沃土壌。" },
-  { pH_level: 9, drainage: 2, fertility: 2, description: "極端なアルカリ性で水はけ良好、肥沃度高い。肥沃で乾燥良排水土壌。" }
+  { pH_level: 9, drainage: 2, fertility: 2, description: "極端なアルカリ性で水はけ良好、肥沃度高い。肥沃で乾燥良排水土壌。" },
 ]
 
 soils.each do |soil|

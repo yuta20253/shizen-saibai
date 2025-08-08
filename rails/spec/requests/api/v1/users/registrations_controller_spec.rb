@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
   include Devise::Test::IntegrationHelpers
@@ -15,8 +15,8 @@ RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
           email: "test@example.com",
           password: "password123",
           password_confirmation: "password123",
-          name: "Test User"
-        }
+          name: "Test User",
+        },
       }
     end
     let(:invalid_params) do
@@ -25,8 +25,8 @@ RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
           email: "invalid-email",
           password: "pass",
           password_confirmation: "different",
-          name: ""
-        }
+          name: "",
+        },
       }
     end
 
@@ -44,13 +44,13 @@ RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
 
     context "emailが不正な場合" do
       it "422エラーとemailに関するバリデーションメッセージを返す" do
-        post '/api/v1/user', params: {
+        post "/api/v1/user", params: {
           user: {
             email: "invalid-email",
             password: "password123",
             password_confirmation: "password123",
-            name: "User"
-          }
+            name: "User",
+          },
         }
         expect(response).to have_http_status(:unprocessable_entity)
         json = JSON.parse(response.body)
@@ -66,8 +66,8 @@ RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
             email: "test@example.com",
             password: "password123",
             password_confirmation: "different123",
-            name: "User"
-          }
+            name: "User",
+          },
         }
         expect(response).to have_http_status(:unprocessable_entity)
         json = JSON.parse(response.body)
@@ -98,7 +98,7 @@ RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
       expect(json["message"]).to eq "退会しました。"
 
       user.reload
-      expect(user.deleted_at).not_to be nil
+      expect(user.deleted_at).not_to be_nil
       expect(user.email).to match(/\Adeleted_[a-z0-9]+@example.com\z/)
     end
   end
