@@ -58,12 +58,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = async () => {
     try {
       await logOutAuth();
-    } catch (error) {
-      console.error('ログアウト API 呼び出しに失敗:', error);
-    } finally {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       setUser(null);
+    } catch (error) {
+      console.error('ログアウト API 呼び出しに失敗:', error);
     }
   };
 
