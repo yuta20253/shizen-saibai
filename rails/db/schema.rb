@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_08_134607) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_05_130524) do
   create_table "diagnoses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "診断したユーザーID"
     t.bigint "weed_id", null: false, comment: "推定された雑草ID"
@@ -38,7 +38,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_08_134607) do
   create_table "soil_vegetable_relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "soil_id", null: false, comment: "土壌ID"
     t.bigint "vegetable_id", null: false, comment: "野菜ID"
-    t.integer "suitability", default: 1, null: false, comment: "適性度"
     t.text "reason", null: false, comment: "選定理由(表示用)"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,7 +89,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_08_134607) do
   create_table "weed_soil_relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "weed_id", null: false, comment: "雑草ID"
     t.bigint "soil_id", null: false, comment: "土壌ID"
-    t.float "confidence", null: false, comment: "対応度（確信度）"
     t.text "notes", null: false, comment: "根拠や参考文献"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -10,6 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { CameraAlt } from '@mui/icons-material';
 import { RequireAuth } from '@/components/RequireAuth';
+import axios from 'axios';
 import { Fragment } from 'react';
 
 export const MyPageContent = (): React.JSX.Element | null => {
@@ -44,6 +45,17 @@ export const MyPageContent = (): React.JSX.Element | null => {
     },
   ];
 
+  const handleClick = async () => {
+    const token = localStorage.getItem('token');
+    const url = 'http://localhost:5000/api/v1/diagnosis';
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post(url, {}, { headers });
+    console.log(response);
+  };
+
   return (
     <RequireAuth>
       <Box
@@ -75,6 +87,7 @@ export const MyPageContent = (): React.JSX.Element | null => {
               p: 2,
               gap: 2,
             }}
+            onClick={handleClick}
           >
             <CameraAlt />
             <Typography variant="h6">雑草画像をアップロード</Typography>
