@@ -32,9 +32,9 @@ class DiagnosisSerializer < ActiveModel::Serializer
 
   def vegetable_difficulty
     case object.vegetable&.difficulty
-    when 0 then "易"
-    when 1 then "普"
-    when 2 then "難"
+    when 0 then "易しい"
+    when 1 then "普通"
+    when 2 then "難しい"
     else "不明"
     end
   end
