@@ -19,12 +19,12 @@ class Diag::Db::SaveRecordService
       SoilVegetableRelation.create!(
         soil_id: @soil.id,
         vegetable_id: @vegetable.id,
-        reason: @reason
+        reason: @reason,
       )
       WeedSoilRelation.create!(
         weed_id: @weed.id,
         soil_id: @soil.id,
-        notes: @reason
+        notes: @reason,
       )
       @diagnosis = Diagnosis.create!(
         user_id: @user.id,
@@ -32,10 +32,10 @@ class Diag::Db::SaveRecordService
         soil_id: @soil.id,
         vegetable_id: @vegetable.id,
         image_url: "",
-        result: @reason
+        result: @reason,
       )
     end
-    return { id: @diagnosis.id }
+    { id: @diagnosis.id }
   rescue => e
     Rails.logger.error("SaveRecordService エラー発生: #{e.class} - #{e.message}")
     Rails.logger.error(e.backtrace.join("\n"))
