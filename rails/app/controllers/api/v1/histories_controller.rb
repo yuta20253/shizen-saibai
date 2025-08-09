@@ -4,7 +4,7 @@ class Api::V1::HistoriesController < Api::V1::BaseController
     if diagnoses.exists?
       render json: diagnoses, each_serializer: ::DiagnosisSerializer
     else
-      render json: { message: "診断履歴がありません。" }
+      render json: []
     end
   end
 
