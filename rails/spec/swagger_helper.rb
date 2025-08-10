@@ -52,15 +52,15 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://{defaultHost}',
+          url: "http://{defaultHost}",
           variables: {
             defaultHost: {
-              default: 'www.example.com'
-            }
-          }
-        }
-      ]
-    }
+              default: "www.example.com",
+            },
+          },
+        },
+      ],
+    },
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.
