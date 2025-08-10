@@ -1,5 +1,5 @@
 class DiagnosisSerializer < ActiveModel::Serializer
-  attributes :id, :diagnosed_at, :image_url, :weed_name, :weed_description, :soil_type, :soil_fertility,
+  attributes :id, :diagnosed_at, :image_url, :weed_name, :weed_description, :soil_type, :soil_drainage , :soil_fertility,
              :soil_description, :recommended_vegetable, :vegetable_difficulty, :vegetable_season, :vegetable_description, :result
 
   def diagnosed_at
@@ -22,6 +22,16 @@ class DiagnosisSerializer < ActiveModel::Serializer
     object.soil&.pH_level_before_type_cast || 10
   end
 
+  def soil_drainage
+    case object.soil&.drainage_before_type_cast
+    when 0 then "良好"
+    when 1 then "普通"
+    when 2 then "悪い"
+    else
+      "不明"
+    end
+  end
+
   def soil_fertility
     case object.soil&.fertility_before_type_cast
     when 0 then "肥沃の土壌"
@@ -39,6 +49,10 @@ class DiagnosisSerializer < ActiveModel::Serializer
   def recommended_vegetable
     object.vegetable&.name
   end
+
+  # def recommended_vegetable_image_url
+  #   object.vegetable&.image_url
+  # end
 
   def vegetable_difficulty
     case object.vegetable&.difficulty
