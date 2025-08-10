@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type Diagnoses = {
+type Diagnosis = {
   id: number;
   diagnosed_at: string;
   image_url: string;
@@ -24,7 +24,7 @@ type Diagnoses = {
 };
 
 export const DiagnosesContent = (): React.JSX.Element | null => {
-  const [diagnoses, setDiagnoses] = useState<Diagnoses[] | null>(null);
+  const [diagnoses, setDiagnoses] = useState<Diagnosis[] | null>(null);
 
   useEffect(() => {
     const resDiagnoses = async () => {
