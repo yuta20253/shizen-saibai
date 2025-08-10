@@ -1,5 +1,5 @@
-const Diagnoses = (): React.JSX.Element => {
-  return <>診断結果一覧画面</>;
-};
+import { DiagnosesContent } from '@/features/MyPage/diagnosis';
+
+const Diagnoses = (): React.JSX.Element => <DiagnosesContent />;
 
 export default Diagnoses;
