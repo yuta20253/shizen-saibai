@@ -44,6 +44,46 @@ export const DiagnosesContent = (): React.JSX.Element | null => {
     };
     resDiagnoses();
   }, []);
+
+  if (diagnoses?.length === 0) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '80vh',
+          textAlign: 'center',
+          px: 2,
+        }}
+      >
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          診断結果がありません。
+        </Typography>
+        <Link
+          href={`/mypage`}
+          style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              height: 48,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '8px',
+              backgroundColor: '#6a994e',
+              color: '#ffffff',
+            }}
+          >
+            <Typography variant="h6">マイページへ</Typography>
+          </Box>
+        </Link>
+      </Box>
+    );
+  }
+
   return (
     <RequireAuth>
       <Box>
