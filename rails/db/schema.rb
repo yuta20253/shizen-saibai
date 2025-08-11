@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_05_130524) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_11_171832) do
   create_table "diagnoses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "診断したユーザーID"
     t.bigint "weed_id", null: false, comment: "推定された雑草ID"
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_05_130524) do
     t.text "description", null: false, comment: "特徴やメモ"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url", default: "", null: false, comment: "野菜の画像URL"
   end
 
   create_table "weed_soil_relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

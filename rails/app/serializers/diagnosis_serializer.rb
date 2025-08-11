@@ -1,6 +1,6 @@
 class DiagnosisSerializer < ActiveModel::Serializer
   attributes :id, :diagnosed_at, :image_url, :weed_name, :weed_description, :soil_type, :soil_drainage , :soil_fertility,
-             :soil_description, :recommended_vegetable, :vegetable_difficulty, :vegetable_season, :vegetable_description, :result
+             :soil_description, :recommended_vegetable, :vegetable_difficulty, :vegetable_season, :vegetable_description, :vegetable_image_url, :result
 
   def diagnosed_at
     object.created_at.iso8601
@@ -50,9 +50,9 @@ class DiagnosisSerializer < ActiveModel::Serializer
     object.vegetable&.name
   end
 
-  # def recommended_vegetable_image_url
-  #   object.vegetable&.image_url
-  # end
+  def vegetable_image_url
+    object.vegetable&.image_url
+  end
 
   def vegetable_difficulty
     case object.vegetable&.difficulty
