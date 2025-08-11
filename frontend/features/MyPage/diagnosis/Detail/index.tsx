@@ -22,6 +22,7 @@ type Diagnosis = {
   vegetable_difficulty: string;
   vegetable_season: string[];
   vegetable_description: string;
+  vegetable_image_url: string;
   result: string;
 };
 
@@ -56,7 +57,7 @@ export const DiagnosisDetail = (): React.JSX.Element => {
           <CardContent>
             <Box
               sx={{
-                flex: '0 0 120px', // 固定幅
+                flex: '0 0 100px', // 固定幅
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -67,8 +68,8 @@ export const DiagnosisDetail = (): React.JSX.Element => {
                 <Image
                   src={diagnosis?.image_url}
                   alt={diagnosis?.weed_name}
-                  width={150}
-                  height={150}
+                  width={100}
+                  height={100}
                   style={{
                     objectFit: 'cover',
                     borderRadius: '8px',
@@ -77,8 +78,8 @@ export const DiagnosisDetail = (): React.JSX.Element => {
               ) : (
                 <Box
                   sx={{
-                    width: 150,
-                    height: 150,
+                    width: 100,
+                    height: 100,
                     backgroundColor: '#ccc',
                     borderRadius: '8px',
                   }}
@@ -134,10 +135,45 @@ export const DiagnosisDetail = (): React.JSX.Element => {
               {diagnosis?.recommended_vegetable}
             </Typography>
           </Box>
-          <Link href="">
-            <Box sx={{ my: 4 }}>
-              <Typography variant="h5">提案理由をみる</Typography>
+        </Box>
+        <Card sx={{ width: '80%', textAlign: 'center', my: 2, textDecoration: 'none' }}>
+          <CardContent>
+            <Box
+              sx={{
+                flex: '0 0 100px', // 固定幅
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mr: 2,
+              }}
+            >
+              {diagnosis?.vegetable_image_url ? (
+                <Image
+                  src={diagnosis?.vegetable_image_url}
+                  alt={diagnosis?.recommended_vegetable}
+                  width={100}
+                  height={100}
+                  style={{
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    backgroundColor: '#ccc',
+                    borderRadius: '8px',
+                  }}
+                />
+              )}
             </Box>
+          </CardContent>
+        </Card>
+        <Box sx={{ my: 2, display: 'inline-block' }}>
+          <Link href="">
+            <Typography variant="h5">提案理由をみる</Typography>
           </Link>
         </Box>
         <Link

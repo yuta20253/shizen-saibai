@@ -8,7 +8,10 @@ import { usePathname } from 'next/navigation';
 export const Footer = (): React.JSX.Element | null => {
   const pathName = usePathname();
   const hiddenPaths = ['/login', '/signup', '/mypage/diagnoses'];
-  const hidden = hiddenPaths.includes(pathName);
+
+  const isDiagnosisDetail = /\mypage\/diagnoses\/\d+$/.test(pathName);
+
+  const hidden = hiddenPaths.includes(pathName) || isDiagnosisDetail;
 
   if (hidden) return null;
 
