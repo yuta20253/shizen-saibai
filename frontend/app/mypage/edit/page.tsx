@@ -1,5 +1,5 @@
-const EditUser = (): React.JSX.Element => {
-  return <>ユーザー情報編集画面</>;
-};
+import { EditUserContent } from '@/features/MyPage/edit';
+
+const EditUser = (): React.JSX.Element => <EditUserContent />;
 
 export default EditUser;
