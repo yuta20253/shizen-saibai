@@ -63,7 +63,7 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = "";
+  public baseUrl: string = "http://{defaultHost}";
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
@@ -262,6 +262,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title API V1
  * @version v1
+ * @baseUrl http://{defaultHost}
  */
 export class Api<
   SecurityDataType extends unknown,
@@ -296,17 +297,17 @@ export class Api<
           message?: string;
           user?: {
             /** @example 1 */
-            id?: number;
+            id: number;
             /** @example "test@example.com" */
-            email?: string;
+            email: string;
             /** @example "test" */
-            name?: string;
+            name: string;
           };
         },
         {
           /** @example 422 */
           status?: number;
-          /** @example "サインアップできませんでした。" */
+          /** @example "サインアップに失敗しました" */
           message?: string;
           errors?: string[];
         }
@@ -344,9 +345,9 @@ export class Api<
           message?: string;
           user?: {
             /** @example 1 */
-            id?: number;
+            id: number;
             /** @example "test@example.com" */
-            email?: string;
+            email: string;
             /** @example "テストユーザー" */
             name: string;
           };
@@ -362,6 +363,30 @@ export class Api<
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V1LogoutDelete
+     * @summary ユーザーのログアウト
+     * @request DELETE:/api/v1/logout
+     */
+    v1LogoutDelete: (params: RequestParams = {}) =>
+      this.request<
+        {
+          /** @example 200 */
+          status?: number;
+          /** @example "ログアウトに成功しました" */
+          message?: string;
+        },
+        void
+      >({
+        path: `/api/v1/logout`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
