@@ -110,7 +110,7 @@ export const MyPageContent = (): React.JSX.Element | null => {
           <Fragment key={i}>
             <Box sx={{ width: '100%', textAlign: 'center', p: 2 }}>
               {link.onClick ? (
-                <Box style={{ textDecoration: 'none', color: 'inherit' }} onClick={handleLogout}>
+                <Box style={{ textDecoration: 'none', color: 'inherit' }} onClick={link.onClick}>
                   <Box
                     sx={{
                       position: 'relative',
