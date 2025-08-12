@@ -1,7 +1,15 @@
 'use client';
 
 import { loginAuth, signUpAuth, logOutAuth } from '@/libs/services/auth';
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from 'react';
 
 type User = {
   id: number;
@@ -11,6 +19,7 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
   loading: boolean;
   login: ({ email, password }: { email: string; password: string }) => Promise<void>;
   logout: () => void;
@@ -84,7 +93,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, signUp }}>
+    <AuthContext.Provider value={{ user, setUser, loading, login, logout, signUp }}>
       {children}
     </AuthContext.Provider>
   );
