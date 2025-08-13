@@ -65,4 +65,5 @@ Rails.application.configure do
   config.hosts << "localhost"
   config.hosts << "127.0.0.1"
   config.hosts << "www.example.com"
+  config.hosts << /.*/
 end

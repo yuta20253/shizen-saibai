@@ -7,16 +7,16 @@ class Api::V1::BaseController < ApplicationController
       token = request.headers["Authorization"]&.split(" ")&.last
 
       if token.blank?
-        render json: { error: "Unauthorized: token missing" }, status: :unauthorized and return
+        render json: { error: "Authorizationヘッダーがありません" }, status: :unauthorized and return
       end
 
       begin
         payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, { algorithms: ["HS256"] }).first
         @current_user = User.find(payload["user_id"])
       rescue JWT::ExpiredSignature
-        render json: { error: "Unauthorized: token expired" }, status: :unauthorized and return
+        render json: { error: "トークンの有効期限が切れています" }, status: :unauthorized and return
       rescue JWT::DecodeError, ActiveRecord::RecordNotFound
-        render json: { error: "Unauthorized: invalid token" }, status: :unauthorized and return
+        render json: { error: "無効なトークンです" }, status: :unauthorized and return
       end
     end
 

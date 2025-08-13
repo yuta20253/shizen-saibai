@@ -50,6 +50,16 @@ RSpec.configure do |config|
       },
       # security: [ { bearerAuth: [] } ],
       paths: {},
+      servers: [
+        {
+          url: "http://{defaultHost}",
+          variables: {
+            defaultHost: {
+              default: "www.example.com",
+            },
+          },
+        },
+      ],
     },
   }
 

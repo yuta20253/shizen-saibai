@@ -10,10 +10,12 @@ class Api::V1::Users::RegistrationsController < ActionController::API
         user: result[:user].as_json(only: [:id, :email, :name]),
       }
     else
+      user = User.new(sign_up_params)
+      user.valid? # バリデーション実行してエラー情報をセット
       render json: {
         status: 422,
         message: "サインアップに失敗しました",
-        errors: result[:user].errors.full_messages,
+        errors: user.errors.full_messages,
       }, status: :unprocessable_entity
     end
   end
