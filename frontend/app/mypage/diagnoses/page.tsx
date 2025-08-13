@@ -1,5 +1,5 @@
-import { DiagnosesContent } from '@/features/MyPage/diagnosis';
+import { Diagnoses } from '@/features/diagnosis';
 
-const Diagnoses = (): React.JSX.Element => <DiagnosesContent />;
+const DiagnosesPage = (): React.JSX.Element => <Diagnoses />;
 
-export default Diagnoses;
+export default DiagnosesPage;
