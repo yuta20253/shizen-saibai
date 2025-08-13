@@ -74,7 +74,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
               justifyContent: 'center',
               borderRadius: '8px',
               backgroundColor: '#6a994e',
-              color: '#ffffff',
+              color: '#fff',
             }}
           >
             <Typography variant="h6">マイページへ</Typography>
