@@ -45,45 +45,6 @@ export const Diagnoses = (): React.JSX.Element | null => {
     resDiagnoses();
   }, []);
 
-  if (diagnoses?.length === 0) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '80vh',
-          textAlign: 'center',
-          px: 2,
-        }}
-      >
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          診断結果がありません。
-        </Typography>
-        <Link
-          href={`/mypage`}
-          style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              height: 48,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '8px',
-              backgroundColor: '#6a994e',
-              color: '#fff',
-            }}
-          >
-            <Typography variant="h6">マイページへ</Typography>
-          </Box>
-        </Link>
-      </Box>
-    );
-  }
-
   return (
     <RequireAuth>
       <Box>
@@ -95,59 +56,96 @@ export const Diagnoses = (): React.JSX.Element | null => {
           診断履歴一覧
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center">
-          {diagnoses?.map((diagnosis, i) => (
-            <Card
-              key={i}
-              component={Link}
-              href={`/mypage/diagnoses/${diagnosis.id}`}
-              sx={{ width: '100%', textAlign: 'center', mb: 2, textDecoration: 'none' }}
+          {diagnoses?.length === 0 ? (
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '80vh',
+                textAlign: 'center',
+                px: 2,
+              }}
             >
-              <CardContent sx={{ display: 'flex' }}>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                診断結果がありません。
+              </Typography>
+              <Link
+                href={`/mypage`}
+                style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
+              >
                 <Box
                   sx={{
-                    flex: '0 0 120px', // 固定幅
-                    height: '100px',
-                    backgroundColor: '#f0f0f0', // デバッグ用背景色
+                    position: 'relative',
+                    height: 48,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    mr: 2,
+                    borderRadius: '8px',
+                    backgroundColor: '#6a994e',
+                    color: '#fff',
                   }}
                 >
-                  {diagnosis.image_url ? (
-                    <Image
-                      src={diagnosis.image_url}
-                      alt={diagnosis.weed_name}
-                      width={120}
-                      height={120}
-                      style={{
-                        objectFit: 'cover',
-                        borderRadius: '8px',
-                      }}
-                    />
-                  ) : (
-                    <Box
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        backgroundColor: '#ccc',
-                        borderRadius: '8px',
-                      }}
-                    />
-                  )}
+                  <Typography variant="h6">マイページへ</Typography>
                 </Box>
-                <Box sx={{ width: '80%', textAlign: 'left' }}>
-                  <Typography variant="h5" component="p" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    {diagnosis.weed_name}
-                  </Typography>
-                  <Typography sx={{ mb: 1 }}>
-                    pH {diagnosis.soil_type},{diagnosis.soil_fertility}
-                  </Typography>
-                  <Typography sx={{ mb: 1 }}>{diagnosis.recommended_vegetable}</Typography>
-                </Box>
-              </CardContent>
-            </Card>
-          ))}
+              </Link>
+            </Box>
+          ) : (
+            diagnoses?.map((diagnosis, i) => (
+              <Card
+                key={i}
+                component={Link}
+                href={`/mypage/diagnoses/${diagnosis.id}`}
+                sx={{ width: '100%', textAlign: 'center', mb: 2, textDecoration: 'none' }}
+              >
+                <CardContent sx={{ display: 'flex' }}>
+                  <Box
+                    sx={{
+                      flex: '0 0 120px', // 固定幅
+                      height: '100px',
+                      backgroundColor: '#f0f0f0', // デバッグ用背景色
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mr: 2,
+                    }}
+                  >
+                    {diagnosis.image_url ? (
+                      <Image
+                        src={diagnosis.image_url}
+                        alt={diagnosis.weed_name}
+                        width={120}
+                        height={120}
+                        style={{
+                          objectFit: 'cover',
+                          borderRadius: '8px',
+                        }}
+                      />
+                    ) : (
+                      <Box
+                        sx={{
+                          width: 120,
+                          height: 120,
+                          backgroundColor: '#ccc',
+                          borderRadius: '8px',
+                        }}
+                      />
+                    )}
+                  </Box>
+                  <Box sx={{ width: '80%', textAlign: 'left' }}>
+                    <Typography variant="h5" component="p" sx={{ fontWeight: 'bold', mb: 1 }}>
+                      {diagnosis.weed_name}
+                    </Typography>
+                    <Typography sx={{ mb: 1 }}>
+                      pH {diagnosis.soil_type},{diagnosis.soil_fertility}
+                    </Typography>
+                    <Typography sx={{ mb: 1 }}>{diagnosis.recommended_vegetable}</Typography>
+                  </Box>
+                </CardContent>
+              </Card>
+            ))
+          )}
         </Box>
         <Link
           href={`/mypage`}
