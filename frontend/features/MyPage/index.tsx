@@ -12,11 +12,33 @@ import { CameraAlt } from '@mui/icons-material';
 import { RequireAuth } from '@/components/RequireAuth';
 import axios from 'axios';
 import { Fragment } from 'react';
+import { useRouter } from 'next/navigation';
 
 export const MyPageContent = (): React.JSX.Element | null => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const router = useRouter();
 
   const iconStyle = { position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleClick = async () => {
+    const token = localStorage.getItem('token');
+    const url = 'http://localhost:5000/api/v1/diagnosis';
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post(url, {}, { headers });
+    console.log(response);
+  };
 
   const links = [
     {
@@ -30,9 +52,10 @@ export const MyPageContent = (): React.JSX.Element | null => {
       title: 'ユーザー情報を編集する',
     },
     {
-      href: '/logout',
+      href: null,
       icon: <LogoutIcon sx={iconStyle} />,
       title: 'ログアウト',
+      onClick: handleLogout,
     },
     {
       href: '/mypage/delete',
@@ -44,17 +67,6 @@ export const MyPageContent = (): React.JSX.Element | null => {
       title: '退会する',
     },
   ];
-
-  const handleClick = async () => {
-    const token = localStorage.getItem('token');
-    const url = 'http://localhost:5000/api/v1/diagnosis';
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    };
-    const response = await axios.post(url, {}, { headers });
-    console.log(response);
-  };
 
   return (
     <RequireAuth>
@@ -97,21 +109,39 @@ export const MyPageContent = (): React.JSX.Element | null => {
         {links.map((link, i) => (
           <Fragment key={i}>
             <Box sx={{ width: '100%', textAlign: 'center', p: 2 }}>
-              <Link href={link.href} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Box
-                  sx={{
-                    position: 'relative',
-                    width: '100%',
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {link.icon}
-                  <Typography variant="h6">{link.title}</Typography>
+              {link.onClick ? (
+                <Box style={{ textDecoration: 'none', color: 'inherit' }} onClick={link.onClick}>
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      width: '100%',
+                      height: 48,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {link.icon}
+                    <Typography variant="h6">{link.title}</Typography>
+                  </Box>
                 </Box>
-              </Link>
+              ) : (
+                <Link href={link.href!} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      width: '100%',
+                      height: 48,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {link.icon}
+                    <Typography variant="h6">{link.title}</Typography>
+                  </Box>
+                </Link>
+              )}
             </Box>
             <Divider sx={{ width: '100%' }} />
           </Fragment>

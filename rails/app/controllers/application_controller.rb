@@ -15,64 +15,64 @@ class ApplicationController < ActionController::API
 
   protected
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password, :name])
-  end
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+      devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password, :name])
+    end
 
-  def handle_internal_server_error(error)
-    render json: {
-      status: "error",
-      code: :internal_server_error,
-      message: "サーバー内部でエラーが発生しました",
-    }, status: 500
-  end
+    def handle_internal_server_error(error)
+      render json: {
+        status: "error",
+        code: :internal_server_error,
+        message: "サーバー内部でエラーが発生しました",
+      }, status: :internal_server_error
+    end
 
-  def handle_param_missing(error)
-    render json: {
-      status: "error",
-      code: :bad_request,
-      message: "リクエストに必要なパラメータが不足しています。",
-    }, status: 400
-  end
+    def handle_param_missing(error)
+      render json: {
+        status: "error",
+        code: :bad_request,
+        message: "リクエストに必要なパラメータが不足しています。",
+      }, status: :bad_request
+    end
 
-  def handle_not_found(error)
-    render json: {
-      status: "error",
-      code: :not_found,
-      message: "対象のデータが見つかりません",
-    }, status: 404
-  end
+    def handle_not_found(error)
+      render json: {
+        status: "error",
+        code: :not_found,
+        message: "対象のデータが見つかりません",
+      }, status: :not_found
+    end
 
-  def handle_validation_error(error)
-    render json: {
-      status: "error",
-      code: :validation_error,
-      message: error.record.errors.full_messages.join(', ')
-    }, status: 422
-  end
+    def handle_validation_error(error)
+      render json: {
+        status: "error",
+        code: :validation_error,
+        message: error.record.errors.full_messages.join(", "),
+      }, status: :unprocessable_content
+    end
 
-  def handle_timeout(error)
-    render json: {
-      status: "error",
-      code: :timeout,
-      message: "OpenAIとの通信がタイムアウトしました。",
-    }, status: 504
-  end
+    def handle_timeout(error)
+      render json: {
+        status: "error",
+        code: :timeout,
+        message: "OpenAIとの通信がタイムアウトしました。",
+      }, status: :gateway_timeout
+    end
 
-  def handle_connection_failed(error)
-    render json: {
-      status: "error",
-      code: :connection_failed,
-      message: "OpenAIへの接続に失敗しました。",
-    }, status: 502
-  end
+    def handle_connection_failed(error)
+      render json: {
+        status: "error",
+        code: :connection_failed,
+        message: "OpenAIへの接続に失敗しました。",
+      }, status: :bad_gateway
+    end
 
-  def handle_json_parse_error
-    render json: {
-      status: "error",
-      code: :invalid_json_response,
-      message: "JSON形式に誤りがあります。",
-    }, status: 400
-  end
+    def handle_json_parse_error
+      render json: {
+        status: "error",
+        code: :invalid_json_response,
+        message: "JSON形式に誤りがあります。",
+      }, status: :bad_request
+    end
 end

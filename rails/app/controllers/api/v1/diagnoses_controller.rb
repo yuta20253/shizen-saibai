@@ -1,5 +1,5 @@
 class Api::V1::DiagnosesController < Api::V1::BaseController
-  require 'openai'
+  require "openai"
   def create
     file_type = ['image/jpeg', 'image/png']
     base64_image = File.read(Rails.root.join('lib', 'diagnosis_image1.txt')).strip

@@ -6,13 +6,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::JTIMatcher
 
-  has_many :diagnoses
+  has_many :diagnoses, dependent: :destroy
 
   default_scope { where(deleted_at: nil) }
 
   validates :name, presence: true
   validates :email, presence: true,
-                    uniqueness: { scope: :deleted_at, message: 'は既に登録されています' },
+                    uniqueness: { scope: :deleted_at, message: "は既に登録されています" },
                     format: { with: URI::MailTo::EMAIL_REGEXP }
 
   # JWT認証用
@@ -33,7 +33,7 @@ class User < ApplicationRecord
       deleted_at: Time.current,
       email: generate_masked_email,
       name: "********",
-      encrypted_password: Devise::Encryptor.digest(self.class, SecureRandom.hex(10))
+      encrypted_password: Devise::Encryptor.digest(self.class, SecureRandom.hex(10)),
     )
   end
 
