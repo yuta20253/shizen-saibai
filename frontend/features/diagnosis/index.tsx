@@ -23,7 +23,7 @@ type Diagnosis = {
   result: string;
 };
 
-export const DiagnosesContent = (): React.JSX.Element | null => {
+export const Diagnoses = (): React.JSX.Element | null => {
   const [diagnoses, setDiagnoses] = useState<Diagnosis[] | null>(null);
 
   useEffect(() => {
@@ -151,7 +151,13 @@ export const DiagnosesContent = (): React.JSX.Element | null => {
         </Box>
         <Link
           href={`/mypage`}
-          style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
+          style={{
+            textDecoration: 'none',
+            width: '80%',
+            margin: '0 auto',
+            display: 'block',
+            marginBottom: '100px',
+          }}
         >
           <Box
             sx={{
