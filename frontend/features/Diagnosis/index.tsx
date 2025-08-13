@@ -3,6 +3,7 @@
 import { RequireAuth } from '@/components/RequireAuth';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,55 +15,169 @@ type Diagnosis = {
   weed_name: string;
   weed_description: string;
   soil_type: number;
+  soil_drainage: string;
   soil_fertility: string;
   soil_description: string;
   recommended_vegetable: string;
   vegetable_difficulty: string;
   vegetable_season: string[];
   vegetable_description: string;
+  vegetable_image_url: string;
   result: string;
 };
 
-export const Diagnoses = (): React.JSX.Element | null => {
-  const [diagnoses, setDiagnoses] = useState<Diagnosis[] | null>(null);
+export const DiagnosisDetail = (): React.JSX.Element => {
+  const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
+  const params = useParams<{ id: string }>();
+  const id = params.id;
 
   useEffect(() => {
-    const resDiagnoses = async () => {
+    const resDiagnosis = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = 'http://localhost:5000/api/v1/histories';
+        const url = `http://localhost:5000/api/v1/histories/${id}`;
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         };
         const response = await axios.get(url, { headers });
 
-        setDiagnoses(response.data);
+        setDiagnosis(response.data);
       } catch (error) {
         console.error(error);
       }
     };
-    resDiagnoses();
-  }, []);
+    resDiagnosis();
+  }, [id]);
 
-  if (diagnoses?.length === 0) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '80vh',
-          textAlign: 'center',
-          px: 2,
-        }}
-      >
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          診断結果がありません。
-        </Typography>
+  return (
+    <RequireAuth>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Card sx={{ width: '80%', textAlign: 'center', my: 4, textDecoration: 'none' }}>
+          <CardContent>
+            <Box
+              sx={{
+                flex: '0 0 100px', // 固定幅
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mr: 2,
+              }}
+            >
+              {diagnosis?.image_url ? (
+                <Image
+                  src={diagnosis?.image_url}
+                  alt={diagnosis?.weed_name}
+                  width={100}
+                  height={100}
+                  style={{
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    backgroundColor: '#ccc',
+                    borderRadius: '8px',
+                  }}
+                />
+              )}
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="h5" component="p" sx={{ fontWeight: 'bold', my: 2 }}>
+                {diagnosis?.weed_name}
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
+        <Box sx={{ width: '100%', mb: 2 }}>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ fontWeight: 'bold', my: 2, textAlign: 'left' }}
+          >
+            土壌環境の推定
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+            <Typography
+              component="p"
+              sx={{ backgroundColor: '#f0f0f0', p: 1, borderRadius: '8px' }}
+            >
+              pH: {diagnosis?.soil_type}
+            </Typography>
+            <Typography
+              component="p"
+              sx={{ backgroundColor: '#f0f0f0', p: 1, borderRadius: '8px' }}
+            >
+              排水性: {diagnosis?.soil_drainage}
+            </Typography>
+            <Typography
+              component="p"
+              sx={{ backgroundColor: '#f0f0f0', p: 1, borderRadius: '8px' }}
+            >
+              肥沃度: {diagnosis?.soil_fertility}
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ width: '100%' }}>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ fontWeight: 'bold', my: 2, textAlign: 'left' }}
+          >
+            おすすめの野菜
+          </Typography>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+              {diagnosis?.recommended_vegetable}
+            </Typography>
+          </Box>
+        </Box>
+        <Card sx={{ width: '80%', textAlign: 'center', my: 2, textDecoration: 'none' }}>
+          <CardContent>
+            <Box
+              sx={{
+                flex: '0 0 100px', // 固定幅
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mr: 2,
+              }}
+            >
+              {diagnosis?.vegetable_image_url ? (
+                <Image
+                  src={diagnosis?.vegetable_image_url}
+                  alt={diagnosis?.recommended_vegetable}
+                  width={100}
+                  height={100}
+                  style={{
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    backgroundColor: '#ccc',
+                    borderRadius: '8px',
+                  }}
+                />
+              )}
+            </Box>
+          </CardContent>
+        </Card>
+        <Box sx={{ my: 2, display: 'inline-block' }}>
+          <Link href="">
+            <Typography variant="h5">提案理由をみる</Typography>
+          </Link>
+        </Box>
         <Link
-          href={`/mypage`}
+          href={`/mypage/diagnoses`}
           style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
         >
           <Box
@@ -77,101 +192,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
               color: '#ffffff',
             }}
           >
-            <Typography variant="h6">マイページへ</Typography>
-          </Box>
-        </Link>
-      </Box>
-    );
-  }
-
-  return (
-    <RequireAuth>
-      <Box>
-        <Typography
-          variant="h4"
-          component="p"
-          sx={{ fontWeight: 'bold', my: 4, textAlign: 'center' }}
-        >
-          診断履歴一覧
-        </Typography>
-        <Box display="flex" flexDirection="column" alignItems="center">
-          {diagnoses?.map((diagnosis, i) => (
-            <Card
-              key={i}
-              component={Link}
-              href={`/mypage/diagnoses/${diagnosis.id}`}
-              sx={{ width: '80%', textAlign: 'center', mb: 2, textDecoration: 'none' }}
-            >
-              <CardContent sx={{ display: 'flex' }}>
-                <Box
-                  sx={{
-                    flex: '0 0 120px', // 固定幅
-                    height: '100px',
-                    backgroundColor: '#f0f0f0', // デバッグ用背景色
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    mr: 2,
-                  }}
-                >
-                  {diagnosis.image_url ? (
-                    <Image
-                      src={diagnosis.image_url}
-                      alt={diagnosis.weed_name}
-                      width={120}
-                      height={120}
-                      style={{
-                        objectFit: 'cover',
-                        borderRadius: '8px',
-                      }}
-                    />
-                  ) : (
-                    <Box
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        backgroundColor: '#ccc',
-                        borderRadius: '8px',
-                      }}
-                    />
-                  )}
-                </Box>
-                <Box sx={{ width: '80%', textAlign: 'left' }}>
-                  <Typography variant="h5" component="p" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    {diagnosis.weed_name}
-                  </Typography>
-                  <Typography sx={{ mb: 1 }}>
-                    pH {diagnosis.soil_type},{diagnosis.soil_fertility}
-                  </Typography>
-                  <Typography sx={{ mb: 1 }}>{diagnosis.recommended_vegetable}</Typography>
-                </Box>
-              </CardContent>
-            </Card>
-          ))}
-        </Box>
-        <Link
-          href={`/mypage`}
-          style={{
-            textDecoration: 'none',
-            width: '80%',
-            margin: '0 auto',
-            display: 'block',
-            marginBottom: '100px',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              height: 48,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '8px',
-              backgroundColor: '#6a994e',
-              color: '#ffffff',
-            }}
-          >
-            <Typography variant="h6">マイページへ</Typography>
+            <Typography variant="h6">診断結果一覧へ</Typography>
           </Box>
         </Link>
       </Box>
