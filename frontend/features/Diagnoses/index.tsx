@@ -100,7 +100,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
               key={i}
               component={Link}
               href={`/mypage/diagnoses/${diagnosis.id}`}
-              sx={{ width: '80%', textAlign: 'center', mb: 2, textDecoration: 'none' }}
+              sx={{ width: '100%', textAlign: 'center', mb: 2, textDecoration: 'none' }}
             >
               <CardContent sx={{ display: 'flex' }}>
                 <Box
