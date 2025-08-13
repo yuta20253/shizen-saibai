@@ -1,4 +1,4 @@
-import { EditUserContent } from '@/features/MyPage/edit';
+import { EditUserContent } from '@/features/EditUser';
 
 const EditUser = (): React.JSX.Element => <EditUserContent />;
 
