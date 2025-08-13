@@ -1,4 +1,4 @@
-import { Diagnoses } from '@/features/diagnosis';
+import { Diagnoses } from '@/features/Diagnosis';
 
 const DiagnosesPage = (): React.JSX.Element => <Diagnoses />;
 
