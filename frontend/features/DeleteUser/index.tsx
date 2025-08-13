@@ -13,8 +13,10 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export const DeletePageContent = (): React.JSX.Element => {
+  const { setUser } = useAuth();
   const [consent, setConsent] = useState<boolean>(false);
   const router = useRouter();
   const handleWithdrawal = async () => {
@@ -27,6 +29,7 @@ export const DeletePageContent = (): React.JSX.Element => {
           Authorization: `Bearer ${token}`,
         };
         await axios.delete(url, { headers });
+        setUser(null);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
 
