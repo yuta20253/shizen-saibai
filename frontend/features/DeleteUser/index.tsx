@@ -21,7 +21,7 @@ export const DeletePageContent = (): React.JSX.Element => {
     if (consent) {
       try {
         const token = localStorage.getItem('token');
-        const url = 'http://localhost:5000/api/v1/';
+        const url = 'http://localhost:5000/api/v1/user';
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -76,38 +76,36 @@ export const DeletePageContent = (): React.JSX.Element => {
               }
               label="注意事項に同意しました。"
             />
-            <Box component="form" onSubmit={handleWithdrawal}>
-              <Box>
-                <Button type="submit" sx={{ width: '100%' }}>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      py: 1,
-                      px: 2,
-                      backgroundColor: '#FF3366',
-                      color: '#ffffff',
-                      borderRadius: '8px',
-                    }}
-                  >
-                    退会する
-                  </Typography>
-                </Button>
-              </Box>
-              <Box>
-                <Button href="/mypage" sx={{ width: '100%' }}>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      py: 1,
-                      px: 2,
-                      color: '#000000',
-                      borderRadius: '8px',
-                    }}
-                  >
-                    キャンセル
-                  </Typography>
-                </Button>
-              </Box>
+            <Box onClick={handleWithdrawal}>
+              <Button sx={{ width: '100%' }}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    py: 1,
+                    px: 2,
+                    backgroundColor: '#FF3366',
+                    color: '#ffffff',
+                    borderRadius: '8px',
+                  }}
+                >
+                  退会する
+                </Typography>
+              </Button>
+            </Box>
+            <Box>
+              <Button href="/mypage" sx={{ width: '100%' }}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    py: 1,
+                    px: 2,
+                    color: '#000000',
+                    borderRadius: '8px',
+                  }}
+                >
+                  キャンセル
+                </Typography>
+              </Button>
             </Box>
           </Box>
         </CardContent>
