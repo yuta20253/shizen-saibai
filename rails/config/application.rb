@@ -44,6 +44,8 @@ module Myapp
     config.enable_reloading = true
     config.autoload_paths << Rails.root.join('app/errors')
     config.eager_load_paths << Rails.root.join('app/errors')
+    config.autoload_paths << Rails.root.join('app/serializers')
+    config.eager_load_paths << Rails.root.join('app/serializers')
     # Warden::JWTAuth::Middleware を除去（無効化）
     config.middleware.delete Warden::JWTAuth::Middleware
   end

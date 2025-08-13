@@ -243,7 +243,7 @@ weeds = [
     name: "ハキダメギク",
     scientific_name: "Galinsoga quadriradiata",
     description: "一見地味だが繁殖力は非常に高い。中南米原産の外来種。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "コメツブウマゴヤシ",
@@ -255,7 +255,7 @@ weeds = [
     name: "アメリカフウロ",
     scientific_name: "Geranium carolinianum",
     description: "切れ込みのある葉が特徴。春から初夏にかけて見られる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ノビル",
@@ -267,7 +267,7 @@ weeds = [
     name: "セリ",
     scientific_name: "Oenanthe javanica",
     description: "水辺に生育する多年草。春の七草のひとつ。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "シロザ",
@@ -279,7 +279,7 @@ weeds = [
     name: "タビラコ",
     scientific_name: "Lapsana apogonoides",
     description: "春の七草の「ホトケノザ」とされるキク科の植物。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "チドメグサ",
@@ -291,7 +291,7 @@ weeds = [
     name: "ハマスゲ",
     scientific_name: "Cyperus rotundus",
     description: "地下茎で増える多年草。根絶が難しい。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ネズミムギ",
@@ -321,7 +321,7 @@ weeds = [
     name: "ヒエ",
     scientific_name: "Echinochloa oryzicola",
     description: "水田の雑草として有名。穂が密集しているのが特徴。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カタヒバリ",
@@ -387,7 +387,7 @@ weeds = [
     name: "ヤブカラシ",
     scientific_name: "Cayratia japonica",
     description: "つる性の多年草。繁殖力が強く、他の植物に絡みつく。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "アレチヌスビトハギ",
@@ -399,7 +399,7 @@ weeds = [
     name: "オオイヌノフグリ",
     scientific_name: "Veronica persica",
     description: "青い小花を咲かせる春の雑草。道端や畑に多い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "タチイヌノフグリ",
@@ -411,25 +411,25 @@ weeds = [
     name: "イヌホオズキ",
     scientific_name: "Solanum nigrum",
     description: "ナス科の一年草。小さな黒い実をつける雑草。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヤブジラミ",
     scientific_name: "Torilis japonica",
     description: "セリ科の一年草。葉が細かく切れ込んでいるのが特徴。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヒルガオ",
     scientific_name: "Calystegia sepium",
     description: "つる性の多年草。朝に白や薄ピンクの花を咲かせる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "スギナ",
     scientific_name: "Equisetum arvense",
     description: "地下茎で広がるシダ植物。春に細長い茎を出す。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヤブカンゾウ",
@@ -453,19 +453,19 @@ weeds = [
     name: "コマツヨイグサ",
     scientific_name: "Oenothera biennis",
     description: "黄色い花を夜に咲かせる多年草。畑の雑草。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "イヌタデ",
     scientific_name: "Persicaria longiseta",
     description: "赤みを帯びた茎を持つ一年草。畑や水辺に多い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "アカツメクサ",
     scientific_name: "Trifolium pratense",
     description: "赤紫色の花をつける多年草。牧草としても使われる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "チチコグサ",
@@ -483,7 +483,7 @@ weeds = [
     name: "カワラケツメイ",
     scientific_name: "Cassia tora",
     description: "豆科の一年草。黄色い花をつける。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヒナゲシ",
@@ -501,7 +501,7 @@ weeds = [
     name: "ヤマノイモ",
     scientific_name: "Dioscorea japonica",
     description: "つる性の多年草。山地の林縁などに生える。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "オオバコモドキ",
@@ -519,7 +519,7 @@ weeds = [
     name: "アキノノゲシ",
     scientific_name: "Sonchus asper",
     description: "キク科の多年草。トゲが多く葉が荒い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ホソバアカザ",
@@ -585,19 +585,19 @@ weeds = [
     name: "コカラスムギ",
     scientific_name: "Avena strigosa",
     description: "イネ科の一年草。カラスムギに似る。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "トキワハゼ",
     scientific_name: "Mazus pumilus",
     description: "小型の一年草。紫色の花が特徴。",
-    image_url: ""
+    image_url: "",
   },
- {
+  {
     name: "オオアワガエリ",
     scientific_name: "Apera spica-venti",
     description: "イネ科の一年草。風に揺れる穂が特徴的。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "キツネノマゴ",
@@ -615,7 +615,7 @@ weeds = [
     name: "オオカワヂシャ",
     scientific_name: "Rorippa indica",
     description: "アブラナ科の多年草。湿った場所に生える。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ミズヒキ",
@@ -627,7 +627,7 @@ weeds = [
     name: "ヒメオドリコソウ",
     scientific_name: "Lamium purpureum",
     description: "シソ科の多年草。紫色の花が咲く。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "スズメノエンドウ",
@@ -651,13 +651,13 @@ weeds = [
     name: "ヤブツルアズキ",
     scientific_name: "Vigna angularis var. nipponensis",
     description: "マメ科のつる性多年草。赤い豆がなる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "アキノタムラソウ",
     scientific_name: "Leonurus japonicus",
     description: "シソ科の多年草。秋に紫色の花を咲かせる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "オニノゲシ",
@@ -669,7 +669,7 @@ weeds = [
     name: "ノアザミ",
     scientific_name: "Cirsium japonicum",
     description: "キク科の多年草。紫色の花が咲く。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ツルムラサキ",
@@ -681,25 +681,25 @@ weeds = [
     name: "ミズバショウ",
     scientific_name: "Lysichiton camtschatcensis",
     description: "湿地に生える多年草。白い花が特徴的。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "オオキンケイギク",
     scientific_name: "Coreopsis lanceolata",
     description: "鮮やかな黄色の花を咲かせる多年草。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "オオブタクサ",
     scientific_name: "Ambrosia trifida",
     description: "大型の一年草。花粉症の原因となることもある。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヒルザキツキミソウ",
     scientific_name: "Oenothera speciosa",
     description: "ピンクの花を咲かせる多年草。庭にも植えられる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ススキ",
@@ -711,13 +711,13 @@ weeds = [
     name: "キクイモ",
     scientific_name: "Helianthus tuberosus",
     description: "黄色い花を咲かせる多年草。地下茎で増える。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "タネツケバナ",
     scientific_name: "Rorippa indica",
     description: "水田周辺に多い小型の一年草。早春に開花。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "フユノハナワラビ",
@@ -735,13 +735,13 @@ weeds = [
     name: "シラヤマギク",
     scientific_name: "Aster yomena",
     description: "白い花を咲かせる多年草。山地に自生。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ツリガネニンジン",
     scientific_name: "Codonopsis lanceolata",
     description: "鐘形の青紫の花を咲かせる多年草。山野に自生。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カワラナデシコ",
@@ -759,19 +759,19 @@ weeds = [
     name: "ノコンギク",
     scientific_name: "Aster ageratoides",
     description: "紫色の花を咲かせる多年草。秋に見られる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カントウタンポポ",
     scientific_name: "Taraxacum platycarpum",
     description: "日本固有種のタンポポ。黄色い花が特徴。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "シソ",
     scientific_name: "Perilla frutescens",
     description: "香りのある一年草。葉は料理に使われる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヒメジソ",
@@ -783,7 +783,7 @@ weeds = [
     name: "ヤブマオ",
     scientific_name: "Urera laciniata",
     description: "低木性の多年草。葉が大きく繁茂する。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "コアカザ",
@@ -795,7 +795,7 @@ weeds = [
     name: "ヒメシロザ",
     scientific_name: "Chenopodium murale",
     description: "シロザに似る小型の一年草。庭に多い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "アキノキリンソウ",
@@ -813,7 +813,7 @@ weeds = [
     name: "ツルニチニチソウ",
     scientific_name: "Vinca major",
     description: "つる性の多年草。紫青色の花が特徴で、グランドカバーに利用される。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ミゾソバ",
@@ -831,7 +831,7 @@ weeds = [
     name: "ヌスビトハギ",
     scientific_name: "Desmodium podocarpum",
     description: "マメ科の多年草で、実が衣服に付きやすい。秋に花が咲く。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "オオチドメ",
@@ -855,55 +855,55 @@ weeds = [
     name: "シロバナタンポポ",
     scientific_name: "Taraxacum albidum",
     description: "白い花を咲かせる日本固有のタンポポの一種。西日本に多い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ハハコグサ",
     scientific_name: "Gnaphalium affine",
     description: "春の七草の一つ。白い綿毛に包まれた花を咲かせる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヘクソカズラ",
     scientific_name: "Paederia scandens",
     description: "独特な臭いを持つつる植物。白い縁のある小さな花を咲かせる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ユウゲショウ",
     scientific_name: "Oenothera rosea",
     description: "ピンク色のかわいらしい花を咲かせる帰化植物。道端に多い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "セイヨウタンポポ",
     scientific_name: "Taraxacum officinale",
     description: "外来種のタンポポ。総苞片が反り返るのが特徴。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "マメグンバイナズナ",
     scientific_name: "Lepidium virginicum",
     description: "白い小花とハート型の種が特徴的な帰化植物。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "イタドリ",
     scientific_name: "Fallopia japonica",
     description: "大きな葉と赤味を帯びた茎が特徴。河原や空き地に繁茂。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ネジバナ",
     scientific_name: "Spiranthes sinensis",
     description: "花が螺旋状に並ぶラン科の多年草。芝生などに自生。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "コオニタビラコ",
     scientific_name: "Lapsana apogonoides",
     description: "タンポポに似た黄色い花を咲かせる一年草。春の七草の一つ「ほとけのざ」。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カキドオシ",
@@ -915,13 +915,13 @@ weeds = [
     name: "ヘビイチゴ",
     scientific_name: "Duchesnea chrysantha",
     description: "黄色い花を咲かせ、赤い偽果をつける。毒性はないが食用には向かない。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "マツヨイグサ",
     scientific_name: "Oenothera biennis",
     description: "夕方に黄色い花を咲かせる外来植物。夜咲きで虫を引き寄せる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ナガミヒナゲシ",
@@ -933,31 +933,31 @@ weeds = [
     name: "ブタクサ",
     scientific_name: "Ambrosia artemisiifolia",
     description: "花粉症の原因植物の一つ。葉は羽状に深く切れ込む。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "アカバナユウゲショウ",
     scientific_name: "Oenothera rosea",
     description: "ピンク色の小花を咲かせる外来種。見た目は可憐だが繁殖力が高い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "イヌビユ",
     scientific_name: "Amaranthus viridis",
     description: "葉が楕円形で先がとがるヒユ科の一年草。夏に群生する。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ムラサキケマン",
     scientific_name: "Corydalis incisa",
     description: "春に紫色の筒状花をつける。ケシ科で毒性があるため注意が必要。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "アオビユ",
     scientific_name: "Amaranthus lividus",
     description: "ヒユ科の雑草。葉に赤紫色の斑点が入ることがある。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ナギナタコウジュ",
@@ -975,25 +975,25 @@ weeds = [
     name: "ツボミオオバコ",
     scientific_name: "Plantago asiatica",
     description: "地面に広がるロゼット状の葉が特徴の多年草。踏みつけに強く道端に多い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "セイバンモロコシ",
     scientific_name: "Sorghum halepense",
     description: "イネ科の多年草。高く伸び、群落を形成する。外来雑草。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ムラサキツメクサ",
     scientific_name: "Trifolium pratense",
     description: "ピンクの花をつけるクローバーの仲間。マメ科で緑肥にもなる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ウラジロチチコグサ",
     scientific_name: "Gamochaeta purpurea",
     description: "裏面が白っぽい葉を持つキク科雑草。ドライな場所に好んで生える。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ナヨクサフジ",
@@ -1011,19 +1011,19 @@ weeds = [
     name: "アキノゲシ",
     scientific_name: "Lactuca indica",
     description: "秋に黄色いタンポポに似た花を咲かせる多年草。草丈が高い。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カラクサナズナ",
     scientific_name: "Lepidium virginicum",
     description: "ロゼット状に広がる葉と十字形の白花が特徴。外来のアブラナ科雑草。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "イノコヅチ",
     scientific_name: "Achyranthes bidentata",
     description: "果実が衣服にくっつく多年草。茎が太く高さ1m近くにもなる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カゼクサ",
@@ -1041,7 +1041,7 @@ weeds = [
     name: "ヌカキビ",
     scientific_name: "Panicum bisulcatum",
     description: "稲に似た穂をつけるイネ科雑草。水田周辺に多く見られる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ヤマトリカブト",
@@ -1071,38 +1071,38 @@ weeds = [
     name: "ナガエツルノゲイトウ",
     scientific_name: "Alternanthera philoxeroides",
     description: "水辺に群生する外来雑草。環境省の要注意外来生物。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "センダングサ",
     scientific_name: "Bidens pilosa",
     description: "「ひっつき虫」として知られるタネを持つ。キク科の外来植物。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ニワゼキショウ",
     scientific_name: "Sisyrinchium rosulatum",
     description: "青紫の小花を咲かせる外来のアヤメ科植物。芝生にも生える。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カモガヤ",
     scientific_name: "Dactylis glomerata",
     description: "牧草としても使われるが、花粉症の原因としても有名なイネ科植物。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "ツルマメ",
     scientific_name: "Glycine soja",
     description: "大豆の原種とされるつる性植物。夏から秋に紫の花を咲かせる。",
-    image_url: ""
+    image_url: "",
   },
   {
     name: "カタバミモドキ",
     scientific_name: "Oxalis debilis",
     description: "ピンクの花を咲かせる外来のカタバミ。庭に生えやすい。",
-    image_url: ""
-  }
+    image_url: "",
+  },
 ]
 
 weeds.each do |weed|
