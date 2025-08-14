@@ -71,25 +71,6 @@ export const Diagnoses = (): React.JSX.Element | null => {
               <Typography variant="h5" sx={{ mb: 2 }}>
                 診断結果がありません。
               </Typography>
-              <Link
-                href={`/mypage`}
-                style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
-              >
-                <Box
-                  sx={{
-                    position: 'relative',
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '8px',
-                    backgroundColor: '#6a994e',
-                    color: '#fff',
-                  }}
-                >
-                  <Typography variant="h6">マイページへ</Typography>
-                </Box>
-              </Link>
             </Box>
           ) : (
             diagnoses?.map(diagnosis => (
