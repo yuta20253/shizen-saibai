@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import LoopIcon from '@mui/icons-material/Loop';
 
 type Diagnosis = {
   id: number;
@@ -25,6 +26,7 @@ type Diagnosis = {
 
 export const Diagnoses = (): React.JSX.Element | null => {
   const [diagnoses, setDiagnoses] = useState<Diagnosis[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const resDiagnoses = async () => {
@@ -38,12 +40,29 @@ export const Diagnoses = (): React.JSX.Element | null => {
         const response = await axios.get(url, { headers });
 
         setDiagnoses(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     resDiagnoses();
   }, []);
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          paddingTop: '20vh',
+        }}
+      >
+        <LoopIcon sx={{ fontSize: 120 }} />
+      </Box>
+    );
+  }
 
   return (
     <RequireAuth>
