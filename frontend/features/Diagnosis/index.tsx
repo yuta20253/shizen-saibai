@@ -26,7 +26,7 @@ type Diagnosis = {
   result: string;
 };
 
-export const DiagnosisDetail = (): React.JSX.Element => {
+export const Diagnosis = (): React.JSX.Element => {
   const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
   const params = useParams<{ id: string }>();
   const id = params.id;
