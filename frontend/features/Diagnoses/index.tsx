@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import LoopIcon from '@mui/icons-material/Loop';
 
 type Diagnosis = {
   id: number;
@@ -25,6 +26,7 @@ type Diagnosis = {
 
 export const Diagnoses = (): React.JSX.Element | null => {
   const [diagnoses, setDiagnoses] = useState<Diagnosis[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const resDiagnoses = async () => {
@@ -38,12 +40,29 @@ export const Diagnoses = (): React.JSX.Element | null => {
         const response = await axios.get(url, { headers });
 
         setDiagnoses(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     resDiagnoses();
   }, []);
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          paddingTop: '20vh',
+        }}
+      >
+        <LoopIcon sx={{ fontSize: 240 }} />
+      </Box>
+    );
+  }
 
   return (
     <RequireAuth>
@@ -71,76 +90,126 @@ export const Diagnoses = (): React.JSX.Element | null => {
               <Typography variant="h5" sx={{ mb: 2 }}>
                 診断結果がありません。
               </Typography>
-              <Link
-                href={`/mypage`}
-                style={{ textDecoration: 'none', width: '80%', margin: '0 auto', display: 'block' }}
-              >
-                <Box
-                  sx={{
-                    position: 'relative',
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '8px',
-                    backgroundColor: '#6a994e',
-                    color: '#fff',
-                  }}
-                >
-                  <Typography variant="h6">マイページへ</Typography>
-                </Box>
-              </Link>
             </Box>
           ) : (
-            diagnoses?.map((diagnosis, i) => (
+            diagnoses?.map(diagnosis => (
               <Card
-                key={i}
+                key={diagnosis.id}
                 component={Link}
                 href={`/mypage/diagnoses/${diagnosis.id}`}
-                sx={{ width: '100%', textAlign: 'center', mb: 2, textDecoration: 'none' }}
+                sx={{
+                  width: 'min(720px, 90vw)',
+                  textDecoration: 'none',
+                  borderRadius: 3,
+                  boxShadow: 2,
+                  overflow: 'hidden',
+                  ':hover': { boxShadow: 4 },
+                }}
               >
-                <CardContent sx={{ display: 'flex' }}>
+                <CardContent sx={{ display: 'flex', gap: 2, alignItems: 'center', p: 2 }}>
                   <Box
                     sx={{
-                      flex: '0 0 120px', // 固定幅
-                      height: '100px',
-                      backgroundColor: '#f0f0f0', // デバッグ用背景色
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      mr: 2,
+                      width: 96,
+                      height: 96,
+                      borderRadius: 2,
+                      overflow: 'hidden',
+                      bgcolor: 'grey.100',
+                      flexShrink: 0,
                     }}
                   >
                     {diagnosis.image_url ? (
                       <Image
                         src={diagnosis.image_url}
                         alt={diagnosis.weed_name}
-                        width={120}
-                        height={120}
-                        style={{
-                          objectFit: 'cover',
-                          borderRadius: '8px',
-                        }}
+                        width={96}
+                        height={96}
+                        sizes="96px"
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                       />
                     ) : (
-                      <Box
-                        sx={{
-                          width: 120,
-                          height: 120,
-                          backgroundColor: '#ccc',
-                          borderRadius: '8px',
-                        }}
-                      />
+                      <Box sx={{ width: '100%', height: '100%', bgcolor: 'grey.200' }} />
                     )}
                   </Box>
-                  <Box sx={{ width: '80%', textAlign: 'left' }}>
-                    <Typography variant="h5" component="p" sx={{ fontWeight: 'bold', mb: 1 }}>
-                      {diagnosis.weed_name}
-                    </Typography>
-                    <Typography sx={{ mb: 1 }}>
-                      pH {diagnosis.soil_type},{diagnosis.soil_fertility}
-                    </Typography>
-                    <Typography sx={{ mb: 1 }}>{diagnosis.recommended_vegetable}</Typography>
+
+                  <Box sx={{ flex: 1, minWidth: 0 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        justifyContent: 'space-between',
+                        gap: 1,
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          lineHeight: 1.2,
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {diagnosis.weed_name}
+                      </Typography>
+                      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                        {(() => {
+                          const dt = new Date(diagnosis.diagnosed_at);
+                          return dt.toLocaleDateString('ja-JP');
+                        })()}
+                      </Typography>
+                    </Box>
+
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 0.5 }}>
+                      <Box
+                        sx={{
+                          px: 1,
+                          py: 0.25,
+                          bgcolor: 'grey.100',
+                          borderRadius: '9999px',
+                          fontSize: 12,
+                        }}
+                      >
+                        pH {diagnosis.soil_type}
+                      </Box>
+                      <Box
+                        sx={{
+                          px: 1,
+                          py: 0.25,
+                          bgcolor: 'grey.100',
+                          borderRadius: '9999px',
+                          fontSize: 12,
+                        }}
+                      >
+                        {diagnosis.soil_fertility}
+                      </Box>
+                      {Array.isArray(diagnosis.vegetable_season) &&
+                        diagnosis.vegetable_season.map((season, i) => (
+                          <Box
+                            key={i}
+                            sx={{
+                              px: 1,
+                              py: 0.25,
+                              bgcolor: 'grey.100',
+                              borderRadius: '9999px',
+                              fontSize: 12,
+                            }}
+                          >
+                            {season}
+                          </Box>
+                        ))}
+                    </Box>
+
+                    <Box sx={{ mt: 1, display: 'flex', gap: 1, alignItems: 'baseline' }}>
+                      <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                        {diagnosis.recommended_vegetable}
+                      </Typography>
+                      {diagnosis.vegetable_difficulty && (
+                        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                          {diagnosis.vegetable_difficulty}
+                        </Typography>
+                      )}
+                    </Box>
                   </Box>
                 </CardContent>
               </Card>
@@ -152,9 +221,8 @@ export const Diagnoses = (): React.JSX.Element | null => {
           style={{
             textDecoration: 'none',
             width: '80%',
-            margin: '0 auto',
             display: 'block',
-            marginBottom: '100px',
+            margin: '24px auto 100px',
           }}
         >
           <Box
