@@ -48,7 +48,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
     resDiagnoses();
   }, []);
 
-  if (!isLoading) {
+  if (isLoading) {
     return (
       <Box
         sx={{
