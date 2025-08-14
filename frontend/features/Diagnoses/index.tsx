@@ -48,7 +48,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
     resDiagnoses();
   }, []);
 
-  if (isLoading) {
+  if (!isLoading) {
     return (
       <Box
         sx={{
@@ -59,7 +59,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
           paddingTop: '20vh',
         }}
       >
-        <LoopIcon sx={{ fontSize: 120 }} />
+        <LoopIcon sx={{ fontSize: 240 }} />
       </Box>
     );
   }
