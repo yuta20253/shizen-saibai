@@ -52,7 +52,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
 
   return (
     <RequireAuth>
-      {isLoading ? (
+      {!isLoading ? (
         <Box>
           <Typography
             variant="h4"
