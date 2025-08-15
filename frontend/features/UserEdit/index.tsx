@@ -1,6 +1,5 @@
 'use client';
 
-import EditUser from '@/app/mypage/edit/page';
 import { RequireAuth } from '@/components/RequireAuth';
 import { useAuth } from '@/context/AuthContext';
 import {
@@ -20,7 +19,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-type EditUser = {
+type UserEdit = {
   name: string;
   email: string;
   current_password: string;
@@ -28,7 +27,7 @@ type EditUser = {
   password_confirmation: string;
 };
 
-export const EditUserContent = (): React.JSX.Element => {
+export const UserEdit = (): React.JSX.Element => {
   const { user, setUser } = useAuth();
   const [showCurrentPassword, setShowCurrentPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
@@ -40,14 +39,14 @@ export const EditUserContent = (): React.JSX.Element => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<EditUser>({
+  } = useForm<UserEdit>({
     defaultValues: {
       name: user?.name,
       email: user?.email,
     },
   });
 
-  const onSubmit: SubmitHandler<EditUser> = async (data: EditUser) => {
+  const onSubmit: SubmitHandler<UserEdit> = async (data: UserEdit) => {
     console.log(data);
     const resEditUser = async () => {
       try {
