@@ -3,33 +3,13 @@
 import { RequireAuth } from '@/components/RequireAuth';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { DiagnosisType } from '@/types/diagnosis';
 
-type Diagnosis = {
-  id: number;
-  diagnosed_at: string;
-  image_url: string;
-  weed_name: string;
-  weed_description: string;
-  soil_type: number;
-  soil_drainage: string;
-  soil_fertility: string;
-  soil_description: string;
-  recommended_vegetable: string;
-  vegetable_difficulty: string;
-  vegetable_season: string[];
-  vegetable_description: string;
-  vegetable_image_url: string;
-  result: string;
-};
-
-export const Diagnosis = (): React.JSX.Element => {
-  const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
-  const params = useParams<{ id: string }>();
-  const id = params.id;
+export const Diagnosis = ({ id }: { id: string }): React.JSX.Element => {
+  const [diagnosis, setDiagnosis] = useState<DiagnosisType | null>(null);
 
   useEffect(() => {
     const resDiagnosis = async () => {
