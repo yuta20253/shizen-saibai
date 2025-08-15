@@ -1,5 +1,5 @@
-import { EditUserContent } from '@/features/EditUser';
+import { UserEdit } from '@/features/UserEdit';
 
-const EditUser = (): React.JSX.Element => <EditUserContent />;
+const UserEditPage = (): React.JSX.Element => <UserEdit />;
 
-export default EditUser;
+export default UserEditPage;
