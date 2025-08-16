@@ -7,12 +7,25 @@ RSpec.describe 'Api::V1::Users::Sessions', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
+      # parameter name: :user, in: :body, schema: {
+      #   type: :object,
+      #   required: ['email', 'password'],
+      #   properties: {
+      #     email: { type: :string, example: 'test@example.com' },
+      #     password: { type: :string, example: 'password123' },
+      #   }
+      # }
       parameter name: :user, in: :body, schema: {
         type: :object,
-        required: ['email', 'password'],
         properties: {
-          email: { type: :string, example: 'test@example.com' },
-          password: { type: :string, example: 'password123' },
+          user: {
+            type: :object,
+            required: ['email', 'password'],
+            properties: {
+              email: { type: :string, example: 'test@example.com' },
+              password: { type: :string, example: 'password123' }
+            }
+          }
         }
       }
 
