@@ -1,15 +1,8 @@
 'use client';
 
 import { loginAuth, signUpAuth, logOutAuth } from '@/libs/services/auth';
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-  SetStateAction,
-  Dispatch,
-} from 'react';
+import { getMe, updateProfileApi } from '@/libs/services/user';
+import { createContext, useContext, useState, ReactNode, useEffect, useMemo } from 'react';
 
 type User = {
   id: number;
@@ -17,90 +10,154 @@ type User = {
   email: string;
 };
 
-type AuthContextType = {
+type AuthState = {
   user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
   loading: boolean;
-  login: ({ email, password }: { email: string; password: string }) => Promise<void>;
+  hydrated: boolean;
+};
+
+type AuthActions = {
+  login: (p: { email: string; password: string }) => Promise<void>;
   logout: () => void;
-  signUp: ({
-    email,
-    password,
-    password_confirmation,
-    name,
-  }: {
+  signUp: (p: {
     email: string;
     password: string;
     password_confirmation: string;
     name: string;
   }) => Promise<void>;
+  updateProfile: (patch: Partial<User>) => Promise<void>;
+  refresh: () => Promise<void>;
+  getAuthHeaders: () => Record<string, string>;
 };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthStateContext = createContext<AuthState | undefined>(undefined);
+const AuthActionsContext = createContext<AuthActions | undefined>(undefined);
+
+const TOKEN_KEY = 'token';
+const USER_KEY = 'user';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [hydrated, setHydrated] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const boot = async () => {
       try {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
+        const token = localStorage.getItem(TOKEN_KEY);
+        const cashed = localStorage.getItem(USER_KEY);
+        if (cashed) {
+          try {
+            setUser(JSON.parse(cashed));
+          } catch (error) {
+            console.error('ユーザー情報の復元に失敗:', error);
+          }
+        }
+        if (token) {
+          const fresh = await getMe(token);
+          if (fresh) {
+            setUser(fresh);
+            localStorage.setItem(USER_KEY, JSON.stringify(fresh));
+          }
+        }
       } catch (error) {
-        console.error('ユーザー情報の復元に失敗:', error);
+        console.error('auth boot failed', error);
+        setUser(null);
+        localStorage.removeItem(USER_KEY);
+        localStorage.removeItem(TOKEN_KEY);
+      } finally {
+        setLoading(false);
+        setHydrated(true);
       }
-    }
-    setLoading(false);
+    };
+    boot();
   }, []);
 
-  const login = async ({ email, password }: { email: string; password: string }) => {
-    const { token, user } = await loginAuth({ email, password });
-
-    // ローカルストレージに保存
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    setUser(user);
+  const login: AuthActions['login'] = async ({ email, password }) => {
+    setLoading(true);
+    try {
+      const { token, user } = await loginAuth({ email, password });
+      localStorage.setItem(TOKEN_KEY, token);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      setUser(user);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const logout = async () => {
+  const logout: AuthActions['logout'] = async () => {
     try {
       await logOutAuth();
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      setUser(null);
     } catch (error) {
       console.error('ログアウト API 呼び出しに失敗:', error);
     }
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+    setUser(null);
   };
 
-  const signUp = async ({
-    email,
-    password,
-    password_confirmation,
-    name,
-  }: {
-    email: string;
-    password: string;
-    password_confirmation: string;
-    name: string;
-  }) => {
-    const { token, user } = await signUpAuth({ email, password, password_confirmation, name });
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    setUser(user);
+  const signUp: AuthActions['signUp'] = async p => {
+    setLoading(true);
+    try {
+      const { token, user } = await signUpAuth(p);
+      localStorage.setItem(TOKEN_KEY, token);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      setUser(user);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateProfile: AuthActions['updateProfile'] = async patch => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) throw new Error('認証失敗です');
+    const updated = await updateProfileApi(patch, token);
+    const next = { ...(user ?? ({} as User)), ...updated } as User;
+    setUser(next);
+    localStorage.setItem(USER_KEY, JSON.stringify(next));
+  };
+
+  const refresh: AuthActions['refresh'] = async () => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) return;
+    const fresh = await getMe(token);
+    setUser(fresh);
+    localStorage.setItem(USER_KEY, JSON.stringify(fresh));
+  };
+
+  const getAuthHeaders = (): Record<string, string> => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
+
+  const stateValue = useMemo<AuthState>(
+    () => ({ user, loading, hydrated }),
+    [user, loading, hydrated]
+  );
+  const actionsValue: AuthActions = {
+    login,
+    logout,
+    signUp,
+    updateProfile,
+    refresh,
+    getAuthHeaders,
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, login, logout, signUp }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthActionsContext value={actionsValue}>
+      <AuthStateContext value={stateValue}>{children}</AuthStateContext>
+    </AuthActionsContext>
   );
 };
 
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within an AuthProvider');
+export const useAuthState = (): AuthState => {
+  const context = useContext(AuthStateContext);
+  if (!context) throw new Error('useAuthState must be used within an AuthProvider');
+  return context;
+};
+
+export const useAuthActions = (): AuthActions => {
+  const context = useContext(AuthActionsContext);
+  if (!context) throw new Error('useAuthActions must be used within an AuthProvider');
   return context;
 };
