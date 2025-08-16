@@ -1,11 +1,11 @@
-'use client';
-
 import { Diagnosis } from '@/features/Diagnosis';
-import { useParams } from 'next/navigation';
 
-const DiagnosisPage = (): React.JSX.Element => {
-  const params = useParams<{ id: string }>();
-  const id = params.id;
+type DiagnosisPageProps = {
+  params: Promise<{ id: string }>;
+};
+
+const DiagnosisPage = async ({ params }: DiagnosisPageProps) => {
+  const { id } = await params;
   return <Diagnosis id={id} />;
 };
 
