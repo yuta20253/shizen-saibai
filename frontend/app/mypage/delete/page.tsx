@@ -1,5 +1,5 @@
-import { DeletePageContent } from '@/features/DeleteUser';
+import { UserDelete } from '@/features/UserDelete';
 
-const DeleteUser = (): React.JSX.Element => <DeletePageContent />;
+const UserDeletePage = (): React.JSX.Element => <UserDelete />;
 
-export default DeleteUser;
+export default UserDeletePage;
