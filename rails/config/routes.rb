@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         registration: "user"
       }
 
-      resource :profile, only: [:update], controller: :users
+      resource :profile, only: [:show, :update], controller: :users
       # 診断履歴（マイページ）
       resources :histories, only: [:index, :show]
       # 画像アップロード・診断結果（雑草→土壌→野菜）
