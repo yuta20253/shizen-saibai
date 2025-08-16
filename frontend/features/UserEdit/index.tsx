@@ -1,8 +1,7 @@
 'use client';
 
-import EditUser from '@/app/mypage/edit/page';
 import { RequireAuth } from '@/components/RequireAuth';
-import { useAuth } from '@/context/AuthContext';
+import { useAuthActions, useAuthState } from '@/context/AuthContext';
 import {
   Alert,
   Box,
@@ -17,10 +16,9 @@ import {
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-type EditUser = {
+type UserEdit = {
   name: string;
   email: string;
   current_password: string;
@@ -28,8 +26,9 @@ type EditUser = {
   password_confirmation: string;
 };
 
-export const EditUserContent = (): React.JSX.Element => {
-  const { user, setUser } = useAuth();
+export const UserEdit = (): React.JSX.Element => {
+  const { user } = useAuthState();
+  const { updateProfile } = useAuthActions();
   const [showCurrentPassword, setShowCurrentPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showNewPasswordConfirm, setShowNewPasswordConfirm] = useState<boolean>(false);
@@ -40,24 +39,17 @@ export const EditUserContent = (): React.JSX.Element => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<EditUser>({
+  } = useForm<UserEdit>({
     defaultValues: {
       name: user?.name,
       email: user?.email,
     },
   });
 
-  const onSubmit: SubmitHandler<EditUser> = async (data: EditUser) => {
+  const onSubmit: SubmitHandler<UserEdit> = async (data: UserEdit) => {
     console.log(data);
     const resEditUser = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const url = 'http://localhost:5000/api/v1/profile';
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        };
-
         const patchData = {
           user: {
             name: data.name,
@@ -67,9 +59,7 @@ export const EditUserContent = (): React.JSX.Element => {
             password_confirmation: data.password_confirmation,
           },
         };
-        const response = await axios.patch(url, patchData, { headers });
-        setUser(response.data.user);
-        console.log(response.data.user);
+        await updateProfile(patchData);
         router.push('/mypage');
       } catch (error) {
         console.log(error);
