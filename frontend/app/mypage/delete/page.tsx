@@ -1,5 +1,5 @@
-const DeleteUser = (): React.JSX.Element => {
-  return <>退会画面</>;
-};
+import { UserDelete } from '@/features/UserDelete';
 
-export default DeleteUser;
+const UserDeletePage = (): React.JSX.Element => <UserDelete />;
+
+export default UserDeletePage;
