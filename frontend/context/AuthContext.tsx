@@ -1,7 +1,7 @@
 'use client';
 
 import { loginAuth, signUpAuth, logOutAuth } from '@/libs/services/auth';
-import { getMe, updateProfileApi } from '@/libs/services/user';
+import { getMe, updateProfileApi, UpdateProfilePayload } from '@/libs/services/user';
 import { createContext, useContext, useState, ReactNode, useEffect, useMemo } from 'react';
 
 type User = {
@@ -25,7 +25,7 @@ type AuthActions = {
     password_confirmation: string;
     name: string;
   }) => Promise<void>;
-  updateProfile: (patch: Partial<User>) => Promise<void>;
+  updateProfile: (patch: UpdateProfilePayload) => Promise<void>;
   refresh: () => Promise<void>;
   getAuthHeaders: () => Record<string, string>;
 };
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const updateProfile: AuthActions['updateProfile'] = async patch => {
+  const updateProfile: AuthActions['updateProfile'] = async (patch: UpdateProfilePayload) => {
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) throw new Error('認証失敗です');
     const updated = await updateProfileApi(patch, token);
