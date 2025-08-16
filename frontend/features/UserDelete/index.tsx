@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -17,15 +18,19 @@ import { useAuthActions } from '@/context/AuthContext';
 export const UserDelete = (): React.JSX.Element => {
   const { signOut } = useAuthActions();
   const [consent, setConsent] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
   const handleWithdrawal = async () => {
     if (consent) {
       try {
         await signOut();
+        setErrorMessage('');
         router.push('/');
       } catch (error) {
         console.log(error);
       }
+    } else {
+      setErrorMessage('退会するには注意事項に同意してください。');
     }
   };
 
@@ -38,6 +43,11 @@ export const UserDelete = (): React.JSX.Element => {
       >
         退会
       </Typography>
+      {errorMessage && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {errorMessage}
+        </Alert>
+      )}
       <Card sx={{ width: '100%', textAlign: 'center', boxShadow: 'none' }}>
         <CardContent>
           <Box>
