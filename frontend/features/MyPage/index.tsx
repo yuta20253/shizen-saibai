@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from '@/context/AuthContext';
+import { useAuthState, useAuthActions } from '@/context/AuthContext';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import Link from 'next/link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -15,7 +15,8 @@ import { Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 
 export const MyPageContent = (): React.JSX.Element | null => {
-  const { user, logout } = useAuth();
+  const { user } = useAuthState();
+  const { logout } = useAuthActions();
   const router = useRouter();
 
   const iconStyle = { position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' };

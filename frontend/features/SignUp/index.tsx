@@ -3,7 +3,7 @@ import { Box, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
+import { useAuthActions } from '@/context/AuthContext';
 import { useState } from 'react';
 
 type SignUpForm = {
@@ -15,7 +15,7 @@ type SignUpForm = {
 export const SignUp = (): React.JSX.Element => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
-  const { signUp } = useAuth();
+  const { signUp } = useAuthActions();
   const {
     register,
     handleSubmit,
