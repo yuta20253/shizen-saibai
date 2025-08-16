@@ -1,7 +1,7 @@
 'use client';
 
 import { loginAuth, signUpAuth, logOutAuth } from '@/libs/services/auth';
-import { getMe, updateProfileApi, UpdateProfilePayload } from '@/libs/services/user';
+import { deleteUserApi, getMe, updateProfileApi, UpdateProfilePayload } from '@/libs/services/user';
 import { createContext, useContext, useState, ReactNode, useEffect, useMemo } from 'react';
 
 type User = {
@@ -28,6 +28,7 @@ type AuthActions = {
   updateProfile: (patch: UpdateProfilePayload) => Promise<void>;
   refresh: () => Promise<void>;
   getAuthHeaders: () => Record<string, string>;
+  signOut: () => Promise<void>;
 };
 
 const AuthStateContext = createContext<AuthState | undefined>(undefined);
@@ -130,6 +131,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return token ? { Authorization: `Bearer ${token}` } : {};
   };
 
+  const signOut: AuthActions['signOut'] = async () => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) throw new Error('認証失敗です');
+    await deleteUserApi(token);
+    setUser(null);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+  };
+
   const stateValue = useMemo<AuthState>(
     () => ({ user, loading, hydrated }),
     [user, loading, hydrated]
@@ -141,6 +151,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     updateProfile,
     refresh,
     getAuthHeaders,
+    signOut,
   };
 
   return (
