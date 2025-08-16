@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { apiClient, clientWithToken } from './apiClient';
 
 type ErrorResponseData = {
   message?: string;
@@ -11,27 +12,20 @@ export const loginAuth = async ({
   email: string;
   password: string;
 }): Promise<{ token: string; user: { id: number; name: string; email: string } }> => {
-  const url = 'http://localhost:5000/api/v1/login';
-
   try {
-    const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
-    const data = {
-      user: {
-        email,
-        password,
-      },
-    };
+    const response = await apiClient.api.v1LoginCreate({
+      email,
+      password,
+    });
 
-    const response = await axios.post(url, data, { headers });
-
-    const token = response.headers.authorization.split(' ')[1];
-
+    // const token = response.headers['authorization']?.split(' ')[1];
+    const authHeader = response.headers.get?.('Authorization');
+    const token = authHeader?.split(' ')[1];
     if (!token) throw new Error('トークンがありません');
 
-    return { token, user: response.data.user };
+    const user = response.data.user as { id: number; name: string; email: string };
+
+    return { token, user: user };
   } catch (error) {
     console.error(error);
 
@@ -61,26 +55,20 @@ export const signUpAuth = async ({
   password_confirmation: string;
   name: string;
 }): Promise<{ token: string; user: { id: number; name: string; email: string } }> => {
-  const url = 'http://localhost:5000/api/v1/user';
   try {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    const data = {
-      user: {
-        email,
-        password,
-        password_confirmation,
-        name,
-      },
-    };
+    const response = await apiClient.api.v1UserCreate({
+      email,
+      password,
+      password_confirmation,
+      name,
+    });
 
-    const response = await axios.post(url, data, { headers });
-
-    const token = response.headers.authorization.split(' ')[1];
+    const authHeader = response.headers.get?.('Authorization');
+    const token = authHeader?.split(' ')[1];
     if (!token) throw new Error('トークンがありません');
 
-    return { token, user: response.data.user };
+    const user = response.data.user as { id: number; name: string; email: string };
+    return { token, user: user };
   } catch (error) {
     console.error(error);
     if (axios.isAxiosError(error) && error.response) {
@@ -97,14 +85,10 @@ export const signUpAuth = async ({
 
 export const logOutAuth = async () => {
   const token = localStorage.getItem('token');
-  const url = 'http://localhost:5000/api/v1/logout';
+  if (!token) throw new Error('トークンがありません');
+
   try {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
-    };
-    await axios.delete(url, { headers });
+    await clientWithToken(token).api.v1LogoutDelete({ secure: true });
   } catch (error) {
     console.error(error);
     if (axios.isAxiosError(error) && error.response) {
