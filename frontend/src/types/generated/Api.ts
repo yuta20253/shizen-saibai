@@ -314,7 +314,7 @@ export class Api<
       >({
         path: `/api/v1/user`,
         method: "POST",
-        body: data,
+        body: { user: data },
         type: ContentType.Json,
         format: "json",
         ...params,
@@ -361,7 +361,7 @@ export class Api<
       >({
         path: `/api/v1/login`,
         method: "POST",
-        body: data,
+        body: { user: data },
         type: ContentType.Json,
         format: "json",
         ...params,

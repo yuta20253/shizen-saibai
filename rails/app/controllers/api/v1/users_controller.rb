@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
   def show
-    render json: current_user.slice(:id, :email, :name, :role )
+    render json: current_user.slice(:id, :email, :name, :role)
   end
 
   def update

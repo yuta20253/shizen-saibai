@@ -7,16 +7,33 @@ RSpec.describe "Api::V1::Users::Registration", type: :request do
       consumes 'application/json'
       produces 'application/json'
 
+      # parameter name: :user, in: :body, schema: {
+      #   type: :object,
+      #   required: ['email', 'password', 'password_confirmation', 'name'],
+      #   properties: {
+      #     email: { type: :string, example: 'test@example.com' },
+      #     password: { type: :string, example: 'password123' },
+      #     password_confirmation: { type: :string, example: 'password123' },
+      #     name: { type: :string, example: 'test' }
+      #   }
+      # }
       parameter name: :user, in: :body, schema: {
         type: :object,
-        required: ['email', 'password', 'password_confirmation', 'name'],
+        required: ['user'],
         properties: {
-          email: { type: :string, example: 'test@example.com' },
-          password: { type: :string, example: 'password123' },
-          password_confirmation: { type: :string, example: 'password123' },
-          name: { type: :string, example: 'test' }
+          user: {
+            type: :object,
+            required: ['email', 'password', 'password_confirmation', 'name'],
+            properties: {
+              email: { type: :string, example: 'test@example.com' },
+              password: { type: :string, example: 'password123' },
+              password_confirmation: { type: :string, example: 'password123' },
+              name: { type: :string, example: 'test' }
+            }
+          }
         }
       }
+
 
       response '200', 'サインアップ成功' do
         schema type: :object,
