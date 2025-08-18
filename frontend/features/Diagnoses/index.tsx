@@ -6,25 +6,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-type Diagnosis = {
-  id: number;
-  diagnosed_at: string;
-  image_url: string;
-  weed_name: string;
-  weed_description: string;
-  soil_type: number;
-  soil_fertility: string;
-  soil_description: string;
-  recommended_vegetable: string;
-  vegetable_difficulty: string;
-  vegetable_season: string[];
-  vegetable_description: string;
-  result: string;
-};
+import { DiagnosisType } from '@/types/diagnosis';
 
 export const Diagnoses = (): React.JSX.Element | null => {
-  const [diagnoses, setDiagnoses] = useState<Diagnosis[] | null>(null);
+  const [diagnoses, setDiagnoses] = useState<DiagnosisType[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
