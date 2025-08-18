@@ -28,7 +28,7 @@ type UserEdit = {
 
 export const UserEdit = (): React.JSX.Element => {
   const { user } = useAuthState();
-  const { updateProfile } = useAuthActions();
+  const { updateProfileAction } = useAuthActions();
   const [showCurrentPassword, setShowCurrentPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showNewPasswordConfirm, setShowNewPasswordConfirm] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export const UserEdit = (): React.JSX.Element => {
             password_confirmation: data.password_confirmation,
           },
         };
-        await updateProfile(patchData);
+        await updateProfileAction(patchData);
         router.push('/mypage');
       } catch (error) {
         console.log(error);
@@ -96,7 +96,7 @@ export const UserEdit = (): React.JSX.Element => {
           <CardContent>
             <Box
               component="form"
-              sx={{ width: '100%', maxWidth: 600, mx: 'auto', mt: 5 }}
+              sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}
               onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={{ mb: 2 }}>
@@ -118,7 +118,6 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('email', {
-                    required: 'メールアドレスを入力してください',
                     pattern: {
                       value: /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/,
                       message: 'メールアドレスの形式が正しくありません',
@@ -135,7 +134,6 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('current_password', {
-                    required: 'パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
                   InputProps={{
@@ -161,7 +159,6 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('password', {
-                    required: 'パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
                   InputProps={{
