@@ -10,7 +10,7 @@ export type UpdateProfilePayload = {
   };
 };
 
-export const getMe = async (token: string) => {
+export const getCurrentUser = async (token: string) => {
   try {
     const res = await axios.get('http://localhost:5000/api/v1/profile', {
       headers: {
@@ -24,7 +24,7 @@ export const getMe = async (token: string) => {
   }
 };
 
-export const updateProfileApi = async (patch: UpdateProfilePayload, token: string) => {
+export const updateProfile = async (patch: UpdateProfilePayload, token: string) => {
   const res = await axios.patch('http://localhost:5000/api/v1/profile', patch, {
     headers: {
       Authorization: `Bearer ${token}`,
