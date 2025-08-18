@@ -35,80 +35,107 @@ export const UserDelete = (): React.JSX.Element => {
   };
 
   return (
-    <Box>
-      <Typography
-        variant="h4"
-        component="p"
-        sx={{ fontWeight: 'bold', my: 4, textAlign: 'center' }}
+    <Box
+      sx={{
+        mt: 4,
+      }}
+    >
+      <Card
+        sx={{
+          width: '100%',
+          maxWidth: 980,
+          borderRadius: 4,
+          backdropFilter: 'blur(8px)',
+          backgroundColor: 'rgba(255,255,255,0.8)',
+          border: '1px solid',
+          borderColor: 'divider',
+          boxShadow: '0 12px 30px rgba(0,0,0,0.08)',
+        }}
+        elevation={0}
       >
-        退会
-      </Typography>
-      {errorMessage && (
-        <Alert severity="error" sx={{ mt: 2 }}>
-          {errorMessage}
-        </Alert>
-      )}
-      <Card sx={{ width: '100%', textAlign: 'center', boxShadow: 'none' }}>
-        <CardContent>
-          <Box>
-            <PriorityHighIcon fontSize="large" />
-            <Box>
-              <Typography
-                variant="h5"
-                component="p"
-                sx={{ fontWeight: 'bold', my: 4, textAlign: 'center' }}
+        <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ textAlign: 'center', mb: 1 }}>
+              <Box
+                sx={{
+                  width: 64,
+                  height: 64,
+                  mx: 'auto',
+                  borderRadius: '50%',
+                  display: 'grid',
+                  placeItems: 'center',
+                  background: 'linear-gradient(135deg, #fee2e2, #fecaca)',
+                }}
               >
-                本当に退会しますか？
+                <PriorityHighIcon fontSize="large" sx={{ color: 'error.main' }} />
+              </Box>
+
+              <Typography variant="h5" component="h1" sx={{ fontWeight: 800, mt: 2 }}>
+                アカウントを退会しますか？
               </Typography>
-              <Typography sx={{ my: 2 }}>
-                退会すると、これまでに診断したデータは
-                <br />
-                閲覧できなくなります。復元はできません。
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1.5 }}>
+                退会すると、これまでに診断したデータは閲覧できなくなります。
+                復元はできません。退会後はログインできません。
               </Typography>
-              <Typography sx={{ my: 2 }}>退会後はログイン不可</Typography>
             </Box>
+
+            {errorMessage && (
+              <Alert severity="error" sx={{ mt: 1 }}>
+                {errorMessage}
+              </Alert>
+            )}
+
             <FormControlLabel
+              sx={{
+                m: 0,
+                p: 0,
+                '& .MuiCheckbox-root': { mt: 0.2 },
+                '& .MuiFormControlLabel-label': { fontSize: 14, color: 'text.secondary' },
+              }}
               control={
                 <Checkbox
                   checked={consent}
                   onChange={e => setConsent(e.target.checked)}
                   color="primary"
-                  sx={{ m: 2 }}
                 />
               }
               label="注意事項に同意しました。"
             />
-            <Box onClick={handleWithdrawal}>
-              <Button sx={{ width: '100%' }}>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    py: 1,
-                    px: 2,
-                    backgroundColor: '#FF3366',
-                    color: '#ffffff',
-                    borderRadius: '8px',
-                  }}
-                >
-                  退会する
-                </Typography>
-              </Button>
-            </Box>
-            <Box>
-              <Button href="/mypage" sx={{ width: '100%' }}>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    py: 1,
-                    px: 2,
-                    color: '#000000',
-                    borderRadius: '8px',
-                  }}
-                >
-                  キャンセル
-                </Typography>
-              </Button>
-            </Box>
+
+            <Button
+              onClick={handleWithdrawal}
+              fullWidth
+              size="large"
+              variant="contained"
+              color="error"
+              disabled={!consent}
+              sx={{
+                mt: 1,
+                py: 1.5,
+                borderRadius: 2,
+                textTransform: 'none',
+                fontWeight: 700,
+                boxShadow: 'none',
+                '&:disabled': { opacity: 0.5 },
+              }}
+            >
+              退会する
+            </Button>
+
+            <Button
+              href="/mypage"
+              fullWidth
+              size="large"
+              variant="text"
+              color="inherit"
+              sx={{
+                mt: 0.5,
+                textTransform: 'none',
+                fontWeight: 600,
+              }}
+            >
+              キャンセル
+            </Button>
           </Box>
         </CardContent>
       </Card>
