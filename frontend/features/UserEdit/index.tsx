@@ -136,17 +136,20 @@ export const UserEdit = (): React.JSX.Element => {
                   {...register('current_password', {
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowCurrentPassword(prev => !prev)}
-                          edge="end"
-                        />
-                        {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
-                      </InputAdornment>
-                    ),
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowCurrentPassword(prev => !prev)}
+                            edge="end"
+                          >
+                            {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
                   }}
                   error={!!errors.current_password}
                   helperText={errors.current_password?.message}
@@ -161,17 +164,20 @@ export const UserEdit = (): React.JSX.Element => {
                   {...register('password', {
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowNewPassword(prev => !prev)}
-                          edge="end"
-                        />
-                        {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
-                      </InputAdornment>
-                    ),
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowNewPassword(prev => !prev)}
+                            edge="end"
+                          >
+                            {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
                   }}
                   error={!!errors.password}
                   helperText={errors.password?.message}
@@ -189,17 +195,19 @@ export const UserEdit = (): React.JSX.Element => {
                     validate: value =>
                       value === newPasswordValue || '新しいパスワードと一致しません',
                   })}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowNewPasswordConfirm(prev => !prev)}
-                          edge="end"
-                        />
-                        {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
-                      </InputAdornment>
-                    ),
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowNewPasswordConfirm(prev => !prev)}
+                            edge="end"
+                          />
+                          {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
+                        </InputAdornment>
+                      ),
+                    },
                   }}
                   error={!!errors.password_confirmation}
                   helperText={errors.password_confirmation?.message}
