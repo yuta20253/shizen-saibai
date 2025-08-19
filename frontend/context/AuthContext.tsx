@@ -27,7 +27,7 @@ type AuthActions = {
   }) => Promise<void>;
   updateProfileAction: (patch: UpdateProfilePayload) => Promise<void>;
   getAuthHeaders: () => Record<string, string>;
-  signOut: () => Promise<void>;
+  deleteAccountAction: () => Promise<void>;
 };
 
 const AuthStateContext = createContext<AuthState | undefined>(undefined);
@@ -124,7 +124,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return token ? { Authorization: `Bearer ${token}` } : {};
   };
 
-  const signOut: AuthActions['signOut'] = async () => {
+  const deleteAccountAction: AuthActions['deleteAccountAction'] = async () => {
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) throw new Error('認証失敗です');
     await deleteUserApi(token);
@@ -143,7 +143,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     signUp,
     updateProfileAction,
     getAuthHeaders,
-    signOut,
+    deleteAccountAction,
   };
 
   return (
