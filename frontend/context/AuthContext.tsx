@@ -7,6 +7,7 @@ import {
   updateProfile,
   UpdateProfilePayload,
 } from '@/libs/services/user';
+
 import { createContext, useContext, useState, ReactNode, useEffect, useMemo } from 'react';
 
 type User = {
@@ -130,6 +131,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const deleteAccountAction: AuthActions['deleteAccountAction'] = async () => {
+
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) throw new Error('認証失敗です');
     await deleteAccount(token);
