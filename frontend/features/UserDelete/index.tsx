@@ -16,14 +16,14 @@ import { useRouter } from 'next/navigation';
 import { useAuthActions } from '@/context/AuthContext';
 
 export const UserDelete = (): React.JSX.Element => {
-  const { signOut } = useAuthActions();
+  const { deleteAccountAction } = useAuthActions();
   const [consent, setConsent] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
   const handleWithdrawal = async () => {
     if (consent) {
       try {
-        await signOut();
+        await deleteAccountAction();
         setErrorMessage('');
         router.push('/');
       } catch (error) {
