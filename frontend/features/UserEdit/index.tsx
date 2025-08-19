@@ -129,10 +129,11 @@ export const UserEdit = (): React.JSX.Element => {
                 />
               </Box>
               <Box sx={{ mb: 2 }}>
-                <Typography>これまでのパスワード</Typography>
                 <TextField
                   type={showCurrentPassword ? 'text' : 'password'}
                   fullWidth
+                  required
+                  label="これまでのパスワード"
                   variant="outlined"
                   {...register('current_password', {
                     required: 'パスワードを入力してください',
@@ -158,10 +159,10 @@ export const UserEdit = (): React.JSX.Element => {
                 />
               </Box>
               <Box sx={{ mb: 2 }}>
-                <Typography>新しいパスワード</Typography>
                 <TextField
                   type={showNewPassword ? 'text' : 'password'}
                   fullWidth
+                  label="新しいパスワード"
                   variant="outlined"
                   {...register('password', {
                     minLength: { value: 8, message: '8文字以上で入力してください' },
@@ -186,10 +187,10 @@ export const UserEdit = (): React.JSX.Element => {
                 />
               </Box>
               <Box sx={{ mb: 2 }}>
-                <Typography>新しいパスワード(再確認)</Typography>
                 <TextField
                   type={showNewPasswordConfirm ? 'text' : 'password'}
                   fullWidth
+                  label="新しいパスワード(再確認)"
                   variant="outlined"
                   {...register('password_confirmation', {
                     minLength: { value: 8, message: '8文字以上で入力してください' },
