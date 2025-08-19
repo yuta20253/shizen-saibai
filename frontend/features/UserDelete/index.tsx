@@ -20,7 +20,7 @@ export const UserDelete = (): React.JSX.Element => {
   const [consent, setConsent] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
-  const handleWithdrawal = async () => {
+  const handleDelete = async () => {
     if (consent) {
       try {
         await deleteAccountAction();
@@ -103,7 +103,7 @@ export const UserDelete = (): React.JSX.Element => {
             />
 
             <Button
-              onClick={handleWithdrawal}
+              onClick={handleDelete}
               fullWidth
               size="large"
               variant="contained"
