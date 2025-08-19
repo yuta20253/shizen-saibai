@@ -190,7 +190,6 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('password_confirmation', {
-                    required: '確認用パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                     validate: value =>
                       value === newPasswordValue || '新しいパスワードと一致しません',
