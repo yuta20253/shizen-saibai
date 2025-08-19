@@ -1,7 +1,12 @@
 'use client';
 
 import { loginAuth, signUpAuth, logOutAuth } from '@/libs/services/auth';
-import { deleteUserApi, getMe, updateProfileApi, UpdateProfilePayload } from '@/libs/services/user';
+import {
+  deleteAccount,
+  getCurrentUser,
+  updateProfile,
+  UpdateProfilePayload,
+} from '@/libs/services/user';
 import { createContext, useContext, useState, ReactNode, useEffect, useMemo } from 'react';
 
 type User = {
@@ -25,10 +30,9 @@ type AuthActions = {
     password_confirmation: string;
     name: string;
   }) => Promise<void>;
-  updateProfile: (patch: UpdateProfilePayload) => Promise<void>;
-  refresh: () => Promise<void>;
+  updateProfileAction: (patch: UpdateProfilePayload) => Promise<void>;
   getAuthHeaders: () => Record<string, string>;
-  signOut: () => Promise<void>;
+  deleteAccountAction: () => Promise<void>;
 };
 
 const AuthStateContext = createContext<AuthState | undefined>(undefined);
@@ -55,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           }
         }
         if (token) {
-          const fresh = await getMe(token);
+          const fresh = await getCurrentUser(token);
           if (fresh) {
             setUser(fresh);
             localStorage.setItem(USER_KEY, JSON.stringify(fresh));
@@ -109,21 +113,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const updateProfile: AuthActions['updateProfile'] = async (patch: UpdateProfilePayload) => {
+  const updateProfileAction: AuthActions['updateProfileAction'] = async (
+    patch: UpdateProfilePayload
+  ) => {
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) throw new Error('認証失敗です');
-    const updated = await updateProfileApi(patch, token);
+    const updated = await updateProfile(patch, token);
     const next = { ...(user ?? ({} as User)), ...updated } as User;
     setUser(next);
     localStorage.setItem(USER_KEY, JSON.stringify(next));
-  };
-
-  const refresh: AuthActions['refresh'] = async () => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (!token) return;
-    const fresh = await getMe(token);
-    setUser(fresh);
-    localStorage.setItem(USER_KEY, JSON.stringify(fresh));
   };
 
   const getAuthHeaders = (): Record<string, string> => {
@@ -131,10 +129,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return token ? { Authorization: `Bearer ${token}` } : {};
   };
 
-  const signOut: AuthActions['signOut'] = async () => {
+  const deleteAccountAction: AuthActions['deleteAccountAction'] = async () => {
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) throw new Error('認証失敗です');
-    await deleteUserApi(token);
+    await deleteAccount(token);
     setUser(null);
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
@@ -148,10 +146,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     login,
     logout,
     signUp,
-    updateProfile,
-    refresh,
+    updateProfileAction,
     getAuthHeaders,
-    signOut,
+    deleteAccountAction,
   };
 
   return (

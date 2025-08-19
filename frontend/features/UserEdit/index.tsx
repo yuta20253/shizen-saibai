@@ -28,7 +28,7 @@ type UserEdit = {
 
 export const UserEdit = (): React.JSX.Element => {
   const { user } = useAuthState();
-  const { updateProfile } = useAuthActions();
+  const { updateProfileAction } = useAuthActions();
   const [showCurrentPassword, setShowCurrentPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showNewPasswordConfirm, setShowNewPasswordConfirm] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export const UserEdit = (): React.JSX.Element => {
             password_confirmation: data.password_confirmation,
           },
         };
-        await updateProfile(patchData);
+        await updateProfileAction(patchData);
         router.push('/mypage');
       } catch (error) {
         console.log(error);
@@ -96,7 +96,7 @@ export const UserEdit = (): React.JSX.Element => {
           <CardContent>
             <Box
               component="form"
-              sx={{ width: '100%', maxWidth: 600, mx: 'auto', mt: 5 }}
+              sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}
               onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={{ mb: 2 }}>
@@ -135,20 +135,22 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('current_password', {
-                    required: 'パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowCurrentPassword(prev => !prev)}
-                          edge="end"
-                        />
-                        {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
-                      </InputAdornment>
-                    ),
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowCurrentPassword(prev => !prev)}
+                            edge="end"
+                          >
+                            {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
                   }}
                   error={!!errors.current_password}
                   helperText={errors.current_password?.message}
@@ -161,20 +163,22 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('password', {
-                    required: 'パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowNewPassword(prev => !prev)}
-                          edge="end"
-                        />
-                        {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
-                      </InputAdornment>
-                    ),
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowNewPassword(prev => !prev)}
+                            edge="end"
+                          >
+                            {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
                   }}
                   error={!!errors.password}
                   helperText={errors.password?.message}
@@ -187,22 +191,23 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('password_confirmation', {
-                    required: '確認用パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                     validate: value =>
                       value === newPasswordValue || '新しいパスワードと一致しません',
                   })}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowNewPasswordConfirm(prev => !prev)}
-                          edge="end"
-                        />
-                        {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
-                      </InputAdornment>
-                    ),
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowNewPasswordConfirm(prev => !prev)}
+                            edge="end"
+                          />
+                          {showNewPasswordConfirm ? <VisibilityOff /> : <Visibility />}
+                        </InputAdornment>
+                      ),
+                    },
                   }}
                   error={!!errors.password_confirmation}
                   helperText={errors.password_confirmation?.message}
