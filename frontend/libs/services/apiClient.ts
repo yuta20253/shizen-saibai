@@ -1,7 +1,7 @@
 import { Api } from '@/src/types/generated/Api';
 
 export const apiClient = new Api({
-  baseUrl: 'http://localhost:5000',
+  baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
   securityWorker: token =>
     token
       ? {
@@ -14,6 +14,6 @@ export const apiClient = new Api({
 
 export const clientWithToken = (token: string) =>
   new Api({
-    baseUrl: 'http://localhost:5000',
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
     securityWorker: () => ({ headers: { Authorization: `Bearer ${token}` } }),
   });
