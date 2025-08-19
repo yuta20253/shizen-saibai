@@ -118,6 +118,7 @@ export const UserEdit = (): React.JSX.Element => {
                   fullWidth
                   variant="outlined"
                   {...register('email', {
+                    required: 'メールアドレスを入力してください',
                     pattern: {
                       value: /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/,
                       message: 'メールアドレスの形式が正しくありません',
