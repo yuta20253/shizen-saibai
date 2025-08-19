@@ -80,7 +80,6 @@ export const UserEdit = (): React.JSX.Element => {
                 <TextField
                   type={showCurrentPassword ? 'text' : 'password'}
                   fullWidth
-                  required
                   label="これまでのパスワード"
                   variant="outlined"
                   {...register('current_password', {
