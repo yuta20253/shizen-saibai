@@ -33,7 +33,7 @@ export const updateProfile = async (patch: UpdateProfilePayload, token: string) 
   return res.data.user;
 };
 
-export const deleteUserApi = async (token: string) => {
+export const deleteAccount = async (token: string) => {
   axios.delete('http://localhost:5000/api/v1/user', {
     headers: {
       'Content-Type': 'application/json',
