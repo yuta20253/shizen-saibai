@@ -1,7 +1,6 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useAuthActions, useAuthState } from '@/context/AuthContext';
+import { UpdateProfilePayload } from '@/libs/services/user';
 
 type UserEdit = {
   name: string;
@@ -11,22 +10,14 @@ type UserEdit = {
   password_confirmation: string;
 };
 
-export const useSubmit = () => {
-  const { updateProfileAction } = useAuthActions();
-  const { user } = useAuthState();
-  const [errorMessage, setErrorMessage] = useState<string>('');
+type Props = {
+  updateProfileAction: (patch: UpdateProfilePayload) => Promise<void>;
+  setErrorMessage: (message: string) => void;
+};
+
+export const useSubmit = ({ updateProfileAction, setErrorMessage }: Props) => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<UserEdit>({
-    defaultValues: {
-      name: user?.name,
-      email: user?.email,
-    },
-  });
+
   const onSubmit: SubmitHandler<UserEdit> = async (data: UserEdit) => {
     console.log(data);
     try {
@@ -53,10 +44,6 @@ export const useSubmit = () => {
     }
   };
   return {
-    register,
-    handleSubmit: handleSubmit(onSubmit),
-    watch,
-    errors,
-    errorMessage,
+    onSubmit,
   };
 };
