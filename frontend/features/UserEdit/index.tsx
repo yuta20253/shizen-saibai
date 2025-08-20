@@ -18,14 +18,7 @@ import { useSubmit } from './hooks';
 import { useAuthState } from '@/context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { useAuthActions } from '@/context/AuthContext';
-
-type UserEdit = {
-  name: string;
-  email: string;
-  current_password: string;
-  password: string;
-  password_confirmation: string;
-};
+import { UserEditType } from '@/types/types';
 
 export const UserEdit = (): React.JSX.Element => {
   const { user } = useAuthState();
@@ -39,7 +32,7 @@ export const UserEdit = (): React.JSX.Element => {
     watch,
     formState: { errors },
     handleSubmit: formHandleSubmit,
-  } = useForm<UserEdit>({
+  } = useForm<UserEditType>({
     defaultValues: {
       name: user?.name,
       email: user?.email,

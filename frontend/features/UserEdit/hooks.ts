@@ -1,14 +1,7 @@
 import { SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { UpdateProfilePayload } from '@/libs/services/user';
-
-type UserEdit = {
-  name: string;
-  email: string;
-  current_password: string;
-  password: string;
-  password_confirmation: string;
-};
+import { UserEditType } from '@/types/types';
 
 type Props = {
   updateProfileAction: (patch: UpdateProfilePayload) => Promise<void>;
@@ -18,7 +11,7 @@ type Props = {
 export const useSubmit = ({ updateProfileAction, setErrorMessage }: Props) => {
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<UserEdit> = async (data: UserEdit) => {
+  const onSubmit: SubmitHandler<UserEditType> = async (data: UserEditType) => {
     console.log(data);
     try {
       const patchData = {
