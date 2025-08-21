@@ -4,12 +4,12 @@ import AppBar from '@mui/material/AppBar';
 import { Box, Button } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useAuth } from '@/context/AuthContext';
+import { useAuthState } from '@/context/AuthContext';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export const Header = (): React.JSX.Element => {
-  const { user } = useAuth();
+  const { user } = useAuthState();
   console.log(user);
   const pathName = usePathname();
 

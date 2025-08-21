@@ -3,8 +3,8 @@ import { Box, TextField } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
+import { useAuthActions } from '@/context/AuthContext';
 
 type UserForm = {
   email: string;
@@ -14,7 +14,7 @@ type UserForm = {
 export const Login = (): React.JSX.Element => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
-  const { login } = useAuth();
+  const { login } = useAuthActions();
   const {
     register,
     handleSubmit,

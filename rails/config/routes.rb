@@ -20,10 +20,8 @@ Rails.application.routes.draw do
         sign_out: "logout",
         registration: "user"
       }
-      post 'password/reset', to: 'users/passwords#reset'
-      patch 'password/update', to: 'users/passwords#update'
 
-      resource :user, only: [:update], controller: :'users'
+      resource :profile, only: [:show, :update], controller: :users
       # 診断履歴（マイページ）
       resources :histories, only: [:index, :show]
       # 画像アップロード・診断結果（雑草→土壌→野菜）

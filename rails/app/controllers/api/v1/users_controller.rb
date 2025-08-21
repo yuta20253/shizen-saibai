@@ -1,6 +1,10 @@
 class Api::V1::UsersController < Api::V1::BaseController
+  def show
+    render json: current_user.slice(:id, :email, :name, :role )
+  end
+
   def update
-    if current_user.update(user_params)
+    if current_user.update_with_password(user_params)
       render json: {
         message: "個人情報を更新しました！",
         user: current_user.slice(:id, :email, :name, :role),
