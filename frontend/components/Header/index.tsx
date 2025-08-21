@@ -44,7 +44,7 @@ export const Header = (): React.JSX.Element => {
           </Box>
           {showAuth ? (
             user ? (
-              <Box sx={{ display: 'flex', gap: 2 }}>
+              <Box component="a" sx={{ display: 'flex', gap: 2, color: '#fff' }} href="/mypage">
                 <AccountCircleIcon />
                 {user.name}
               </Box>
