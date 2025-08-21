@@ -15,13 +15,31 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
 import { useSubmit } from './hooks';
+import { useAuthState } from '@/context/AuthContext';
+import { useForm } from 'react-hook-form';
+import { useAuthActions } from '@/context/AuthContext';
+import { UserEditType } from '@/types/UserEdit/types';
 
 export const UserEdit = (): React.JSX.Element => {
+  const { user } = useAuthState();
   const [showCurrentPassword, setShowCurrentPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showNewPasswordConfirm, setShowNewPasswordConfirm] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const { updateProfileAction } = useAuthActions();
+  const {
+    register,
+    watch,
+    formState: { errors },
+    handleSubmit: formHandleSubmit,
+  } = useForm<UserEditType>({
+    defaultValues: {
+      name: user?.name,
+      email: user?.email,
+    },
+  });
 
-  const { register, handleSubmit, watch, errors, errorMessage } = useSubmit();
+  const { onSubmit } = useSubmit({ updateProfileAction, setErrorMessage });
 
   const newPasswordValue = watch('password');
 
@@ -45,7 +63,7 @@ export const UserEdit = (): React.JSX.Element => {
             <Box
               component="form"
               sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}
-              onSubmit={handleSubmit}
+              onSubmit={formHandleSubmit(onSubmit)}
             >
               <Box sx={{ mb: 2 }}>
                 <Typography>名前</Typography>
@@ -83,6 +101,7 @@ export const UserEdit = (): React.JSX.Element => {
                   label="これまでのパスワード"
                   variant="outlined"
                   {...register('current_password', {
+                    required: 'パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
                   slotProps={{

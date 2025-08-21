@@ -1,33 +1,17 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useAuthActions, useAuthState } from '@/context/AuthContext';
+import { UpdateProfilePayload } from '@/libs/services/user';
+import { UserEditType } from '@/types/UserEdit/types';
 
-type UserEdit = {
-  name: string;
-  email: string;
-  current_password: string;
-  password: string;
-  password_confirmation: string;
+type Props = {
+  updateProfileAction: (patch: UpdateProfilePayload) => Promise<void>;
+  setErrorMessage: (message: string) => void;
 };
 
-export const useSubmit = () => {
-  const { updateProfileAction } = useAuthActions();
-  const { user } = useAuthState();
-  const [errorMessage, setErrorMessage] = useState<string>('');
+export const useSubmit = ({ updateProfileAction, setErrorMessage }: Props) => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<UserEdit>({
-    defaultValues: {
-      name: user?.name,
-      email: user?.email,
-    },
-  });
-  const onSubmit: SubmitHandler<UserEdit> = async (data: UserEdit) => {
+
+  const onSubmit: SubmitHandler<UserEditType> = async (data: UserEditType) => {
     console.log(data);
     try {
       const patchData = {
@@ -53,10 +37,6 @@ export const useSubmit = () => {
     }
   };
   return {
-    register,
-    handleSubmit: handleSubmit(onSubmit),
-    watch,
-    errors,
-    errorMessage,
+    onSubmit,
   };
 };
