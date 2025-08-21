@@ -101,6 +101,7 @@ export const UserEdit = (): React.JSX.Element => {
                   label="これまでのパスワード"
                   variant="outlined"
                   {...register('current_password', {
+                    required: 'パスワードを入力してください',
                     minLength: { value: 8, message: '8文字以上で入力してください' },
                   })}
                   slotProps={{
