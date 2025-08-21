@@ -18,7 +18,7 @@ import { useSubmit } from './hooks';
 import { useAuthState } from '@/context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { useAuthActions } from '@/context/AuthContext';
-import { UserEditType } from '@/types/types';
+import { UserEditType } from '@/types/UserEdit/types';
 
 export const UserEdit = (): React.JSX.Element => {
   const { user } = useAuthState();

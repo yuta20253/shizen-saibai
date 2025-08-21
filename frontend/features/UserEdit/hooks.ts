@@ -1,7 +1,7 @@
 import { SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { UpdateProfilePayload } from '@/libs/services/user';
-import { UserEditType } from '@/types/types';
+import { UserEditType } from '@/types/UserEdit/types';
 
 type Props = {
   updateProfileAction: (patch: UpdateProfilePayload) => Promise<void>;
