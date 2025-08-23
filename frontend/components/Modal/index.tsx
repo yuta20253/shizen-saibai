@@ -24,11 +24,11 @@ export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_props,
       const token = localStorage.getItem('token');
       const url = process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/diagnosis';
       const headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       };
       await axios
-        .post(url, { formData }, { headers })
+        .post(url, formData, { headers })
         .then(res => {
           console.log(res.data);
           router.push(`http://localhost:3000/mypage/diagnoses/${res.data.id}`);
