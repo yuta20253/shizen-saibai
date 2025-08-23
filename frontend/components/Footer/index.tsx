@@ -1,14 +1,18 @@
 'use client';
 
-import { Box, IconButton } from '@mui/material';
-import React from 'react';
+import { Box } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import React, { useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { ImageCaptureUploader } from '../Modal';
 
 export const Footer = (): React.JSX.Element | null => {
   const pathName = usePathname();
   const hiddenPaths = ['/login', '/signup', '/mypage/edit', '/mypage/delete'];
   const hidden = hiddenPaths.includes(pathName);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const triggerInput = () => inputRef.current?.click();
 
   if (hidden) return null;
 
@@ -29,25 +33,30 @@ export const Footer = (): React.JSX.Element | null => {
         zIndex: 9999,
       }}
     >
-      <IconButton
-        size="large"
+      <Box
+        onClick={triggerInput}
         sx={{
           position: 'absolute',
-          top: -28,
+          top: -36,
           left: '50%',
           transform: 'translateX(-50%)',
           bgcolor: 'background.paper',
-          width: 56,
-          height: 56,
+          width: 60,
+          height: 60,
           borderRadius: '50%',
           boxShadow: 3,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
           '&:hover': {
-            bgcolor: 'background.paper',
+            bgcolor: 'grey.100',
           },
         }}
       >
-        <CameraAltIcon sx={{ fontSize: '1.8rem' }} />
-      </IconButton>
+        <CameraAltIcon sx={{ fontSize: 32 }} />
+      </Box>
+      <ImageCaptureUploader ref={inputRef} />
     </Box>
   );
 };
