@@ -7,8 +7,24 @@ import { Box, Button } from '@mui/material';
 import GrassIcon from '@mui/icons-material/Grass';
 import SearchIcon from '@mui/icons-material/Search';
 import { FeatureCarousel } from '@components/FeatureCarousel';
+import { useRef } from 'react';
+import { ImageCaptureUploader } from '@/components/ImageCaptureUploader';
+import { useAuthState } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const Home = (): React.JSX.Element => {
+  const { user } = useAuthState();
+  const router = useRouter();
+  const uploaderRef = useRef<HTMLInputElement>(null);
+
+  const triggerUpload = () => {
+    if (user === null) {
+      router.push('/login');
+      return;
+    }
+    uploaderRef.current?.click();
+  };
+
   return (
     <>
       <Typography variant="h5" component="p" textAlign="center" sx={{ fontWeight: 'bold', mt: 4 }}>
@@ -31,10 +47,12 @@ const Home = (): React.JSX.Element => {
             fontWeight: 'bold',
             borderColor: 'primary.main',
           }}
+          onClick={triggerUpload}
         >
           いますぐ解析する
         </Button>
       </Box>
+      <ImageCaptureUploader ref={uploaderRef} />
       <Box sx={{ mt: 4 }}>
         <Typography
           variant="h6"
