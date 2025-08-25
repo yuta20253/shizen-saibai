@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import React, { useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { ImageCaptureUploader } from '../Modal';
+import { ImageCaptureUploader } from '../ImageCaptureUploader';
 
 export const Footer = (): React.JSX.Element | null => {
   const pathName = usePathname();

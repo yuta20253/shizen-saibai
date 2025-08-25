@@ -10,14 +10,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { CameraAlt } from '@mui/icons-material';
 import { RequireAuth } from '@/components/RequireAuth';
-import axios from 'axios';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { ImageCaptureUploader } from '@/components/ImageCaptureUploader';
 
 export const MyPageContent = (): React.JSX.Element | null => {
   const { user } = useAuthState();
   const { logout } = useAuthActions();
   const router = useRouter();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const triggerInput = () => inputRef.current?.click();
 
   const iconStyle = { position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' };
 
@@ -28,17 +31,6 @@ export const MyPageContent = (): React.JSX.Element | null => {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleClick = async () => {
-    const token = localStorage.getItem('token');
-    const url = 'http://localhost:5000/api/v1/diagnosis';
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    };
-    const response = await axios.post(url, {}, { headers });
-    console.log(response);
   };
 
   const links = [
@@ -100,11 +92,12 @@ export const MyPageContent = (): React.JSX.Element | null => {
               p: 2,
               gap: 2,
             }}
-            onClick={handleClick}
+            onClick={triggerInput}
           >
             <CameraAlt />
             <Typography variant="h6">雑草画像をアップロード</Typography>
           </Button>
+          <ImageCaptureUploader ref={inputRef} />
           <Divider sx={{ mt: 4 }} />
         </Box>
         {links.map((link, i) => (
