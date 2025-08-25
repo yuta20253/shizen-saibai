@@ -6,7 +6,7 @@ class Diag::Ai::WeedIdentificationService
 
   def call
     weeds_text_for_prompt = format_weed_list(@weeds_json)
-    weeds_enum = weed_names_array(@weeds_json) 
+    weeds_enum = weed_names_array(@weeds_json)
 
     Rails.logger.debug weeds_text_for_prompt.to_s
     client = OpenAI::Client.new(
@@ -51,7 +51,7 @@ class Diag::Ai::WeedIdentificationService
             ] },
           ],
           response_format: {
-            type: 'json_schema',
+            type: "json_schema",
             json_schema: {
               name: "weed_identification",
               strict: true,
@@ -59,15 +59,15 @@ class Diag::Ai::WeedIdentificationService
                 type: "object",
                 properties: {
                   weed_name: {
-                    type: 'string',
-                    enum: weeds_enum
-                  }
+                    type: "string",
+                    enum: weeds_enum,
+                  },
                 },
                 required: ["weed_name"],
-                additionalProperties: false
-              }
-            }
-          }
+                additionalProperties: false,
+              },
+            },
+          },
         },
       )
     rescue Faraday::TooManyRequestsError => e
@@ -113,6 +113,6 @@ class Diag::Ai::WeedIdentificationService
   def weed_names_array(json)
     return [] if json.blank?
 
-    JSON.parse(json).map { |w| w["name"] }.compact.uniq
+    JSON.parse(json).map {|w| w["name"] }.compact.uniq
   end
 end
