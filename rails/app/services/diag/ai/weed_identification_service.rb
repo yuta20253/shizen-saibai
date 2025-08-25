@@ -5,8 +5,10 @@ class Diag::Ai::WeedIdentificationService
   end
 
   def call
-    weeds = @weeds_json
-    Rails.logger.debug format_weed_list(weeds).to_s
+    weeds_text_for_prompt = format_weed_list(@weeds_json)
+    weeds_enum = weed_names_array(@weeds_json) 
+
+    Rails.logger.debug weeds_text_for_prompt.to_s
     client = OpenAI::Client.new(
       access_token: Rails.application.credentials.chatgpt_api_key,
     )
@@ -16,7 +18,7 @@ class Diag::Ai::WeedIdentificationService
         なお、雑草は「雑草一覧」から選択してください。
 
         ## 雑草一覧（以下から1つ選んでください）
-        #{format_weed_list(weeds)}
+        #{weeds_text_for_prompt}
 
       【重要】
         - 出力する雑草名は、必ず「雑草一覧」にある **1種類** のみ。
@@ -48,6 +50,24 @@ class Diag::Ai::WeedIdentificationService
               { type: "image_url", image_url: { url: @image } },
             ] },
           ],
+          response_format: {
+            type: 'json_schema',
+            json_schema: {
+              name: "weed_identification",
+              strict: true,
+              schema: {
+                type: "object",
+                properties: {
+                  weed_name: {
+                    type: 'string',
+                    enum: weeds_enum
+                  }
+                },
+                required: ["weed_name"],
+                additionalProperties: false
+              }
+            }
+          }
         },
       )
     rescue Faraday::TooManyRequestsError => e
@@ -88,5 +108,11 @@ class Diag::Ai::WeedIdentificationService
     return "" if json.blank?
 
     JSON.parse(json).map {|w| w["name"] }.join("\n")
+  end
+
+  def weed_names_array(json)
+    return [] if json.blank?
+
+    JSON.parse(json).map { |w| w["name"] }.compact.uniq
   end
 end
