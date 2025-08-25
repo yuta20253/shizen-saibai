@@ -1,19 +1,22 @@
-import { forwardRef, useState } from 'react';
+'use client';
 import { ImagePreviewDialog } from '../ImagePreviewDialog';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import React, { forwardRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Alert, Box, type AlertColor } from '@mui/material';
 
-type Props = {};
+type Props = object;
 
 export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref) => {
   const router = useRouter();
-
   const [open, setOpen] = useState<boolean>(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [alertSeverity, SetAlertSeverity] = useState<AlertColor | null>(null);
 
   const isFromCamera = (file: File): boolean => {
     const now = Date.now();
@@ -50,7 +53,8 @@ export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref)
           router.push(`http://localhost:3000/mypage/diagnoses/${res.data.id}`);
         })
         .catch(err => console.log(err));
-      alert('アップロード成功');
+      setAlertMessage('アップロード成功');
+      SetAlertSeverity('success');
     } catch (error) {
       console.error(error);
       alert('アップロードに失敗しました。');
@@ -63,7 +67,6 @@ export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref)
       handleClose();
     }
   };
-
   return (
     <>
       <input
@@ -74,6 +77,24 @@ export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref)
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
+
+      {alertMessage && alertSeverity && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 20,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1300,
+            width: '90%',
+            maxWidth: 400,
+          }}
+        >
+          <Alert severity={alertSeverity} onClose={() => setAlertMessage(null)}>
+            {alertMessage}
+          </Alert>
+        </Box>
+      )}
 
       {open && (
         <ImagePreviewDialog
@@ -86,3 +107,5 @@ export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref)
     </>
   );
 });
+
+ImageCaptureUploader.displayName = 'ImageCaptureUploader';

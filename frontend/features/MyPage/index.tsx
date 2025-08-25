@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuthState, useAuthActions } from '@/context/AuthContext';
-import { Box, Button, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import Link from 'next/link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -17,9 +17,8 @@ import { ImageCaptureUploader } from '@/components/ImageCaptureUploader';
 export const MyPageContent = (): React.JSX.Element | null => {
   const { user } = useAuthState();
   const { logout } = useAuthActions();
-  const router = useRouter();
-
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
   const triggerInput = () => inputRef.current?.click();
 
   const iconStyle = { position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' };
@@ -83,23 +82,38 @@ export const MyPageContent = (): React.JSX.Element | null => {
             <Typography variant="h6">{user?.email}</Typography>
           </Box>
         </Box>
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Button
+        <Box
+          sx={{
+            width: '100%',
+            textAlign: 'center',
+            p: 2,
+          }}
+        >
+          <Box
             sx={{
-              backgroundColor: '#999',
+              position: 'relative',
+              width: '100%',
+              height: 48,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              bgcolor: '#999',
               color: '#fff',
               fontWeight: 'bold',
-              p: 2,
-              gap: 2,
+              cursor: 'pointer',
+              borderRadius: 1,
+              '&:hover': {
+                opacity: 0.8,
+              },
             }}
             onClick={triggerInput}
           >
             <CameraAlt />
             <Typography variant="h6">雑草画像をアップロード</Typography>
-          </Button>
-          <ImageCaptureUploader ref={inputRef} />
-          <Divider sx={{ mt: 4 }} />
+          </Box>
         </Box>
+        <Divider sx={{ width: '100%' }} />
+        <ImageCaptureUploader ref={inputRef} />
         {links.map((link, i) => (
           <Fragment key={i}>
             <Box sx={{ width: '100%', textAlign: 'center', p: 2 }}>
