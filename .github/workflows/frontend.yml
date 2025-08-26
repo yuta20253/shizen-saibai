@@ -7,7 +7,7 @@ on:
       - ".github/workflows/frontend.yml"
 
 jobs:
-  Web:
+  Frontend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
