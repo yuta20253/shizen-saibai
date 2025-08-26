@@ -12,11 +12,14 @@ jobs:
     strategy:
       matrix:
         ruby-version: ["3.4"]
-        mysql-version: ["8.0.32"]
     timeout-minutes: 15
     defaults:
       run:
         working-directory: rails
+    env:
+      RAILS_ENV: test
+      BUNDLE_WITH: "development test"
+      BUNDLE_WITHOUT: ""
 
     steps:
       - name: Cancel Previous Runs
@@ -36,6 +39,9 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
+
+      - name: Debug bundler
+        run: bundle info rubocop || true
 
       - name: Lint (RuboCop)
         run: bundle exec rubocop --parallel
