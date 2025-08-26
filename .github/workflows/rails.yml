@@ -39,6 +39,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
+          working-directory: rails
 
       - name: Debug bundler
         run: bundle info rubocop || true
