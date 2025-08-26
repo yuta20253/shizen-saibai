@@ -1,0 +1,45 @@
+name: Rails CI
+
+on:
+  pull_request:
+    paths:
+      - "rails/**"
+      - ".github/workflows/rails.yml"
+
+jobs:
+  Rails:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ["3.4"]
+        mysql-version: ["8.0.32"]
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: rails
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v3
+
+      - name: Install system packages (for mysql2)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libmysqlclient-dev
+
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+
+      - name: Lint (RuboCop)
+        run: bundle exec rubocop --parallel
+
+      - name: Test (RSpec)
+        if: ${{ hashFiles('spec/**/*') != '' }}
+        run: bundle exec rspec --format documentation
