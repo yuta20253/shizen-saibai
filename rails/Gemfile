@@ -45,6 +45,7 @@ gem "ruby-openai"
 
 gem "active_model_serializers", "~> 0.10.12"
 
+gem "aws-sdk-s3", require: false
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -95,6 +96,8 @@ group :development, :test do
   gem "rubocop-rspec"
   # shoulda-matchers
   gem "shoulda-matchers", "~> 6.0"
+
+  gem "dotenv-rails"
 end
 
 group :development do

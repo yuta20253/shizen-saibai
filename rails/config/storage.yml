@@ -32,3 +32,18 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+sakura:
+  service: S3
+  access_key_id: <%= ENV['SAKURA_ACCESS_KEY'] %>
+  secret_access_key: <%= ENV['SAKURA_SECRET_KEY'] %>
+  region: ap-northeast-1
+  endpoint: https://s3.isk01.sakurastorage.jp
+  bucket: <%= ENV['SAKURA_BUCKET'] %>
+  force_path_style: true
+  upload:
+    client:
+      http_open_timeout: 20
+      http_read_timeout: 80
+      http_idle_timeout: 40
+    checksum_algorithm: null

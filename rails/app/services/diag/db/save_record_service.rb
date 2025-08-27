@@ -1,5 +1,5 @@
 class Diag::Db::SaveRecordService
-  def initialize(vegetable_name:, weed_name:, soil_data:, reason:, current_user:)
+  def initialize(vegetable_name:, weed_name:, soil_data:, reason:, current_user:, image_file: nil)
     @vegetable = Vegetable.find_by(name: vegetable_name)
     raise ActiveRecord::RecordNotFound, "野菜データ、#{vegetable_name}が見つかりません。" unless @vegetable
 
@@ -12,6 +12,8 @@ class Diag::Db::SaveRecordService
     @reason = reason
 
     @user = current_user
+
+    @image_file = image_file
   end
 
   def call
@@ -34,6 +36,17 @@ class Diag::Db::SaveRecordService
         image_url: "",
         result: @reason,
       )
+
+      if @image_file.present?
+        Rails.logger.debug("@image_file.class: #{@image_file.class}")
+        Rails.logger.debug("@image_file.original_filename: #{@image_file.original_filename rescue 'N/A'}")
+        Rails.logger.debug("@image_file.size: #{@image_file.size rescue 'N/A'}")
+        @diagnosis.image.attach(
+          io: @image_file,
+          filename: @image_file.original_filename,
+          content_type: @image_file.content_type || 'image/jpeg' # fallback
+        )
+      end
     end
     { id: @diagnosis.id }
   rescue => e

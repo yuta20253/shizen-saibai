@@ -6,7 +6,9 @@ Rails.application.configure do
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.enable_reloading = true
+
+  config.cache_classes = false
+  config.reload_classes_only_on_change = true
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -31,7 +33,13 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :sakura
+
+  config.active_storage.service_urls_expire_in = 5.minutes
+  config.active_storage.replace_on_assign_to_many = true
+
+  # 重要：S3互換対応のため、single-part upload にする
+  config.active_storage.track_variants = false
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -66,6 +74,6 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.action_mailer.default_options = { from: "no-replay@example.com" }
+  config.action_mailer.default_options = { from: "no-reply@example.com" }
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
