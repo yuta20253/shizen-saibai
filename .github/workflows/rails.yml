@@ -41,12 +41,9 @@ jobs:
           bundler-cache: true
           working-directory: rails
 
-      - name: Debug bundler
-        run: bundle info rubocop || true
-
       - name: Lint (RuboCop)
         run: bundle exec rubocop --parallel
 
       - name: Test (RSpec)
-        if: ${{ hashFiles('spec/**/*') != '' }}
+        if: ${{ hashFiles('rails/spec/**/*') != '' }}
         run: bundle exec rspec --format documentation
