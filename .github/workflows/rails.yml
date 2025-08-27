@@ -9,6 +9,21 @@ on:
 jobs:
   Rails:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0.32
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: myapp_development
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
     strategy:
       matrix:
         ruby-version: ["3.4.4"]
@@ -20,6 +35,7 @@ jobs:
       RAILS_ENV: test
       BUNDLE_WITH: "development test"
       BUNDLE_WITHOUT: ""
+      DATABASE_URL: "mysql2://root:root@127.0.0.1:3306/myapp_development?encoding=utf8mb4"
 
     steps:
       - name: Cancel Previous Runs
@@ -43,6 +59,9 @@ jobs:
 
       - name: Lint (RuboCop)
         run: bundle exec rubocop --parallel
+
+      - name: DB prepare
+        run: bundle exec rails db:prepare
 
       - name: Test (RSpec)
         if: ${{ hashFiles('rails/spec/**/*') != '' }}
