@@ -22,6 +22,8 @@ class Diag::File::FileUploadService
 
     @file.rewind
     base64_image = Base64.strict_encode64(@file.read)
+
+    @file.rewind
     "data:image/jpeg;base64,#{base64_image}"
   end
 end

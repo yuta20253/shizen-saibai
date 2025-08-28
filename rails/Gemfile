@@ -95,6 +95,8 @@ group :development, :test do
   gem "rubocop-rspec"
   # shoulda-matchers
   gem "shoulda-matchers", "~> 6.0"
+
+  gem 'aws-sdk-s3'
 end
 
 group :development do

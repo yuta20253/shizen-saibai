@@ -1,6 +1,9 @@
 class Api::V1::DiagnosesController < Api::V1::BaseController
   require "openai"
+  require 'aws-sdk-s3'
   def create
+    Rails.logger.info("受け取った params[:image]: #{params[:image].class}")
+
     begin
       image_data_url = Diag::File::FileUploadService.new(params[:image]).call
     rescue Diag::Errors::ImageMissing => e
@@ -33,7 +36,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
 
     vegetable_name, weed_name, soil_data, reason = Diag::Json::SearchWeedService.new(data).call
     id = Diag::Db::SaveRecordService.new(vegetable_name: vegetable_name, weed_name: weed_name, soil_data: soil_data, reason: reason,
-                                         current_user: current_user).call
+                                         current_user: current_user, image_file: params[:image]).call
 
     render json: id, status: :ok
   end
