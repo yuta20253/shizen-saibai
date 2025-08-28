@@ -69,23 +69,28 @@ paths:
             schema:
               type: object
               required:
-              - email
-              - password
-              - password_confirmation
-              - name
+              - user
               properties:
-                email:
-                  type: string
-                  example: test@example.com
-                password:
-                  type: string
-                  example: password123
-                password_confirmation:
-                  type: string
-                  example: password123
-                name:
-                  type: string
-                  example: test
+                user:
+                  type: object
+                  required:
+                  - email
+                  - password
+                  - password_confirmation
+                  - name
+                  properties:
+                    email:
+                      type: string
+                      example: test@example.com
+                    password:
+                      type: string
+                      example: password123
+                    password_confirmation:
+                      type: string
+                      example: password123
+                    name:
+                      type: string
+                      example: test
   "/api/v1/login":
     post:
       summary: ユーザーのログイン
@@ -140,16 +145,19 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-              - email
-              - password
               properties:
-                email:
-                  type: string
-                  example: test@example.com
-                password:
-                  type: string
-                  example: password123
+                user:
+                  type: object
+                  required:
+                  - email
+                  - password
+                  properties:
+                    email:
+                      type: string
+                      example: test@example.com
+                    password:
+                      type: string
+                      example: password123
   "/api/v1/logout":
     delete:
       summary: ユーザーのログアウト
