@@ -38,11 +38,12 @@ class Diag::Db::SaveRecordService
       )
 
       if @image_file.present?
+        tempfile = @image_file.respond_to?(:tempfile) ? @image_file.tempfile : @image_file
         Rails.logger.debug("@image_file.class: #{@image_file.class}")
         Rails.logger.debug("@image_file.original_filename: #{@image_file.original_filename rescue 'N/A'}")
         Rails.logger.debug("@image_file.size: #{@image_file.size rescue 'N/A'}")
         @diagnosis.image.attach(
-          io: @image_file,
+          io: tempfile,
           filename: @image_file.original_filename,
           content_type: @image_file.content_type || 'image/jpeg' # fallback
         )
