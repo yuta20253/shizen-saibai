@@ -37,7 +37,7 @@ sakura:
   service: S3
   access_key_id: <%= ENV['SAKURA_ACCESS_KEY'] %>
   secret_access_key: <%= ENV['SAKURA_SECRET_KEY'] %>
-  region: ap-northeast-1
+  region: isk01
   endpoint: https://s3.isk01.sakurastorage.jp
   bucket: <%= ENV['SAKURA_BUCKET'] %>
   force_path_style: true
