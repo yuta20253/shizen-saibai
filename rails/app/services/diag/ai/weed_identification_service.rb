@@ -98,7 +98,7 @@ class Diag::Ai::WeedIdentificationService
       end
     rescue JSON::ParserError => e
       Rails.logger.error("[JSONパースエラー] #{e.class}: #{e.message}")
-      raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #{e.message}"
+      raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #-{e.message}"
     end
 
     data

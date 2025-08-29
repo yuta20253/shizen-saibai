@@ -100,7 +100,7 @@ RSpec.describe 'Api::V1::Users::Sessions', type: :request do
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(response.status).to eq(401)
-          expect(data['error']).to eq('Authorizationヘッダーがありません')
+          expect(data['message']).to eq('Authorizationヘッダーがありません')
         end
       end
 
@@ -109,7 +109,7 @@ RSpec.describe 'Api::V1::Users::Sessions', type: :request do
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(response.status).to eq(401)
-          expect(data['error']).to eq('無効なトークンです')
+          expect(data['message']).to eq('無効なトークンです')
         end
       end
       response '401', '有効期限切れトークン' do
@@ -130,7 +130,7 @@ RSpec.describe 'Api::V1::Users::Sessions', type: :request do
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(response.status).to eq(401)
-          expect(data['error']).to eq('トークンの有効期限が切れています')
+          expect(data['message']).to eq('トークンの有効期限が切れています')
         end
       end
     end
