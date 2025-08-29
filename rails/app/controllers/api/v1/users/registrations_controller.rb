@@ -28,7 +28,7 @@ class Api::V1::Users::RegistrationsController < ActionController::API
     end
 
     begin
-      payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, algorithm: "HS256").first
+      payload = JWT.decode(token, ENV["DEVISE_JWT_SECRET_KEY"], true, algorithm: "HS256").first
       user = User.find_by(id: payload["user_id"])
 
       if user.nil?
@@ -38,7 +38,7 @@ class Api::V1::Users::RegistrationsController < ActionController::API
       # 論理削除＆メールマスキング処理（soft_delete! はUserモデルに実装済み前提）
       user.soft_delete!
 
-      render json: { status: 200, message: "退会処理が完了しました" }, status: :ok
+      render json: { status: 401, message: "退会処理が完了しました" }, status: :ok
     rescue JWT::ExpiredSignature
       render json: { status: 401, message: "トークンの有効期限が切れています" }, status: :unauthorized
     rescue JWT::DecodeError

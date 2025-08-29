@@ -11,7 +11,7 @@ class Api::V1::BaseController < ApplicationController
       end
 
       begin
-        payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, { algorithms: ["HS256"] }).first
+        payload = JWT.decode(token, ENV["DEVISE_JWT_SECRET_KEY"], true, { algorithms: ["HS256"] }).first
         @current_user = User.find(payload["user_id"])
       rescue JWT::ExpiredSignature
         render json: { error: "トークンの有効期限が切れています" }, status: :unauthorized and return
