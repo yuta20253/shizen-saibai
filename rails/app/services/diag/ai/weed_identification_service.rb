@@ -10,7 +10,7 @@ class Diag::Ai::WeedIdentificationService
 
     Rails.logger.debug weeds_text_for_prompt.to_s
     client = OpenAI::Client.new(
-      access_token: Rails.application.credentials.chatgpt_api_key,
+      access_token: ENV["CHATGPT_API_KEY"],
     )
     user_prompt = <<~TEXT
         受け取った画像に対して、

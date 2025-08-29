@@ -83,7 +83,7 @@ RSpec.describe "API::V1::Users::RegistrationsController", type: :request do
 
     let(:token) do
       payload = { user_id: user.id }
-      JWT.encode(payload, Rails.application.credentials.devise[:jwt_secret_key], "HS256")
+      JWT.encode(payload, ENV["DEVISE_JWT_SECRET_KEY"], "HS256")
     end
 
     let(:auth_headers) do

@@ -30,6 +30,8 @@ services:
       DATABASE_HOST: db
       DATABASE_PORT: 3306
       RAILS_ENV: development
+    env_file:
+      - ./rails/.env
     tty: true
     stdin_open: true
 
