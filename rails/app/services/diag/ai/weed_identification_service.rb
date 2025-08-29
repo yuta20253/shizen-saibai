@@ -34,7 +34,7 @@ class Diag::Ai::WeedIdentificationService
 
     def openai_client
       @openai_client ||= OpenAI::Client.new(
-        access_token: Rails.application.credentials.chatgpt_api_key,
+        access_token: ENV["CHATGPT_API_KEY"],
       )
     end
 

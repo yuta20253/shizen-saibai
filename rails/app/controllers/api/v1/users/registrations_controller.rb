@@ -28,7 +28,7 @@ class Api::V1::Users::RegistrationsController < ActionController::API
     end
 
     begin
-      payload = JWT.decode(token, Rails.application.credentials.devise[:jwt_secret_key], true, algorithm: "HS256").first
+      payload = JWT.decode(token, ENV["DEVISE_JWT_SECRET_KEY"], true, algorithm: "HS256").first
       user = User.find_by(id: payload["user_id"])
 
       if user.nil?

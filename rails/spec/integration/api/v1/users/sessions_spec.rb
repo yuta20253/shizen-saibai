@@ -123,7 +123,7 @@ RSpec.describe 'Api::V1::Users::Sessions', type: :request do
             exp: 1.hour.ago.to_i, # 期限切れ
             jti: SecureRandom.uuid
           }
-          JWT.encode(payload, Rails.application.credentials.devise[:jwt_secret_key], 'HS256')
+          JWT.encode(payload, ENV["DEVISE_JWT_SECRET_KEY"], 'HS256')
         end
 
         let(:Authorization) { "Bearer #{expired_token}" }
