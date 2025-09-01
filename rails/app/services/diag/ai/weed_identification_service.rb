@@ -5,71 +5,25 @@ class Diag::Ai::WeedIdentificationService
   end
 
   def call
-    weeds_text_for_prompt = format_weed_list(@weeds_json)
+    prompt     = Diag::Ai::WeedPrompt.build_prompt(weed_list_text)
     weeds_enum = weed_names_array(@weeds_json)
+    content    = request_openai(prompt, weeds_enum)
+    parse_content!(content)
+  end
 
-    Rails.logger.debug weeds_text_for_prompt.to_s
-    client = OpenAI::Client.new(
-      access_token: ENV["CHATGPT_API_KEY"],
-    )
-    user_prompt = <<~TEXT
-        受け取った画像に対して、
-        その画像に写っている雑草の名前を教えてください。
-        なお、雑草は「雑草一覧」から選択してください。
+  private
 
-        ## 雑草一覧（以下から1つ選んでください）
-        #{weeds_text_for_prompt}
+    # ---- OpenAI 呼び出し -------------------------------------------------------
 
-      【重要】
-        - 出力する雑草名は、必ず「雑草一覧」にある **1種類** のみ。
-        - 一覧にない雑草名・学名・別名・形容詞などは **絶対に使用しないでください**。
-        - 「雑草一覧」に含まれない名前を出力した場合はエラーとみなします。
+    def request_openai(prompt, weeds_enum)
+      Rails.logger.debug(prompt.to_s)
+      response = openai_client.chat(parameters: build_params(prompt, weeds_enum))
+      content  = response.dig("choices", 0, "message", "content")
 
-        【禁止事項】
-        - 上記一覧にない雑草名を出力すること
-        - 複数の雑草名を出力すること
-        - 別名・学名・英語名・画像の説明・その他のコメントを出力すること
+      Rails.logger.debug("GPTの生データ: #{content}")
+      raise StandardError, "OpenAIからのレスポンスが空です" if content.blank?
 
-        ## 出力JSONフォーマット(厳守)
-        以下の形式でJSONのみ出力してください（前後に、```jsonなどの余計な説明は絶対に不要です）:
-
-        {
-          "weed_name": "ユウゲショウ"
-        }
-
-    TEXT
-
-    begin
-      response = client.chat(
-        parameters: {
-          model: "gpt-4o",
-          messages: [
-            { role: "system", content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。絶対に```jsonなどの説明文や補足、余計な文章は一切含めてはいけません。" },
-            { role: "user", content: [
-              { type: "text", text: user_prompt },
-              { type: "image_url", image_url: { url: @image } },
-            ] },
-          ],
-          response_format: {
-            type: "json_schema",
-            json_schema: {
-              name: "weed_identification",
-              strict: true,
-              schema: {
-                type: "object",
-                properties: {
-                  weed_name: {
-                    type: "string",
-                    enum: weeds_enum,
-                  },
-                },
-                required: ["weed_name"],
-                additionalProperties: false,
-              },
-            },
-          },
-        },
-      )
+      content
     rescue Faraday::TooManyRequestsError => e
       Rails.logger.warn("OpenAI APIのレート制限を超えました: #{e.message}")
       raise Diag::Errors::RateLimitExceeded, e.message
@@ -78,41 +32,63 @@ class Diag::Ai::WeedIdentificationService
       raise Diag::Errors::OpenAiCallFailed, "#{e.class}: #{e.message}"
     end
 
-    # Rails.logger.debug("OpenAIレスポンス全体: #{response.inspect}")
+    def openai_client
+      @openai_client ||= OpenAI::Client.new(
+        access_token: ENV["CHATGPT_API_KEY"],
+      )
+    end
 
-    data_str = response.dig("choices", 0, "message", "content")
-    Rails.logger.debug("GPTの生データ: #{data_str}")
-    raise StandardError, "OpenAIからのレスポンスが空です" unless data_str
+    def build_params(prompt, weeds_enum)
+      {
+        model: "gpt-4o",
+        messages: build_messages(prompt),
+        response_format: Diag::Ai::WeedPrompt.response_schema(weeds_enum),
+      }
+    end
 
-    json_start_index = data_str.index("{")
+    def build_messages(prompt)
+      [
+        {
+          role: "system",
+          content: "あなたはJSON生成AIです。必ず純粋なJSONデータのみを返してください。余計な文章は一切含めないでください。",
+        },
+        {
+          role: "user",
+          content: [
+            { type: "text", text: prompt },
+            { type: "image_url", image_url: { url: @image } },
+          ],
+        },
+      ]
+    end
 
-    raise StandardError, "OpenAIの出力が不完全です（JSONの開始が見つかりません）" unless json_start_index
+    # ---- レスポンス検証 ---------------------------------------------------------
 
-    json_string = data_str[json_start_index..]
+    def parse_content!(content)
+      data = JSON.parse(content)
+      name = data["weed_name"]
 
-    # OpenAIの出力が不完全/JSONの形式が不正
-    begin
-      data = JSON.parse(json_string)
-      unless data["weed_name"].is_a?(String) && !data["weed_name"].empty?
-        raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不完全です"
+      unless name.is_a?(String) && name.present?
+        raise Diag::Errors::InvalidResponseFormat, "weed_name が不正です"
       end
+
+      data
     rescue JSON::ParserError => e
       Rails.logger.error("[JSONパースエラー] #{e.class}: #{e.message}")
       raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #-{e.message}"
     end
 
-    data
-  end
+    # ---- 入力JSONの整形 ---------------------------------------------------------
 
-  def format_weed_list(json)
-    return "" if json.blank?
+    def weed_list_text
+      return "" if @weeds_json.blank?
 
-    JSON.parse(json).map {|w| w["name"] }.join("\n")
-  end
+      JSON.parse(@weeds_json).map {|w| w["name"] }.join("\n")
+    end
 
-  def weed_names_array(json)
-    return [] if json.blank?
+    def weed_names_array(json)
+      return [] if json.blank?
 
-    JSON.parse(json).map {|w| w["name"] }.compact.uniq
-  end
+      JSON.parse(json).map {|w| w["name"] }.compact.uniq
+    end
 end

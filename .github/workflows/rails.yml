@@ -1,0 +1,69 @@
+name: Rails CI
+
+on:
+  pull_request:
+    paths:
+      - "rails/**"
+      - ".github/workflows/rails.yml"
+
+jobs:
+  Rails:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0.32
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: myapp_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    strategy:
+      matrix:
+        ruby-version: ["3.4.4"]
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: rails
+    env:
+      DEVISE_JWT_SECRET_KEY: ee95bb031f05c79fd9c74c5597c63918fe3007b8ed9f495b25a851a297b317391905544b792fbb5bd3ece8e87b218a74561c1d13413cbb31716b6bb5c7035988
+      RAILS_ENV: test
+      BUNDLE_WITH: "development test"
+      BUNDLE_WITHOUT: ""
+      DATABASE_URL: "mysql2://root:root@127.0.0.1:3306/myapp_test?encoding=utf8mb4"
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v3
+
+      - name: Install system packages (for mysql2)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libmysqlclient-dev
+
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+          working-directory: rails
+
+      - name: Lint (RuboCop)
+        run: bundle exec rubocop --parallel
+
+      - name: DB prepare
+        run: bundle exec rails db:prepare
+
+      - name: Test (RSpec)
+        if: ${{ hashFiles('rails/spec/**/*') != '' }}
+        run: bundle exec rspec --format documentation
