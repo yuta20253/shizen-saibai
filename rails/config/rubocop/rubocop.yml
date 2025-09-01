@@ -112,6 +112,9 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 8
 
+Metrics/ParameterLists:
+  Max: 6
+
 #################### Naming ################################
 
 Naming/PredicateName:
