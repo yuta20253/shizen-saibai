@@ -65,6 +65,7 @@ class Api::V1::DiagnosesController < Api::V1::BaseController
         soil_data: soil_data,
         reason: reason,
         current_user: current_user,
+        image_file: params[:image],
       ).call
     end
 

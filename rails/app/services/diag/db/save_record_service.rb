@@ -1,5 +1,5 @@
 class Diag::Db::SaveRecordService
-  def initialize(vegetable_name:, weed_name:, soil_data:, reason:, current_user:, image_file: nil)
+  def initialize(vegetable_name:, weed_name:, soil_data:, reason:, current_user:, image_file:)
     @vegetable = Vegetable.find_by(name: vegetable_name)
     raise ActiveRecord::RecordNotFound, "野菜データ、#{vegetable_name}が見つかりません。" unless @vegetable
 
