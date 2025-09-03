@@ -36,9 +36,8 @@ class Diag::Db::SaveRecordService
         image_url: "",
         result: @reason,
       )
-      if @image_file.present?
-        @diagnosis.image.attach(@image_file)
-      end
+
+      @diagnosis.image.attach(@image_file)
     end
     { id: @diagnosis.id }
   rescue => e
