@@ -5,15 +5,13 @@ class Diag::Ai::WeedIdentificationService
   end
 
   def call
-    prompt     = Diag::Ai::WeedPrompt.build_prompt(weed_list_text)
+    prompt = Diag::Ai::WeedPrompt.build_prompt(weed_list_text)
     weeds_enum = weed_names_array(@weeds_json)
-    content    = request_openai(prompt, weeds_enum)
+    content = request_openai(prompt, weeds_enum)
     parse_content!(content)
   end
 
   private
-
-    # ---- OpenAI 呼び出し -------------------------------------------------------
 
     def request_openai(prompt, weeds_enum)
       Rails.logger.debug(prompt.to_s)
@@ -62,8 +60,6 @@ class Diag::Ai::WeedIdentificationService
       ]
     end
 
-    # ---- レスポンス検証 ---------------------------------------------------------
-
     def parse_content!(content)
       data = JSON.parse(content)
       name = data["weed_name"]
@@ -77,8 +73,6 @@ class Diag::Ai::WeedIdentificationService
       Rails.logger.error("[JSONパースエラー] #{e.class}: #{e.message}")
       raise Diag::Errors::InvalidResponseFormat, "OpenAIの出力が不正なJSON形式です: #-{e.message}"
     end
-
-    # ---- 入力JSONの整形 ---------------------------------------------------------
 
     def weed_list_text
       return "" if @weeds_json.blank?
