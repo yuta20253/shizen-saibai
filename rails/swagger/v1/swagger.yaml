@@ -10,6 +10,37 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
+  "/api/v1/password/reset/request":
+    post:
+      summary: パスワード変更メール
+      tags:
+      - PasswordResets
+      parameters: []
+      responses:
+        '200':
+          description: リセットメール送信成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ご入力のメールアドレス宛に、パスワード再設定用のリンクを送信しました。
+                required:
+                - message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
   "/api/v1/user":
     post:
       summary: ユーザーのサインアップ
@@ -140,24 +171,6 @@ paths:
                   message:
                     type: string
                     example: メールアドレスか、パスワードが不正です
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user:
-                  type: object
-                  required:
-                  - email
-                  - password
-                  properties:
-                    email:
-                      type: string
-                      example: test@example.com
-                    password:
-                      type: string
-                      example: password123
   "/api/v1/logout":
     delete:
       summary: ユーザーのログアウト
