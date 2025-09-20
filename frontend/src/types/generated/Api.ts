@@ -311,16 +311,14 @@ export class Api<
      */
     v1UserCreate: (
       data: {
-        user: {
-          /** @example "test@example.com" */
-          email: string;
-          /** @example "password123" */
-          password: string;
-          /** @example "password123" */
-          password_confirmation: string;
-          /** @example "test" */
-          name: string;
-        };
+        /** @example "test@example.com" */
+        email: string;
+        /** @example "password123" */
+        password: string;
+        /** @example "password123" */
+        password_confirmation: string;
+        /** @example "test" */
+        name: string;
       },
       params: RequestParams = {},
     ) =>
@@ -349,7 +347,7 @@ export class Api<
       >({
         path: `/api/v1/user`,
         method: "POST",
-        body: data,
+        body: { user: data },
         type: ContentType.Json,
         format: "json",
         ...params,
@@ -363,7 +361,15 @@ export class Api<
      * @summary ユーザーのログイン
      * @request POST:/api/v1/login
      */
-    v1LoginCreate: (params: RequestParams = {}) =>
+    v1LoginCreate: (
+      data: {
+        /** @example "test@example.com" */
+        email: string;
+        /** @example "password123" */
+        password: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<
         {
           /** @example 200 */
@@ -388,6 +394,8 @@ export class Api<
       >({
         path: `/api/v1/login`,
         method: "POST",
+        body: { user: data },
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
