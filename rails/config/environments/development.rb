@@ -55,7 +55,7 @@ Rails.application.configure do
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
-
+  config.active_job.queue_adapter = :async
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
@@ -68,4 +68,14 @@ Rails.application.configure do
 
   config.action_mailer.default_options = { from: "no-replay@example.com" }
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "sandbox.smtp.mailtrap.io",
+    domain: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    user_name: ENV["MAILTRAP_USERNAME"],
+    password: ENV["MAILTRAP_PASSWORD"],
+    authentication: "plain",
+    enable_starttles: true,
+   }
 end

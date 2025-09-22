@@ -247,6 +247,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags PasswordResets
+     * @name V1PasswordResetRequestCreate
+     * @summary パスワード変更メール
+     * @request POST:/api/v1/password/reset/request
+     */
+    v1PasswordResetRequestCreate: (
+      data: {
+        /**
+         * @format email
+         * @example "user@example.com"
+         */
+        email: string;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<
+        {
+          /** @example "ご入力のメールアドレス宛に、パスワード再設定用のリンクを送信しました。" */
+          message: string;
+        },
+        any
+      >({
+        path: `/api/v1/password/reset/request`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Users
      * @name V1UserCreate
      * @summary ユーザーのサインアップ

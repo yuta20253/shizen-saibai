@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       #   resources :knowledges, only: [:index, :create, :update, :destroy]
       # end
       resources :chats, only: [:create]
+
+      post "password/reset/request", to: "password_resets#create"
     end
   end
   mount Rswag::Ui::Engine => '/api-docs'
