@@ -23,11 +23,11 @@ class Api::V1::PasswordResetsController < ApplicationController
     return render_expired_token unless @user.reset_password_period_valid?
 
     if params[:password].blank? || params[:password_confirmation].blank?
-      return render json: { message: "パスワードと確認用パスワードを入力してください。" }, status: :unprocessable_entity
+      return render json: { message: "パスワードと確認用パスワードを入力してください。" }, status: :unprocessable_content
     end
 
     if params[:password] != params[:password_confirmation]
-      return render json: { message: "パスワードが一致しません。" }, status: :unprocessable_entity
+      return render json: { message: "パスワードが一致しません。" }, status: :unprocessable_content
     end
 
     if @user.update(password: params[:password])
@@ -35,7 +35,7 @@ class Api::V1::PasswordResetsController < ApplicationController
 
       render json: { message: "パスワードを更新しました。" }, status: :ok
     else
-      render json: { message: @user.errors.full_messages.join(", ") }, status: :unprocessable_entity
+      render json: { message: @user.errors.full_messages.join(", ") }, status: :unprocessable_content
     end
   end
 
