@@ -403,16 +403,14 @@ export class Api<
      */
     v1UserCreate: (
       data: {
-        user: {
-          /** @example "test@example.com" */
-          email: string;
-          /** @example "password123" */
-          password: string;
-          /** @example "password123" */
-          password_confirmation: string;
-          /** @example "test" */
-          name: string;
-        };
+        /** @example "test@example.com" */
+        email: string;
+        /** @example "password123" */
+        password: string;
+        /** @example "password123" */
+        password_confirmation: string;
+        /** @example "test" */
+        name: string;
       },
       params: RequestParams = {},
     ) =>
@@ -441,7 +439,7 @@ export class Api<
       >({
         path: `/api/v1/user`,
         method: "POST",
-        body: data,
+        body: { user: data },
         type: ContentType.Json,
         format: "json",
         ...params,
@@ -457,12 +455,10 @@ export class Api<
      */
     v1LoginCreate: (
       data: {
-        user?: {
-          /** @example "test@example.com" */
-          email: string;
-          /** @example "password123" */
-          password: string;
-        };
+        /** @example "test@example.com" */
+        email: string;
+        /** @example "password123" */
+        password: string;
       },
       params: RequestParams = {},
     ) =>
@@ -490,7 +486,7 @@ export class Api<
       >({
         path: `/api/v1/login`,
         method: "POST",
-        body: data,
+        body: { user: data },
         type: ContentType.Json,
         format: "json",
         ...params,
