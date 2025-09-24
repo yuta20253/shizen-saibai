@@ -54,7 +54,7 @@ class Api::V1::PasswordResetsController < ApplicationController
     end
 
     def password_present?
-      params[:password].present? && params[:password_confirmation]
+      params[:password].present? && params[:password_confirmation].present?
     end
 
     def passwords_match?
