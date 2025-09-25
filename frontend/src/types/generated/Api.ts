@@ -280,6 +280,98 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags EmailVerify
+     * @name V1PasswordVerifyCreate
+     * @summary トークン&メールアドレスチェック
+     * @request POST:/api/v1/password/verify
+     */
+    v1PasswordVerifyCreate: (
+      data: {
+        /**
+         * @format email
+         * @example "user@example.com"
+         */
+        email: string;
+        /** @example "abc123reset_token_here" */
+        token: string;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<
+        {
+          /** @example "トークンは有効です。" */
+          message?: string;
+        },
+        | {
+            /** @example "無効なトークンです" */
+            message?: string;
+          }
+        | {
+            /** @example "ユーザーが見つかりません。" */
+            message?: string;
+          }
+      >({
+        path: `/api/v1/password/verify`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PasswordUpdate
+     * @name V1PasswordResetPartialUpdate
+     * @summary パスワード更新
+     * @request PATCH:/api/v1/password/reset
+     */
+    v1PasswordResetPartialUpdate: (
+      data: {
+        /**
+         * @format email
+         * @example "user@example.com"
+         */
+        email: string;
+        /** @example "abc123reset_token_here" */
+        token: string;
+        /** @example "password123" */
+        password: string;
+        /** @example "password123" */
+        password_confirmation: string;
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<
+        {
+          /** @example "パスワードを更新しました。" */
+          message?: string;
+        },
+        | {
+            /** @example "無効なトークンです" */
+            message?: string;
+          }
+        | {
+            /** @example "ユーザーが見つかりません。" */
+            message?: string;
+          }
+        | {
+            /** @example "パスワードと確認用パスワードを入力してください。" */
+            message?: string;
+          }
+      >({
+        path: `/api/v1/password/reset`,
+        method: 'PATCH',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Users
      * @name V1UserCreate
      * @summary ユーザーのサインアップ

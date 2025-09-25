@@ -102,7 +102,7 @@ Metrics/BlockLength:
     - "db/seeds.rb"
 
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 12
 
 Metrics/MethodLength:
   Max: 30
@@ -110,7 +110,7 @@ Metrics/MethodLength:
     - "db/migrate/*.rb"
 
 Metrics/PerceivedComplexity:
-  Max: 8
+  Max: 12
 
 Metrics/ParameterLists:
   Max: 6

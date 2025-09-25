@@ -41,6 +41,130 @@ paths:
                   type: string
                   format: email
                   example: user@example.com
+  "/api/v1/password/verify":
+    post:
+      summary: トークン&メールアドレスチェック
+      tags:
+      - EmailVerify
+      parameters: []
+      responses:
+        '200':
+          description: 有効なトークン
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: トークンは有効です。
+        '401':
+          description: トークンが空
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 無効なトークンです
+        '404':
+          description: ユーザーが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザーが見つかりません。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - token
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                token:
+                  type: string
+                  example: abc123reset_token_here
+  "/api/v1/password/reset":
+    patch:
+      summary: パスワード更新
+      tags:
+      - PasswordUpdate
+      parameters: []
+      responses:
+        '200':
+          description: パスワードを更新成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: パスワードを更新しました。
+        '401':
+          description: 無効なトークンor期限切れ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 無効なトークンです
+        '404':
+          description: ユーザーが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザーが見つかりません。
+        '422':
+          description: パスワードが空白
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: パスワードと確認用パスワードを入力してください。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - token
+              - password
+              - password_confirmation
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                token:
+                  type: string
+                  example: abc123reset_token_here
+                password:
+                  type: string
+                  example: password123
+                password_confirmation:
+                  type: string
+                  example: password123
   "/api/v1/user":
     post:
       summary: ユーザーのサインアップ
@@ -171,6 +295,24 @@ paths:
                   message:
                     type: string
                     example: メールアドレスか、パスワードが不正です
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  required:
+                  - email
+                  - password
+                  properties:
+                    email:
+                      type: string
+                      example: test@example.com
+                    password:
+                      type: string
+                      example: password123
   "/api/v1/logout":
     delete:
       summary: ユーザーのログアウト

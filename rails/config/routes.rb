@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       resources :chats, only: [:create]
 
       post "password/reset/request", to: "password_resets#create"
+      patch "password/reset", to: "password_resets#update"
+      post "password/verify", to: "password_resets#verify"
     end
   end
   mount Rswag::Ui::Engine => '/api-docs'
