@@ -39,9 +39,8 @@ RUN bundle lock --add-platform x86_64-linux && \
 # 4) アプリケーションコードのコピー
 COPY . .
 
-# 5) bootsnap & assets precompile
-RUN bundle exec bootsnap precompile app/ lib/ && \
-    bundle exec rake assets:precompile
+# 5) bootsnap
+RUN bundle exec bootsnap precompile app/ lib/
 
 # ---------- final stage ----------
 FROM base
