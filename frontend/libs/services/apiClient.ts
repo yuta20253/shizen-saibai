@@ -1,4 +1,4 @@
-import { Api } from '@/src/types/generated/Api';
+import { Api } from '@/types/generated/Api';
 
 export const apiClient = new Api({
   baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,

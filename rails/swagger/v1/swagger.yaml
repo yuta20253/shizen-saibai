@@ -4,6 +4,26 @@ info:
   title: API V1
   version: v1
 components:
+  schemas:
+    User:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: ユーザー太朗
+        email:
+          type: string
+          example: user@example.com
+        role:
+          type: string
+          example: user
   securitySchemes:
     bearerAuth:
       type: http
@@ -340,6 +360,28 @@ paths:
                     example: ログアウトに成功しました
         '401':
           description: 有効期限切れトークン
+  "/api/v1/profile":
+    get:
+      summary: プロフィール取得
+      tags:
+      - Profile
+      description: ログイン中のユーザー情報（プロフィール）を取得します。
+      operationId: getProfile
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        description: Bearer token
+      responses:
+        '200':
+          description: プロフィールの取得成功
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+        '401':
+          description: 未認証
 servers:
 - url: http://{defaultHost}
   variables:
