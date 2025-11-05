@@ -10,7 +10,7 @@
     "format:check": "prettier '**/*.{js,ts,tsx,json}' --check",
     "lint": "eslint \"**/*.{js,ts,tsx}\" --max-warnings=0",
     "lint:fix": "eslint **/*.{js,ts,tsx} --fix",
-    "generate-types": "ts-node --loader ts-node/esm scripts/generateTypes.ts"
+    "generate-types": "node ./scripts/ApiTypeGenerator.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
