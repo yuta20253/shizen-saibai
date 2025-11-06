@@ -45,12 +45,12 @@ RSpec.configure do |config|
             type: :object,
             required: %w[id name email],
             properties: {
-              id: { type: :integer, example: 1 }, 
-              name: { type: :string, example: 'ユーザー太朗' }, 
-              email: { type: :string, example: 'user@example.com' }, 
-              role: { type: :string, example: 'user' }
-            }
-          }
+              id: { type: :integer, example: 1 },
+              name: { type: :string, example: "ユーザー太朗" },
+              email: { type: :string, example: "user@example.com" },
+              role: { type: :string, example: "user" },
+            },
+          },
         },
         securitySchemes: {
           bearerAuth: {
