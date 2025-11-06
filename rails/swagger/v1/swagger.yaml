@@ -22,8 +22,11 @@ components:
           type: string
           example: user@example.com
         role:
-          type: string
-          example: user
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: 0=admin, 1=user
   securitySchemes:
     bearerAuth:
       type: http

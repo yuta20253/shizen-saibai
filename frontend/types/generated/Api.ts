@@ -17,8 +17,8 @@ export interface User {
   name: string;
   /** @example "user@example.com" */
   email: string;
-  /** @example "user" */
-  role?: string;
+  /** 0=admin, 1=user */
+  role?: 0 | 1;
 }
 
 export type QueryParamsType = Record<string | number, any>;
