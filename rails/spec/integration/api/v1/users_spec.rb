@@ -21,7 +21,14 @@ RSpec.describe 'Api::V1::Users (Profile)', type: :request, swagger_doc: 'v1/swag
         let(:token) { User::LoginService.new(email: user.email, password: 'password123').call[:token] }
         let(:Authorization) { "Bearer #{token}" }
 
-        run_test!
+        run_test! do |response|
+          body = JSON.parse(response.body)
+          
+          expect(body["id"]).to eq(user.id)
+          expect(body["name"]).to eq(user.name)
+          expect(body["email"]).to eq(user.email)
+          expect(body["role"]).to be_a(Integer)
+        end
       end
 
       response '401', '未認証' do
