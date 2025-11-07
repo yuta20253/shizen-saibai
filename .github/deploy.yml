@@ -1,0 +1,59 @@
+name: Deploy to Production Server
+
+on:
+  push:
+    branches:
+      - main
+      - create-production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ リポジトリを取得
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Docker Hub にログイン
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: yuta2025
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      # 3️⃣ frontend イメージをビルド & Push
+      - name: Build and Push frontend image
+        run: |
+          docker build -f frontend/Dockerfile.prod \
+            --build-arg NEXT_PUBLIC_BACKEND_URL=http://163.43.209.197/api \
+            -t yuta2025/shizen-frontend:latest \
+            ./frontend
+          docker push yuta2025/shizen-frontend:latest
+
+      # 4️⃣ rails イメージをビルド & Push
+      - name: Build and Push rails image
+        run: |
+          docker build -f rails/Dockerfile.prod \
+            -t yuta2025/shizen-rails:latest \
+            ./rails
+          docker push yuta2025/shizen-rails:latest
+
+      # 5️⃣ サーバーに SSH 接続してデプロイ実行
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 163.43.209.197
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/shizen-saibai
+
+            # 最新の変更を取得（docker-compose.yml なども更新される想定）
+            git fetch origin main
+            git reset --hard origin/main
+
+            # 最新のイメージをプルして再起動
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d --remove-orphans
