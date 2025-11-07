@@ -385,6 +385,76 @@ paths:
                 "$ref": "#/components/schemas/User"
         '401':
           description: 未認証
+    patch:
+      summary: プロフィール更新
+      tags:
+      - Profile
+      description: current_password を含めてプロフィールを更新する
+      operationId: updateProfile
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        description: Bearer token
+      responses:
+        '200':
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - message
+                - user
+                properties:
+                  message:
+                    type: string
+                    example: プロフィールを更新しました
+                  user:
+                    "$ref": "#/components/schemas/User"
+        '422':
+          description: メールアドレスの形式が異なる時にエラーになる
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - errors
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          description: 未認証
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: 新しいユーザー名
+                    email:
+                      type: string
+                      format: email
+                      example: new@example.com
+                    password:
+                      type: string
+                      example: new_password_123
+                    password_confirmation:
+                      type: string
+                      example: new_password_123
+                    current_password:
+                      type: string
+                      example: current_password_123
 servers:
 - url: http://{defaultHost}
   variables:

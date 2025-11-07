@@ -522,5 +522,51 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
+
+    /**
+     * @description current_password を含めてプロフィールを更新する
+     *
+     * @tags Profile
+     * @name UpdateProfile
+     * @summary プロフィール更新
+     * @request PATCH:/api/v1/profile
+     */
+    updateProfile: (
+      data: {
+        user: {
+          /** @example "新しいユーザー名" */
+          name?: string;
+          /**
+           * @format email
+           * @example "new@example.com"
+           */
+          email?: string;
+          /** @example "new_password_123" */
+          password?: string;
+          /** @example "new_password_123" */
+          password_confirmation?: string;
+          /** @example "current_password_123" */
+          current_password?: string;
+        };
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<
+        {
+          /** @example "プロフィールを更新しました" */
+          message: string;
+          user: User;
+        },
+        void | {
+          errors: string[];
+        }
+      >({
+        path: `/api/v1/profile`,
+        method: 'PATCH',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
   };
 }
