@@ -89,7 +89,7 @@ RSpec.describe 'Api::V1::Users (Profile)', type: :request, swagger_doc: 'v1/swag
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['message']).to eq('プロフィールを更新しました')
+          expect(body['message']).to eq('個人情報を更新しました！')
           expect(body['user']).to include(
             'id' => user.id,
             'name' => '新しい名前',
