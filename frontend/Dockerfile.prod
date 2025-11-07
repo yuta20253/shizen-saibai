@@ -26,6 +26,9 @@ COPY next-env.d.ts ./
 ARG NEXT_PUBLIC_BACKEND_URL
 ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
 
+# Next.js に確実に渡すため明示的にecho
+RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
+
 # エイリアス解決用
 ENV NODE_PATH=/app
 
