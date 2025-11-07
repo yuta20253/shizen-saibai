@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     config.resolve.alias['@context'] = path.resolve(__dirname, 'context');
     return config;
   },
+  env: {
+    NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  },
 };
 
 export default nextConfig;
