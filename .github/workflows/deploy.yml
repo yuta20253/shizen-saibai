@@ -50,8 +50,8 @@ jobs:
             cd ~/shizen-saibai
 
             # 最新の変更を取得（docker-compose.yml なども更新される想定）
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch origin $GITHUB_REF_NAME
+            git reset --hard origin/$GITHUB_REF_NAME
 
             # 最新のイメージをプルして再起動
             docker compose -f docker-compose.prod.yml pull
