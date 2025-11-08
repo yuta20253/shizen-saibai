@@ -2,13 +2,15 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+ARG NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+
 # package.json だけ先にコピーして依存インストール
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --omit=dev
 
-# next.config.ts を先にコピー
+# next.config.ts をコピー
 COPY next.config.prod.ts ./next.config.ts
-# 本番用 tsconfig をコピー
 COPY tsconfig.prod.json ./tsconfig.json
 
 # ソースコードをコピー
@@ -23,20 +25,16 @@ COPY src ./src
 COPY types ./types
 COPY next-env.d.ts ./
 
-# ホストの .env.production をそのままコピー
-COPY frontend/.env.production ./
+# .env.production をビルド時に作成
+RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
 
-# エイリアス解決用
 ENV NODE_PATH=/app
 
-# 本番ビルド
 RUN npm run build
 
 # ---------- Production Stage ----------
 FROM node:20-alpine
 WORKDIR /app
-
 COPY --from=builder /app ./
-
 EXPOSE 3000
 CMD ["npm", "start"]
