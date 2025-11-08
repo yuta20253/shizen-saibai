@@ -2,12 +2,9 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-ARG NEXT_PUBLIC_BACKEND_URL
-ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
-
 # package.json だけ先にコピーして依存インストール
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 # next.config.ts を先にコピー
 COPY next.config.prod.ts ./next.config.ts
@@ -26,8 +23,8 @@ COPY src ./src
 COPY types ./types
 COPY next-env.d.ts ./
 
-# Next.js に確実に渡すため明示的にecho
-RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
+# ホストの .env.production をそのままコピー
+COPY .env.production ./
 
 # エイリアス解決用
 ENV NODE_PATH=/app
