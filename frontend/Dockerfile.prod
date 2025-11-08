@@ -24,7 +24,7 @@ COPY types ./types
 COPY next-env.d.ts ./
 
 # ホストの .env.production をそのままコピー
-COPY .env.production ./
+COPY frontend/.env.production ./
 
 # エイリアス解決用
 ENV NODE_PATH=/app
