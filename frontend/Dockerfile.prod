@@ -3,8 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 ARG NEXT_PUBLIC_BACKEND_URL
-# .env.production をビルド時に作成
-RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
 
 # package.json だけ先にコピーして依存インストール
 COPY package*.json ./
@@ -26,9 +25,14 @@ COPY src ./src
 COPY types ./types
 COPY next-env.d.ts ./
 
+# .env.production 作成（オプション、念のため）
+RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
+
 ENV NODE_PATH=/app
 
-RUN npm run build
+# ← ここがポイント
+# build 時に NEXT_PUBLIC_BACKEND_URL が環境変数として反映される
+RUN export NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL && npm run build
 
 # ---------- Production Stage ----------
 FROM node:20-alpine
