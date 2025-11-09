@@ -26,7 +26,7 @@ jobs:
       - name: Build and Push frontend image
         run: |
           docker build --no-cache -f frontend/Dockerfile.prod \
-            --build-arg NEXT_PUBLIC_BACKEND_URL=http://nginx/api \
+            --build-arg NEXT_PUBLIC_BACKEND_URL=http://163.43.209.197/api \
             -t yuta2025/shizen-frontend:latest \
             ./frontend
           docker push yuta2025/shizen-frontend:latest
