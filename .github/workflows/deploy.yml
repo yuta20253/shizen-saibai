@@ -59,20 +59,20 @@ jobs:
 
             # GitHub Secrets から .env を生成
             cat << 'EOF' > .env
-RAILS_ENV=production
-CHATGPT_API_KEY=${{ secrets.CHATGPT_API_KEY }}
-SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
-DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
-DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
-DATABASE_HOST=${{ secrets.DATABASE_HOST }}
-DATABASE_PORT=${{ secrets.DATABASE_PORT }}
-SAKURA_ACCESS_KEY=${{ secrets.SAKURA_ACCESS_KEY }}
-SAKURA_SECRET_KEY=${{ secrets.SAKURA_SECRET_KEY }}
-SAKURA_BUCKET=${{ secrets.SAKURA_BUCKET }}
-MAILTRAP_USERNAME=${{ secrets.MAILTRAP_USERNAME }}
-MAILTRAP_PASSWORD=${{ secrets.MAILTRAP_PASSWORD }}
-FRONTEND_URL=${{ secrets.FRONTEND_URL }}
-EOF
+            RAILS_ENV=production
+            CHATGPT_API_KEY=${{ secrets.CHATGPT_API_KEY }}
+            SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
+            DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
+            DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+            DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+            DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+            SAKURA_ACCESS_KEY=${{ secrets.SAKURA_ACCESS_KEY }}
+            SAKURA_SECRET_KEY=${{ secrets.SAKURA_SECRET_KEY }}
+            SAKURA_BUCKET=${{ secrets.SAKURA_BUCKET }}
+            MAILTRAP_USERNAME=${{ secrets.MAILTRAP_USERNAME }}
+            MAILTRAP_PASSWORD=${{ secrets.MAILTRAP_PASSWORD }}
+            FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+            EOF
 
             # Docker Compose で更新
             docker compose -f docker-compose.prod.yml pull
