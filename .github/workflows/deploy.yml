@@ -57,23 +57,23 @@ jobs:
           script: |
             cd ~/shizen-saibai
 
-            export DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
-            export DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
-            export DATABASE_HOST=${{ secrets.DATABASE_HOST }}
-            export DATABASE_PORT=${{ secrets.DATABASE_PORT }}
-            export CHATGPT_API_KEY=${{ secrets.CHATGPT_API_KEY }}
-            export DEVISE_JWT_SECRET_KEY=${{ secrets.DEVISE_JWT_SECRET_KEY }}
-            export SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
-            export FRONTEND_URL=${{ secrets.FRONTEND_URL }}
-            export SAKURA_ACCESS_KEY=${{ secrets.SAKURA_ACCESS_KEY }}
-            export SAKURA_SECRET_KEY=${{ secrets.SAKURA_SECRET_KEY }}
-            export SAKURA_BUCKET=${{ secrets.SAKURA_BUCKET }}
-            export MAILTRAP_USERNAME=${{ secrets.MAILTRAP_USERNAME }}
-            export MAILTRAP_PASSWORD=${{ secrets.MAILTRAP_PASSWORD }}
-            export RAILS_ENV=production
-            export NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
-
-            # 最新のイメージをプルして再起動
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml down
-            docker compose -f docker-compose.prod.yml up -d --remove-orphans
+
+            docker compose -f docker-compose.prod.yml up -d \
+              --remove-orphans \
+              -e DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} \
+              -e DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
+              -e DATABASE_HOST=${{ secrets.DATABASE_HOST }} \
+              -e DATABASE_PORT=${{ secrets.DATABASE_PORT }} \
+              -e CHATGPT_API_KEY=${{ secrets.CHATGPT_API_KEY }} \
+              -e DEVISE_JWT_SECRET_KEY=${{ secrets.DEVISE_JWT_SECRET_KEY }} \
+              -e SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
+              -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} \
+              -e SAKURA_ACCESS_KEY=${{ secrets.SAKURA_ACCESS_KEY }} \
+              -e SAKURA_SECRET_KEY=${{ secrets.SAKURA_SECRET_KEY }} \
+              -e SAKURA_BUCKET=${{ secrets.SAKURA_BUCKET }} \
+              -e MAILTRAP_USERNAME=${{ secrets.MAILTRAP_USERNAME }} \
+              -e MAILTRAP_PASSWORD=${{ secrets.MAILTRAP_PASSWORD }} \
+              -e RAILS_ENV=production \
+              -e NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
