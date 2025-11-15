@@ -61,7 +61,7 @@ jobs:
             cd ~/shizen-saibai
 
             # GitHub Secrets から .env を生成
-            cat << EOF > rails/.env
+            cat << 'EOF' > rails/.env
 RAILS_ENV=production
 CHATGPT_API_KEY=${{ secrets.CHATGPT_API_KEY }}
 SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
