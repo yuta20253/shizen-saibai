@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   nginx:
-    build: ./nginx
+    image: yuta2025/shizen-nginx:latest
     container_name: nginx
     ports:
       - "80:80"
@@ -14,8 +14,8 @@ services:
     image: yuta2025/shizen-frontend:latest
     container_name: frontend
     environment:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_BACKEND_URL=http://163.43.209.197:5000
+      - NODE_ENV: production
+      - NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
     depends_on:
       - rails
 
@@ -28,10 +28,21 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    env_file:
-      - ./rails/.env
-    tty: true
-    stdin_open: true
+    environment:
+      DEVISE_JWT_SECRET_KEY: ${DEVISE_JWT_SECRET_KEY}
+      CHATGPT_API_KEY: ${CHATGPT_API_KEY}
+      RAILS_ENV: ${RAILS_ENV}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      SAKURA_ACCESS_KEY: ${SAKURA_ACCESS_KEY}
+      SAKURA_SECRET_KEY: ${SAKURA_SECRET_KEY}
+      SAKURA_BUCKET: ${SAKURA_BUCKET}
+      MAILTRAP_USERNAME: ${MAILTRAP_USERNAME}
+      MAILTRAP_PASSWORD: ${MAILTRAP_PASSWORD}
+      FRONTEND_URL: ${FRONTEND_URL}
 
   db:
     image: mysql:8.0.32
