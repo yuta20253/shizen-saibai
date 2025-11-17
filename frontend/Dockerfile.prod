@@ -3,7 +3,9 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 ARG NEXT_PUBLIC_BACKEND_URL
+ARG NEXT_PUBLIC_FRONT_BASE_URL
 ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+ENV NEXT_PUBLIC_FRONT_BASE_URL=${NEXT_PUBLIC_FRONT_BASE_URL}
 
 # package.json だけ先にコピーして依存インストール
 COPY package*.json ./
@@ -27,6 +29,7 @@ COPY next-env.d.ts ./
 
 # .env.production 作成（オプション、念のため）
 RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
+RUN echo "NEXT_PUBLIC_FRONT_BASE_URL=$NEXT_PUBLIC_FRONT_BASE_URL" > .env.production
 
 ENV NODE_PATH=/app
 

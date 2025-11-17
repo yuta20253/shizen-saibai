@@ -31,6 +31,7 @@ jobs:
         run: |
           docker build --no-cache -f frontend/Dockerfile.prod \
             --build-arg NEXT_PUBLIC_BACKEND_URL=http://163.43.209.197:5000 \
+            --build-arg NEXT_PUBLIC_FRONT_BASE_URL=http://163.43.209.197 \
             -t yuta2025/shizen-frontend:latest \
             ./frontend
           docker push yuta2025/shizen-frontend:latest
