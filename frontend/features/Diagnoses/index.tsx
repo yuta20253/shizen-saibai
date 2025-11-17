@@ -18,7 +18,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
         setIsLoading(true);
 
         const token = localStorage.getItem('token');
-        const url = 'http://localhost:5000/api/v1/histories';
+        const url = process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/histories';
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
