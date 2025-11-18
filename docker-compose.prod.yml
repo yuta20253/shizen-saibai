@@ -15,7 +15,8 @@ services:
     container_name: frontend
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_BACKEND_URL: http://163.43.209.197:5000
+      NEXT_PUBLIC_BACKEND_URL: http://zasso-lens.com/api
+      NEXT_PUBLIC_FRONT_BASE_URL: http://zasso-lens.com
     depends_on:
       - rails
 
