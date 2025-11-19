@@ -1,7 +1,9 @@
 name: Deploy to Production Server
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build Frontend Image", "Build Rails Image"]
+    types: [completed]
 
 jobs:
   deploy_to_server:
