@@ -1,19 +1,13 @@
 name: Deploy to Production Server
 
 on:
-  # workflow_dispatch:
-  push:
-    branches:
-      - create-production
+  workflow_dispatch:
 
 jobs:
   deploy_to_server:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Upload docker-compose.prod.yml to server
         uses: appleboy/scp-action@v0.1.7
         with:
