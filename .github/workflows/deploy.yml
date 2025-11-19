@@ -1,9 +1,10 @@
 name: Deploy to Production Server
 
 on:
-  workflow_run:
-    workflows: ["Build Frontend Image", "Build Rails Image"]
-    types: [completed]
+  push:
+    branches:
+      - main
+      - create-production
 
 jobs:
   deploy_to_server:
