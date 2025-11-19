@@ -3,7 +3,6 @@ name: Deploy to Production Server
 on:
   push:
     branches:
-      - main
       - create-production
 
 jobs:
@@ -11,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Upload docker-compose.prod.yml to server
         uses: appleboy/scp-action@v0.1.7
         with:
