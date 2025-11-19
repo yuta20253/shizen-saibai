@@ -1,7 +1,10 @@
 name: Deploy to Production Server
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
+  push:
+    branches:
+      - create-production
 
 jobs:
   deploy_to_server:
