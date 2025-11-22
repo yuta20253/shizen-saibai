@@ -1,11 +1,9 @@
-import { Inter } from 'next/font/google';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme/theme';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AuthProvider } from '@/context/AuthContext';
-
-const inter = Inter({ subsets: ['latin'] });
+import { inter } from './fonts';
 
 export const metadata = {
   title: 'My App',
