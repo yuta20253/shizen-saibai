@@ -39,10 +39,7 @@ export const Header = (): JSX.Element => {
                 style={{
                   fontSize: '1.35rem',
                   letterSpacing: '0.25em',
-                  transform: 'translateY(1px)',
-                  color: '#FDFCF5',
                   textShadow: '0 0 6px rgba(0, 0, 0, 0.25)',
-                  whiteSpace: 'nowrap',
                 }}
               >
                 雑草レンズ
