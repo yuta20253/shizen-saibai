@@ -11,6 +11,7 @@ services:
       - rails
     volumes:
       - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/conf:/etc/letsencrypt:ro
 
   certbot:
     image: certbot/certbot
