@@ -10,6 +10,34 @@ services:
       - frontend
       - rails
 
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    command: >
+      certonly --webroot
+      -w /var/www/certbot
+      -d zasso-lens.com
+      -d www.zasso-lens.com
+      --email zasso.lens@gmail.com
+      --agree-tos
+      --no-eff-email
+    depends_on:
+      - nginx
+
+  certbot-renew:
+    image: certbot/certbot
+    container_name: certbot-renew
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    entrypoint: >
+      sh -c "certbot renew --webroot -w /var/www/certbot"
+    depends_on:
+      - nginx
+
   frontend:
     image: yuta2025/shizen-frontend:latest
     container_name: frontend
