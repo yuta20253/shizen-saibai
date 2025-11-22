@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { JSX } from 'react';
 import { logoFont } from '@/app/fonts';
 
-export const Header = (): React.JSX.Element => {
+export const Header = (): JSX.Element => {
   const { user } = useAuthState();
   console.log(user);
   const pathName = usePathname();
