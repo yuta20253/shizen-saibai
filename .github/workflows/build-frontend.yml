@@ -23,8 +23,8 @@ jobs:
       - name: Build and Push frontend image
         run: |
           docker build --no-cache -f frontend/Dockerfile.prod \
-            --build-arg NEXT_PUBLIC_BACKEND_URL=http://zasso-lens.com \
-            --build-arg NEXT_PUBLIC_FRONT_BASE_URL=http://zasso-lens.com \
+            --build-arg NEXT_PUBLIC_BACKEND_URL=https://zasso-lens.com \
+            --build-arg NEXT_PUBLIC_FRONT_BASE_URL=https://zasso-lens.com \
             -t yuta2025/shizen-frontend:latest \
             ./frontend
           docker push yuta2025/shizen-frontend:latest
