@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000", "http://zasso-lens.com", "http://www.zasso-lens.com"
+    origins "http://localhost:3000", "https://zasso-lens.com", "https://www.zasso-lens.com"
 
     resource "*",
       headers: :any,
