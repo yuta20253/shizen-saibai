@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-      - create-production
+    paths:
+      - "frontend/**"
 
 jobs:
   build_frontend:

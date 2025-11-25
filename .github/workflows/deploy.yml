@@ -3,7 +3,13 @@ name: Deploy to Production Server
 on:
   push:
     branches:
-      - create-production
+      - main
+    paths:
+      - "rails/**"
+      - "nginx/**"
+      - "frontend/**"
+      - ".github/workflows/deploy.yml"
+      - "docker-compose.prod.yml"
 
 jobs:
   deploy_to_server:
