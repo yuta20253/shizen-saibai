@@ -13,13 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload docker-compose.prod.yml to server
+      - name: Create .env file for docker-compose
+        run: |
+          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
+          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" > .env
+
+      - name: Upload docker-compose.prod.yml and .env to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 163.43.209.197
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./docker-compose.prod.yml"
+          source: |
+            ./docker-compose.prod.yml
+            .env
           target: "~/shizen-saibai/"
 
       - name: Deploy via SSH
