@@ -27,10 +27,6 @@ COPY src ./src
 COPY types ./types
 COPY next-env.d.ts ./
 
-# .env.production 作成（オプション、念のため）
-RUN echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" > .env.production
-RUN echo "NEXT_PUBLIC_FRONT_BASE_URL=$NEXT_PUBLIC_FRONT_BASE_URL" > .env.production
-
 ENV NODE_PATH=/app
 
 # ← ここがポイント
