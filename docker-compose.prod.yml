@@ -48,8 +48,6 @@ services:
     container_name: frontend
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_BACKEND_URL: http://zasso-lens.com
-      NEXT_PUBLIC_FRONT_BASE_URL: http://zasso-lens.com
     depends_on:
       - rails
 
