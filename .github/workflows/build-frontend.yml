@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "frontend/**"
+      - "docker-compose.prd.yml"
 
 jobs:
   build_frontend:
