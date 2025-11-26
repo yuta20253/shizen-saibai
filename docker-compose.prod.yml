@@ -54,6 +54,11 @@ services:
   rails:
     image: yuta2025/shizen-rails:latest
     container_name: rails
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
     command: bash -c "./bin/rails db:create db:migrate && ./bin/rails s -b 0.0.0.0 -p 3000"
     ports:
       - "5000:3000"
@@ -68,6 +73,8 @@ services:
     container_name: mysql
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       TZ: Asia/Tokyo
     volumes:
       - mysql_data:/var/lib/mysql
