@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "nginx/**"
+      - "docker-compose.prd.yml"
 
 jobs:
   deploy_to_server:
