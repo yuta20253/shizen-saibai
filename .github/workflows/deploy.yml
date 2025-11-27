@@ -16,7 +16,7 @@ jobs:
       - name: Create .env file for docker-compose
         run: |
           echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
-          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" > .env
+          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
 
       - name: Upload docker-compose.prod.yml and .env to server
         uses: appleboy/scp-action@v0.1.7
