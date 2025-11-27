@@ -15,7 +15,7 @@ export const Diagnosis = ({ id }: { id: string }): React.JSX.Element => {
     const resDiagnosis = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = `http://localhost:5000/api/v1/histories/${id}`;
+        const url = process.env.NEXT_PUBLIC_BACKEND_URL + `/api/v1/histories/${id}`;
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,

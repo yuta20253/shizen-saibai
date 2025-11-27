@@ -50,7 +50,7 @@ export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref)
         .post(url, formData, { headers })
         .then(res => {
           console.log(res.data);
-          router.push(`http://localhost:3000/mypage/diagnoses/${res.data.id}`);
+          router.push(`/mypage/diagnoses/${res.data.id}`);
         })
         .catch(err => console.log(err));
       setAlertMessage('アップロード成功');

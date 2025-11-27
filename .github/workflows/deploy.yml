@@ -1,0 +1,43 @@
+name: Deploy to Production Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_to_server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create .env file for docker-compose
+        run: |
+          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
+          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
+
+      - name: Upload docker-compose.prod.yml and .env to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 163.43.209.197
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: |
+            ./docker-compose.prod.yml
+            .env
+          target: "~/shizen-saibai/"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 163.43.209.197
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/shizen-saibai
+
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d --remove-orphans

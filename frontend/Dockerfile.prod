@@ -1,0 +1,39 @@
+# ---------- Build Stage ----------
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+ARG NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+
+# package.json だけ先にコピーして依存インストール
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# next.config.ts をコピー
+COPY next.config.prod.ts ./next.config.ts
+COPY tsconfig.prod.json ./tsconfig.json
+
+# ソースコードをコピー
+COPY app ./app
+COPY components ./components
+COPY features ./features
+COPY context ./context
+COPY libs ./libs
+COPY public ./public
+COPY scripts ./scripts
+COPY src ./src
+COPY types ./types
+COPY next-env.d.ts ./
+
+ENV NODE_PATH=/app
+
+# ← ここがポイント
+# build 時に NEXT_PUBLIC_BACKEND_URL が環境変数として反映される
+RUN npm run build
+
+# ---------- Production Stage ----------
+FROM node:20-alpine
+WORKDIR /app
+COPY --from=builder /app ./
+EXPOSE 3000
+CMD ["npm", "start"]

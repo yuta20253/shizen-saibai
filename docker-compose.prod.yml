@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: yuta2025/shizen-nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - frontend
+      - rails
+    volumes:
+      - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    command: >
+      certonly --webroot
+      -w /var/www/certbot
+      -d zasso-lens.com
+      -d www.zasso-lens.com
+      --email zasso.lens@gmail.com
+      --agree-tos
+      --no-eff-email
+    depends_on:
+      - nginx
+
+  certbot-renew:
+    image: certbot/certbot
+    container_name: certbot-renew
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    entrypoint: >
+      sh -c "certbot renew --webroot -w /var/www/certbot"
+    depends_on:
+      - nginx
+
+  frontend:
+    image: yuta2025/shizen-frontend:latest
+    container_name: frontend
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - rails
+
+  rails:
+    image: yuta2025/shizen-rails:latest
+    container_name: rails
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+    command: bash -c "./bin/rails db:create db:migrate && ./bin/rails s -b 0.0.0.0 -p 3000"
+    ports:
+      - "5000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./rails/.env
+
+  db:
+    image: mysql:8.0.32
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TZ: Asia/Tokyo
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  mysql_data:

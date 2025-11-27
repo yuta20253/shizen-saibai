@@ -12,7 +12,7 @@ export type UpdateProfilePayload = {
 
 export const getCurrentUser = async (token: string) => {
   try {
-    const res = await axios.get('http://localhost:5000/api/v1/profile', {
+    const res = await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/profile', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,7 +25,7 @@ export const getCurrentUser = async (token: string) => {
 };
 
 export const updateProfile = async (patch: UpdateProfilePayload, token: string) => {
-  const res = await axios.patch('http://localhost:5000/api/v1/profile', patch, {
+  const res = await axios.patch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/profile', patch, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -34,7 +34,7 @@ export const updateProfile = async (patch: UpdateProfilePayload, token: string) 
 };
 
 export const deleteAccount = async (token: string) => {
-  axios.delete('http://localhost:5000/api/v1/user', {
+  axios.delete(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/user', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
