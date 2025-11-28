@@ -37,7 +37,7 @@ export const Header = (): JSX.Element => {
               <span
                 className={logoFont.className}
                 style={{
-                  fontSize: '1.35rem',
+                  fontSize: '1.2rem',
                   letterSpacing: '0.25em',
                   textShadow: '0 0 6px rgba(0, 0, 0, 0.25)',
                 }}
