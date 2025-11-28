@@ -47,8 +47,10 @@ export const loginAuth = async ({
 }): Promise<{ token: string; user: { id: number; name: string; email: string } }> => {
   try {
     const response = await apiClient.api.v1LoginCreate({
-      email,
-      password,
+      user: {
+        email,
+        password,
+      },
     });
 
     const authHeader = response.headers.get?.('Authorization');
@@ -77,10 +79,12 @@ export const signUpAuth = async ({
 }): Promise<{ token: string; user: { id: number; name: string; email: string } }> => {
   try {
     const response = await apiClient.api.v1UserCreate({
-      email,
-      password,
-      password_confirmation,
-      name,
+      user: {
+        email,
+        password,
+        password_confirmation,
+        name,
+      },
     });
 
     const authHeader = response.headers.get?.('Authorization');

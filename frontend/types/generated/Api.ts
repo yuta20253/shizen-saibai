@@ -10,6 +10,17 @@
  * ---------------------------------------------------------------
  */
 
+export interface User {
+  /** @example 1 */
+  id: number;
+  /** @example "ユーザー太朗" */
+  name: string;
+  /** @example "user@example.com" */
+  email: string;
+  /** 0=admin, 1=user */
+  role?: 0 | 1;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, 'body' | 'bodyUsed'>;
 
@@ -379,14 +390,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     v1UserCreate: (
       data: {
-        /** @example "test@example.com" */
-        email: string;
-        /** @example "password123" */
-        password: string;
-        /** @example "password123" */
-        password_confirmation: string;
-        /** @example "test" */
-        name: string;
+        user: {
+          /** @example "test@example.com" */
+          email: string;
+          /** @example "password123" */
+          password: string;
+          /** @example "password123" */
+          password_confirmation: string;
+          /** @example "test" */
+          name: string;
+        };
       },
       params: RequestParams = {}
     ) =>
@@ -415,7 +428,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       >({
         path: `/api/v1/user`,
         method: 'POST',
-        body: { user: data },
+        body: data,
         type: ContentType.Json,
         format: 'json',
         ...params,
@@ -431,10 +444,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     v1LoginCreate: (
       data: {
-        /** @example "test@example.com" */
-        email: string;
-        /** @example "password123" */
-        password: string;
+        user?: {
+          /** @example "test@example.com" */
+          email: string;
+          /** @example "password123" */
+          password: string;
+        };
       },
       params: RequestParams = {}
     ) =>
@@ -462,7 +477,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       >({
         path: `/api/v1/login`,
         method: 'POST',
-        body: { user: data },
+        body: data,
         type: ContentType.Json,
         format: 'json',
         ...params,
@@ -488,6 +503,68 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       >({
         path: `/api/v1/logout`,
         method: 'DELETE',
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * @description ログイン中のユーザー情報（プロフィール）を取得します。
+     *
+     * @tags Profile
+     * @name GetProfile
+     * @summary プロフィール取得
+     * @request GET:/api/v1/profile
+     */
+    getProfile: (params: RequestParams = {}) =>
+      this.request<User, void>({
+        path: `/api/v1/profile`,
+        method: 'GET',
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * @description current_password を含めてプロフィールを更新する
+     *
+     * @tags Profile
+     * @name UpdateProfile
+     * @summary プロフィール更新
+     * @request PATCH:/api/v1/profile
+     */
+    updateProfile: (
+      data: {
+        user: {
+          /** @example "新しいユーザー名" */
+          name?: string;
+          /**
+           * @format email
+           * @example "new@example.com"
+           */
+          email?: string;
+          /** @example "new_password_123" */
+          password?: string;
+          /** @example "new_password_123" */
+          password_confirmation?: string;
+          /** @example "current_password_123" */
+          current_password?: string;
+        };
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<
+        {
+          /** @example "プロフィールを更新しました" */
+          message: string;
+          user: User;
+        },
+        void | {
+          errors: string[];
+        }
+      >({
+        path: `/api/v1/profile`,
+        method: 'PATCH',
+        body: data,
+        type: ContentType.Json,
         format: 'json',
         ...params,
       }),
