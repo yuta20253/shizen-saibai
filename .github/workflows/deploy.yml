@@ -24,9 +24,7 @@ jobs:
           host: 163.43.209.197
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: |
-            ./docker-compose.prod.yml
-            .env
+          source: "./docker-compose.prod.yml,.env"
           target: "~/shizen-saibai/"
 
       - name: Deploy via SSH
