@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - fix_build_frontend_yml
     paths:
       - "frontend/**"
       - "docker-compose.prod.yml"
