@@ -106,7 +106,7 @@ export const Login = (): React.JSX.Element => {
             </Button>
           </Box>
           <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <Link href="/sendemail">パスワードをお忘れの方はこちら</Link>
+            <Link href="/passwordreset">パスワードをお忘れの方はこちら</Link>
           </Box>
         </Box>
       </Box>
