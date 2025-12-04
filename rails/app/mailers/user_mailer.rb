@@ -7,7 +7,15 @@ class UserMailer < ApplicationMailer
   def reset_password(user, token)
     @user = user
     @token = token
-    url = "#{ENV["FRONTEND_URL"]}/password/reset/#{@token}?email=#{@user.email}"
+
+    front_url =
+      if Rails.env.production?
+        ENV["PRD_FRONTEND_URL"]
+      else
+        ENV["FRONTEND_URL"]
+      end
+
+    url = "#{front_url}/password/reset/#{@token}?email=#{@user.email}"
 
     mail(to: @user.email, subject: "パスワード再設定のご案内", body: "パスワード再設定はこちらのリンクからお願いします： #{url}")
   end
