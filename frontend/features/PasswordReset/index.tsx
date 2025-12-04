@@ -20,17 +20,20 @@ export const PasswordReset = (): React.JSX.Element => {
     setErrorMessage('');
 
     try {
-      const res = await fetch('/api/v1/password/reset/request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/password/reset/request',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        }
+      );
 
       const body = await res.json();
 
       if (!res.ok) throw new Error(body.message || 'エラーが発生しました');
 
-      router.push('/password-reset/sent');
+      router.push('/passwordreset/sent');
     } catch (error) {
       const message =
         error instanceof Error
