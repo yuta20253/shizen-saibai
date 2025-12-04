@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import {
   Box,
   Button,
@@ -33,9 +33,10 @@ export const PasswordResetConfirm = (): React.JSX.Element => {
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showNewPasswordConfirm, setShowNewPasswordConfirm] = useState<boolean>(false);
 
+  const params = useParams();
   const searchParams = useSearchParams();
+  const token = params.token;
   const email = searchParams.get('email');
-  const token = searchParams.get('token');
 
   const {
     register,
