@@ -8,7 +8,7 @@ import { ImageCaptureUploader } from '../ImageCaptureUploader';
 
 export const Footer = (): React.JSX.Element | null => {
   const pathName = usePathname();
-  const hiddenPaths = ['/login', '/signup', '/mypage/edit', '/mypage/delete'];
+  const hiddenPaths = ['/login', '/signup', '/mypage/edit', '/mypage/delete', '/passwordreset'];
   const hidden = hiddenPaths.includes(pathName);
   const inputRef = useRef<HTMLInputElement>(null);
 
