@@ -15,8 +15,8 @@ class UserMailer < ApplicationMailer
         ENV["FRONTEND_URL"]
       end
 
-    url = "#{front_url}/password/reset/#{@token}?email=#{@user.email}"
+    @url = "#{front_url}/passwordreset/#{@token}?email=#{@user.email}"
 
-    mail(to: @user.email, subject: "パスワード再設定のご案内", body: "パスワード再設定はこちらのリンクからお願いします： #{url}")
+    mail(to: @user.email, subject: "パスワード再設定のご案内")
   end
 end
