@@ -26,7 +26,7 @@ services:
       -w /var/www/certbot
       -d zasso-lens.com
       -d www.zasso-lens.com
-      --email zasso.lens@gmail.com
+      --email magee.20253@gmail.com
       --agree-tos
       --no-eff-email
     depends_on:
