@@ -76,6 +76,7 @@ export const Diagnoses = (): React.JSX.Element | null => {
                     boxShadow: 2,
                     overflow: 'hidden',
                     ':hover': { boxShadow: 4 },
+                    m: 1,
                   }}
                 >
                   <CardContent sx={{ display: 'flex', gap: 2, alignItems: 'center', p: 2 }}>
