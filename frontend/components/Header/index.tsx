@@ -21,8 +21,8 @@ export const Header = (): JSX.Element => {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }}>
+        <Toolbar sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
             <Link
               href="/"
               aria-label="ホーム"
@@ -37,6 +37,7 @@ export const Header = (): JSX.Element => {
               <span
                 className={logoFont.className}
                 style={{
+                  alignItems: 'center',
                   fontSize: '0.8rem',
                   letterSpacing: '0.25em',
                   textShadow: '0 0 6px rgba(0, 0, 0, 0.25)',
@@ -48,7 +49,11 @@ export const Header = (): JSX.Element => {
           </Box>
           {showAuth ? (
             user ? (
-              <Box component="a" sx={{ display: 'flex', gap: 2, color: '#fff' }} href="/mypage">
+              <Box
+                component="a"
+                sx={{ display: 'flex', alignItems: 'center', gap: 2, color: '#fff' }}
+                href="/mypage"
+              >
                 <AccountCircleIcon />
                 {user.name}
               </Box>
