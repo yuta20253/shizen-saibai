@@ -47,7 +47,11 @@ export const Header = (): JSX.Element => {
           </Box>
           {showAuth ? (
             user ? (
-              <Box component="a" sx={{ display: 'flex', gap: 2, color: '#fff' }} href="/mypage">
+              <Box
+                component="a"
+                sx={{ display: 'flex', alignItems: 'center', gap: 2, color: '#fff' }}
+                href="/mypage"
+              >
                 <AccountCircleIcon />
                 {user.name}
               </Box>
