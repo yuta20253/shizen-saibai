@@ -12,7 +12,6 @@ import { logoFont } from '@/app/fonts';
 
 export const Header = (): JSX.Element => {
   const { user } = useAuthState();
-  console.log(user);
   const pathName = usePathname();
 
   const hideAuthButtonPaths = ['/login', '/signup'];
@@ -21,7 +20,7 @@ export const Header = (): JSX.Element => {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar sx={{ display: 'flex', alignItems: 'center' }}>
+        <Toolbar>
           <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
             <Link
               href="/"
@@ -37,7 +36,6 @@ export const Header = (): JSX.Element => {
               <span
                 className={logoFont.className}
                 style={{
-                  alignItems: 'center',
                   fontSize: '0.8rem',
                   letterSpacing: '0.25em',
                   textShadow: '0 0 6px rgba(0, 0, 0, 0.25)',
@@ -49,11 +47,7 @@ export const Header = (): JSX.Element => {
           </Box>
           {showAuth ? (
             user ? (
-              <Box
-                component="a"
-                sx={{ display: 'flex', alignItems: 'center', gap: 2, color: '#fff' }}
-                href="/mypage"
-              >
+              <Box component="a" sx={{ display: 'flex', gap: 2, color: '#fff' }} href="/mypage">
                 <AccountCircleIcon />
                 {user.name}
               </Box>
