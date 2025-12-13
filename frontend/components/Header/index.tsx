@@ -47,14 +47,14 @@ export const Header = (): JSX.Element => {
           </Box>
           {showAuth ? (
             user ? (
-              <Box
-                component="a"
+              <Button
+                LinkComponent={Link}
                 sx={{ display: 'flex', alignItems: 'center', gap: 2, color: '#fff' }}
                 href="/mypage"
               >
                 <AccountCircleIcon />
                 {user.name}
-              </Box>
+              </Button>
             ) : (
               <Box sx={{ display: 'flex', gap: 2 }}>
                 <Button LinkComponent={Link} color="inherit" variant="outlined" href="/login">
