@@ -1,6 +1,6 @@
 class Api::V1::HistoriesController < Api::V1::BaseController
   def index
-    diagnoses = current_user.diagnoses.includes(:weed, :soil, :vegetable)
+    diagnoses = current_user.diagnoses.order('created_at': :desc).includes(:weed, :soil, :vegetable)
     if diagnoses.exists?
       render json: diagnoses, each_serializer: ::DiagnosisSerializer
     else
