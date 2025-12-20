@@ -7,10 +7,14 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { DiagnosisType } from '@/types/diagnosis';
+import { RecommendedVegetableDrawer } from '@/features/Diagnosis/Drawer';
 
 export const Diagnosis = ({ id }: { id: string }): React.JSX.Element => {
   const [diagnosis, setDiagnosis] = useState<DiagnosisType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   useEffect(() => {
     const resDiagnosis = async () => {
@@ -257,6 +261,7 @@ export const Diagnosis = ({ id }: { id: string }): React.JSX.Element => {
                   boxShadow: 1,
                   ':hover': { boxShadow: 2, bgcolor: 'grey.50' },
                 }}
+                onClick={handleOpen}
               >
                 <Typography variant="body1" sx={{ fontWeight: 700 }}>
                   提案理由をみる
@@ -264,6 +269,9 @@ export const Diagnosis = ({ id }: { id: string }): React.JSX.Element => {
               </Box>
             </Link>
           </Box>
+          {open && diagnosis && (
+            <RecommendedVegetableDrawer open={open} onClose={handleClose} diagnosis={diagnosis} />
+          )}
 
           <Link
             href={`/mypage/diagnoses`}
