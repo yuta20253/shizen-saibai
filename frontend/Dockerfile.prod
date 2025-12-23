@@ -26,13 +26,26 @@ COPY next-env.d.ts ./
 
 ENV NODE_PATH=/app
 
-# ← ここがポイント
-# build 時に NEXT_PUBLIC_BACKEND_URL が環境変数として反映される
 RUN npm run build
 
 # ---------- Production Stage ----------
 FROM node:20-alpine
+
+# 非rootユーザー作成
+RUN addgroup -g 1001 nodejs \
+  && adduser -u 1001 -G nodejs -s /bin/sh -D nextjs
+
 WORKDIR /app
+
 COPY --from=builder /app ./
+
+# 所有者を変更し、read-onlyにする
+RUN chown -R nextjs:nodejs /app
+
+USER nextjs
+
+ENV NODE_ENV=production
+
 EXPOSE 3000
-CMD ["npm", "start"]
+
+CMD ["node", "node_modules/next/dist/bin/next", "start"]

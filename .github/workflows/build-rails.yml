@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "rails/**"
-      - "docker-compose.prd.yml"
+      - "docker-compose.prod.yml"
 
 jobs:
   build_rails:

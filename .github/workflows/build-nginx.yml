@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "nginx/**"
-      - "docker-compose.prd.yml"
+      - "docker-compose.prod.yml"
 
 jobs:
   deploy_to_server:
