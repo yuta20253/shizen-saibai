@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/recreate_production_deploy
 
 jobs:
   deploy_to_server:
