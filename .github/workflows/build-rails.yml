@@ -5,9 +5,9 @@ on:
     branches:
       - main
       - feature/recreate_production_deploy
-    paths:
-      - "rails/**"
-      - "docker-compose.prod.yml"
+    # paths:
+    #   - "rails/**"
+    #   - "docker-compose.prod.yml"
 
 jobs:
   build_rails:

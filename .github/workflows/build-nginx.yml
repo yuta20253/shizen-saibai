@@ -5,9 +5,9 @@ on:
     branches:
       - main
       - feature/recreate_production_deploy
-    paths:
-      - "nginx/**"
-      - "docker-compose.prod.yml"
+    # paths:
+    #   - "nginx/**"
+    #   - "docker-compose.prod.yml"
 
 jobs:
   deploy_to_server:

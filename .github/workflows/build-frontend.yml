@@ -5,9 +5,9 @@ on:
     branches:
       - main
       - feature/recreate_production_deploy
-    paths:
-      - "frontend/**"
-      - "docker-compose.prod.yml"
+    # paths:
+    #   - "frontend/**"
+    #   - "docker-compose.prod.yml"
 
 jobs:
   build_frontend:
