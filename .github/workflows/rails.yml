@@ -39,7 +39,7 @@ jobs:
       RAILS_ENV: test
       BUNDLE_WITH: "development test"
       BUNDLE_WITHOUT: ""
-      # DATABASE_URL: "mysql2://root:root@127.0.0.1:3306/myapp_test?encoding=utf8mb4"
+      DATABASE_URL: "mysql2://root:root@127.0.0.1:3306/myapp_test?encoding=utf8mb4"
 
     steps:
       - name: Cancel Previous Runs
