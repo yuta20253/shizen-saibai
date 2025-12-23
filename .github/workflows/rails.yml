@@ -32,6 +32,7 @@ jobs:
       run:
         working-directory: rails
     env:
+      DATABASE_NAME: for-production
       DEVISE_JWT_SECRET_KEY: ee95bb031f05c79fd9c74c5597c63918fe3007b8ed9f495b25a851a297b317391905544b792fbb5bd3ece8e87b218a74561c1d13413cbb31716b6bb5c7035988
       RAILS_ENV: test
       BUNDLE_WITH: "development test"
