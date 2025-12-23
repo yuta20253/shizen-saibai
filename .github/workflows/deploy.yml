@@ -19,7 +19,7 @@ jobs:
           host: ${{ secrets.SAKURA_CLOUD_SSH_HOST }}
           username: deploy
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./docker-compose.prod.yml,.env"
+          source: "./docker-compose.prod.yml"
           target: "~/zasso-lens/"
 
       - name: Deploy via SSH
