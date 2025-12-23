@@ -46,6 +46,12 @@ services:
 
   frontend:
     image: yuta2025/shizen-frontend:latest
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/.next/cache
+    security_opt:
+      - no-new-privileges:true
     container_name: frontend
     environment:
       NODE_ENV: production
