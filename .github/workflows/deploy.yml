@@ -36,6 +36,10 @@ jobs:
             export MYSQL_USER='${{ secrets.MYSQL_USER }}'
             export MYSQL_PASSWORD='${{ secrets.MYSQL_PASSWORD }}'
             export LETSENCRYPT_EMAIL='${{ secrets.LETSENCRYPT_EMAIL }}'
+            export DEVISE_JWT_SECRET_KEY='${{ secrets.DEVISE_JWT_SECRET_KEY }}'
+            export CHATGPT_API_KEY='${{ secrets.CHATGPT_API_KEY }}'
+            export SECRET_KEY_BASE='${{ secrets.SECRET_KEY_BASE }}'
+            export FRONTEND_URL='https://zasso-lens.com'
 
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml down

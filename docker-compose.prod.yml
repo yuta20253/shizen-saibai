@@ -57,11 +57,17 @@ services:
     container_name: rails
     environment:
       RAILS_ENV: production
+
       DATABASE_HOST: db
       DATABASE_PORT: 3306
       DATABASE_NAME: ${MYSQL_DATABASE}
       DATABASE_USERNAME: ${MYSQL_USER}
       DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+
+      DEVISE_JWT_SECRET_KEY: ${DEVISE_JWT_SECRET_KEY}
+      CHATGPT_API_KEY: ${CHATGPT_API_KEY}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      FRONTEND_URL: ${FRONTEND_URL}
     command: bash -c "./bin/rails db:create db:migrate && ./bin/rails s -b 0.0.0.0 -p 3000"
     ports:
       - "5000:3000"
