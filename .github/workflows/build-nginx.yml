@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "nginx/**"
-      - "docker-compose.prd.yml"
+      - "docker-compose.prod.yml"
 
 jobs:
   deploy_to_server:
@@ -24,7 +24,8 @@ jobs:
 
       - name: Build and Push nginx image
         run: |
+          TAG=${{ github.sha }}
           docker build -f nginx/Dockerfile \
-            -t yuta2025/shizen-nginx:latest \
+            -t yuta2025/shizen-nginx:$TAG \
             ./nginx
-          docker push yuta2025/shizen-nginx:latest
+          docker push yuta2025/shizen-nginx:$TAG
