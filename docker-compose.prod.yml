@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   nginx:
-    image: yuta2025/shizen-nginx:latest
+    image: yuta2025/shizen-nginx:${IMAGE_TAG:-latest}
     container_name: nginx
     ports:
       - "80:80"
@@ -45,7 +45,7 @@ services:
     profiles: ["cert"]
 
   frontend:
-    image: yuta2025/shizen-frontend:latest
+    image: yuta2025/shizen-frontend:${IMAGE_TAG:-latest}
     read_only: true
     tmpfs:
       - /tmp
@@ -59,7 +59,7 @@ services:
       - rails
 
   rails:
-    image: yuta2025/shizen-rails:latest
+    image: yuta2025/shizen-rails:${IMAGE_TAG:-latest}
     container_name: rails
     environment:
       RAILS_ENV: production

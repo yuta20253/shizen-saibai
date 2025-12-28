@@ -29,7 +29,10 @@ jobs:
           username: deploy
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd ~/zasso-lens
+
+            export IMAGE_TAG='${{ github.sha }}'
 
             export MYSQL_ROOT_PASSWORD='${{ secrets.MYSQL_ROOT_PASSWORD }}'
             export MYSQL_DATABASE='${{ secrets.MYSQL_DATABASE }}'
@@ -42,5 +45,8 @@ jobs:
             export FRONTEND_URL='https://zasso-lens.com'
 
             docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d --remove-orphans
+
+            docker compose -f docker-compose.prod.yml ps || true
+            docker compose -f docker-compose.prod.yml logs --tail=200 nginx || true
+            docker compose -f docker-compose.prod.yml logs --tail=200 rails || true
