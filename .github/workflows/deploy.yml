@@ -13,29 +13,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create .env file for docker-compose
-        run: |
-          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
-          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
-
-      - name: Upload docker-compose.prod.yml and .env to server
+      - name: Upload docker-compose.prod.yml to server
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: 163.43.209.197
-          username: ubuntu
+          host: ${{ secrets.SAKURA_CLOUD_SSH_HOST }}
+          username: deploy
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./docker-compose.prod.yml,.env"
-          target: "~/shizen-saibai/"
+          source: "./docker-compose.prod.yml"
+          target: "~/zasso-lens/"
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 163.43.209.197
-          username: ubuntu
+          host: ${{ secrets.SAKURA_CLOUD_SSH_HOST }}
+          username: deploy
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/shizen-saibai
+            set -e
+            cd ~/zasso-lens
+
+            export IMAGE_TAG='${{ github.sha }}'
+
+            export MYSQL_ROOT_PASSWORD='${{ secrets.MYSQL_ROOT_PASSWORD }}'
+            export MYSQL_DATABASE='${{ secrets.MYSQL_DATABASE }}'
+            export MYSQL_USER='${{ secrets.MYSQL_USER }}'
+            export MYSQL_PASSWORD='${{ secrets.MYSQL_PASSWORD }}'
+            export LETSENCRYPT_EMAIL='${{ secrets.LETSENCRYPT_EMAIL }}'
+            export DEVISE_JWT_SECRET_KEY='${{ secrets.DEVISE_JWT_SECRET_KEY }}'
+            export CHATGPT_API_KEY='${{ secrets.CHATGPT_API_KEY }}'
+            export SECRET_KEY_BASE='${{ secrets.SECRET_KEY_BASE }}'
+            export FRONTEND_URL='https://zasso-lens.com'
 
             docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d --remove-orphans
+
+            docker compose -f docker-compose.prod.yml ps || true
+            docker compose -f docker-compose.prod.yml logs --tail=200 nginx || true
+            docker compose -f docker-compose.prod.yml logs --tail=200 rails || true

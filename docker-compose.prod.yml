@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   nginx:
-    image: yuta2025/shizen-nginx:latest
+    image: yuta2025/shizen-nginx:${IMAGE_TAG:-latest}
     container_name: nginx
     ports:
       - "80:80"
@@ -11,40 +11,47 @@ services:
       - frontend
       - rails
     volumes:
-      - ./certbot/www:/var/www/certbot:rw
-      - ./certbot/conf:/etc/letsencrypt:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - certbot_www:/var/www/certbot:rw
+      - certbot_conf:/etc/letsencrypt:ro
 
   certbot:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+      - certbot_conf:/etc/letsencrypt
     command: >
       certonly --webroot
       -w /var/www/certbot
       -d zasso-lens.com
       -d www.zasso-lens.com
-      --email magee.20253@gmail.com
+      --email ${LETSENCRYPT_EMAIL}
       --agree-tos
       --no-eff-email
     depends_on:
       - nginx
+    profiles: ["cert"]
 
   certbot-renew:
     image: certbot/certbot
     container_name: certbot-renew
     volumes:
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+      - certbot_conf:/etc/letsencrypt
     entrypoint: >
       sh -c "certbot renew --webroot -w /var/www/certbot"
     depends_on:
       - nginx
+    profiles: ["cert"]
 
   frontend:
-    image: yuta2025/shizen-frontend:latest
+    image: yuta2025/shizen-frontend:${IMAGE_TAG:-latest}
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/.next/cache
+    security_opt:
+      - no-new-privileges:true
     container_name: frontend
     environment:
       NODE_ENV: production
@@ -52,21 +59,27 @@ services:
       - rails
 
   rails:
-    image: yuta2025/shizen-rails:latest
+    image: yuta2025/shizen-rails:${IMAGE_TAG:-latest}
     container_name: rails
     environment:
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      RAILS_ENV: production
+
       DATABASE_HOST: db
       DATABASE_PORT: 3306
+      DATABASE_NAME: ${MYSQL_DATABASE}
+      DATABASE_USERNAME: ${MYSQL_USER}
+      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+
+      DEVISE_JWT_SECRET_KEY: ${DEVISE_JWT_SECRET_KEY}
+      CHATGPT_API_KEY: ${CHATGPT_API_KEY}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      FRONTEND_URL: ${FRONTEND_URL}
     command: bash -c "./bin/rails db:create db:migrate && ./bin/rails s -b 0.0.0.0 -p 3000"
     ports:
       - "5000:3000"
     depends_on:
       db:
         condition: service_healthy
-    env_file:
-      - ./rails/.env
 
   db:
     image: mysql:8.0.32
@@ -75,6 +88,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: Asia/Tokyo
     volumes:
       - mysql_data:/var/lib/mysql
@@ -87,3 +102,5 @@ services:
 
 volumes:
   mysql_data:
+  certbot_www:
+  certbot_conf:

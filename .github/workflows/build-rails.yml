@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "rails/**"
-      - "docker-compose.prd.yml"
+      - "docker-compose.prod.yml"
 
 jobs:
   build_rails:
@@ -24,7 +24,8 @@ jobs:
 
       - name: Build and Push rails image
         run: |
+          TAG=${{ github.sha }}
           docker build -f rails/Dockerfile.prod \
-            -t yuta2025/shizen-rails:latest \
+            -t yuta2025/shizen-rails:$TAG \
             ./rails
-          docker push yuta2025/shizen-rails:latest
+          docker push yuta2025/shizen-rails:$TAG
