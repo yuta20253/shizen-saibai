@@ -48,6 +48,7 @@ services:
     profiles: ["cert"]
 
   frontend:
+    pids_limit: 200
     image: yuta2025/shizen-frontend:${IMAGE_TAG:-latest}
     read_only: true
     tmpfs:
