@@ -13,6 +13,9 @@ services:
     volumes:
       - certbot_www:/var/www/certbot:rw
       - certbot_conf:/etc/letsencrypt:ro
+    networks:
+      - public_net
+      - app_net
 
   certbot:
     image: certbot/certbot
@@ -45,6 +48,7 @@ services:
     profiles: ["cert"]
 
   frontend:
+    pids_limit: 200
     image: yuta2025/shizen-frontend:${IMAGE_TAG:-latest}
     read_only: true
     tmpfs:
@@ -59,6 +63,8 @@ services:
       - rails
     expose:
       - "3000"
+    networks:
+      - app_net
 
   rails:
     image: yuta2025/shizen-rails:${IMAGE_TAG:-latest}
@@ -82,6 +88,8 @@ services:
         condition: service_healthy
     expose:
       - "3000"
+    networks:
+      - app_net
 
   db:
     image: mysql:8.0.32
@@ -101,8 +109,15 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    networks:
+      - app_net
 
 volumes:
   mysql_data:
   certbot_www:
   certbot_conf:
+
+networks:
+  public_net: {}
+  app_net:
+    internal: true
