@@ -5,10 +5,9 @@ WORKDIR /app
 ARG NEXT_PUBLIC_BACKEND_URL
 ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
 
-# package-lock 前提で依存を固定して install scripts を無効化する
+# dev も含めて build に必要な依存を入れる（install scripts は無効）
 COPY package.json package-lock.json ./
-RUN npm config set ignore-scripts true \
-  && npm ci
+RUN npm config set ignore-scripts true && npm ci
 
 # 設定ファイルをコピー
 COPY tsconfig.json ./
@@ -26,12 +25,7 @@ COPY scripts ./scripts
 COPY types ./types
 
 ENV NODE_PATH=/app
-
 RUN npm run build
-
-# 本番用に production 依存だけ入れ直す
-RUN npm ci --omit=dev \
-  && npm cache clean --force
 
 # ---------- Production Stage ----------
 FROM node:20-alpine
@@ -42,20 +36,21 @@ RUN addgroup -g 1001 nodejs \
 
 WORKDIR /app
 
-# ビルド成果物と production依存だけをコピー
-COPY --from=builder /app/package.json /app/package-lock.json ./
-COPY --from=builder /app/node_modules ./node_modules
+# 本番依存だけを “本番側でクリーンに” 入れる（install scripts は無効）
+COPY package.json package-lock.json ./
+RUN npm config set ignore-scripts true \
+  && npm ci --omit=dev \
+  && npm cache clean --force
+
+# ビルド成果物のみコピー
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.ts ./next.config.ts
 
 # 所有者を変更し、read-onlyにする
 RUN chown -R nextjs:nodejs /app
-
 USER nextjs
 
 ENV NODE_ENV=production
-
 EXPOSE 3000
-
 CMD ["node", "node_modules/next/dist/bin/next", "start"]
