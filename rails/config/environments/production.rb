@@ -69,7 +69,7 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
 
-  # Don't log any deprecations.
+  # Don"t log any deprecations.
   config.active_support.report_deprecations = false
 
   # Do not dump schema after migrations.
@@ -82,4 +82,14 @@ Rails.application.configure do
   ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"],
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
 end
