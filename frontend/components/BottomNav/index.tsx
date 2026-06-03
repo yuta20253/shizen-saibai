@@ -9,7 +9,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRef, JSX } from 'react';
 import { useAuthState } from '@/context/AuthContext';
-import { ImageCaptureUploader } from '@/components/ImageCaptureUploader';
+import {
+  ImageCaptureUploader,
+  type ImageCaptureUploaderHandle,
+} from '@/components/ImageCaptureUploader';
 
 const HIDE_PATHS = ['/login', '/signup', '/mypage/edit', '/mypage/delete'];
 const HIDE_PREFIXES = ['/password'];
@@ -33,7 +36,7 @@ const isActive = (pathname: string, href: string): boolean =>
 export const BottomNav = (): JSX.Element | null => {
   const pathname = usePathname();
   const { user } = useAuthState();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const uploaderRef = useRef<ImageCaptureUploaderHandle>(null);
 
   const hidden =
     !user ||
@@ -41,7 +44,7 @@ export const BottomNav = (): JSX.Element | null => {
     HIDE_PREFIXES.some(p => pathname.startsWith(p));
   if (hidden) return null;
 
-  const triggerDiagnose = () => inputRef.current?.click();
+  const triggerDiagnose = () => uploaderRef.current?.open();
 
   return (
     <Paper
@@ -100,7 +103,7 @@ export const BottomNav = (): JSX.Element | null => {
         <NavTab key={item.href} item={item} active={isActive(pathname, item.href)} />
       ))}
 
-      <ImageCaptureUploader ref={inputRef} />
+      <ImageCaptureUploader ref={uploaderRef} />
     </Paper>
   );
 };

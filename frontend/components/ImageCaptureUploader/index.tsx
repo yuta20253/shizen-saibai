@@ -1,156 +1,196 @@
 'use client';
-import { ImagePreviewDialog } from '../ImagePreviewDialog';
+
 import axios from 'axios';
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  Alert,
-  Backdrop,
-  Box,
-  CircularProgress,
-  LinearProgress,
-  Stack,
-  Typography,
-  type AlertColor,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from '@mui/material';
+import { ImagePreviewDialog } from '../ImagePreviewDialog';
+import { CaptureGuide, HIDE_GUIDE_KEY } from '../CaptureGuide';
+import { DiagnosisProgress } from '../DiagnosisProgress';
+
+/** 親から uploader.open() を呼んで撮影フローを開始する。 */
+export type ImageCaptureUploaderHandle = {
+  open: () => void;
+};
+
+type ErrorState = {
+  title: string;
+  message: string;
+  /** 同じファイルで再送できるか（一時的なエラー） */
+  retryable: boolean;
+};
 
 type Props = object;
 
-export const ImageCaptureUploader = forwardRef<HTMLInputElement, Props>((_, ref) => {
+export const ImageCaptureUploader = forwardRef<ImageCaptureUploaderHandle, Props>((_, ref) => {
   const router = useRouter();
-  const [open, setOpen] = useState<boolean>(false);
-  const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const albumInputRef = useRef<HTMLInputElement>(null);
 
+  const [guideOpen, setGuideOpen] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
-  const [alertSeverity, SetAlertSeverity] = useState<AlertColor | null>(null);
-  const [uploading, setUploading] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState<ErrorState | null>(null);
 
-  const isFromCamera = (file: File): boolean => {
-    const now = Date.now();
-    return now - file.lastModified < 10_000;
-  };
+  useImperativeHandle(ref, () => ({
+    open: () => {
+      // 「次回から表示しない」が選ばれていればガイドを飛ばしてカメラ起動
+      if (typeof window !== 'undefined' && localStorage.getItem(HIDE_GUIDE_KEY) === '1') {
+        cameraInputRef.current?.click();
+      } else {
+        setGuideOpen(true);
+      }
+    },
+  }));
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    e.target.value = ''; // 同じファイル再選択を許可
     if (!file) return;
-
-    if (isFromCamera(file)) {
-      uploadImage(file);
-    } else {
-      setSelectedFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
-      handleOpen();
-    }
+    setSelectedFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
+    setPreviewOpen(true);
   };
 
   const uploadImage = async (file: File) => {
     const formData = new FormData();
     formData.append('image', file);
-
     setUploading(true);
     setProgress(0);
-    setAlertMessage(null);
+    setError(null);
 
     try {
       const token = localStorage.getItem('token');
       const url = process.env.NEXT_PUBLIC_BACKEND_URL + '/api/v1/diagnosis';
-
       const response = await axios.post(url, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         onUploadProgress: event => {
           if (!event.total) return;
-
-          const progress = Math.round((event.loaded * 100) / event.total);
-
-          setProgress(progress);
+          setProgress(Math.round((event.loaded * 100) / event.total));
         },
       });
-
-      setAlertMessage('アップロード成功');
-      SetAlertSeverity('success');
-
       router.push(`/mypage/diagnoses/${response.data.id}`);
-    } catch (error) {
-      console.error(error);
-
-      setAlertMessage('アップロードに失敗しました。');
-
-      SetAlertSeverity('error');
+    } catch (err) {
+      console.error(err);
+      setError(toErrorState(err));
     } finally {
       setUploading(false);
     }
   };
 
-  const onConfirm = () => {
-    if (selectedFile) {
-      uploadImage(selectedFile);
-      handleClose();
-    }
+  const handleConfirmPreview = () => {
+    setPreviewOpen(false);
+    if (selectedFile) uploadImage(selectedFile);
   };
 
-  const backDropLabel = uploading
-    ? progress < 100
-      ? `アップロード中... ${progress}%`
-      : '送信完了。解析中...'
-    : '';
+  const handleRetry = () => {
+    setError(null);
+    if (selectedFile) uploadImage(selectedFile);
+  };
+
+  const handleRetake = () => {
+    setError(null);
+    setGuideOpen(true);
+  };
 
   return (
     <>
       <input
         type="file"
-        ref={ref}
+        ref={cameraInputRef}
         accept="image/*"
         capture="environment"
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
+      <input
+        type="file"
+        ref={albumInputRef}
+        accept="image/*"
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
 
-      {alertMessage && alertSeverity && (
-        <Box
-          sx={{
-            position: 'fixed',
-            top: 20,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 1300,
-            width: '90%',
-            maxWidth: 400,
-          }}
-        >
-          <Alert severity={alertSeverity} onClose={() => setAlertMessage(null)}>
-            {alertMessage}
-          </Alert>
-        </Box>
-      )}
+      <CaptureGuide
+        open={guideOpen}
+        onClose={() => setGuideOpen(false)}
+        onPickCamera={() => {
+          setGuideOpen(false);
+          cameraInputRef.current?.click();
+        }}
+        onPickAlbum={() => {
+          setGuideOpen(false);
+          albumInputRef.current?.click();
+        }}
+      />
 
-      {open && (
+      {previewOpen && (
         <ImagePreviewDialog
-          open={open}
+          open={previewOpen}
           previewUrl={previewUrl}
-          onConfirm={onConfirm}
-          onClose={handleClose}
+          onConfirm={handleConfirmPreview}
+          onClose={() => setPreviewOpen(false)}
         />
       )}
 
-      <Backdrop open={uploading} sx={{ color: '#fff', zIndex: '9999' }}>
-        <Stack spacing={2} alignItems="center" sx={{ width: '80%', maxWidth: 360 }}>
-          <CircularProgress />
-          <Typography>{backDropLabel}</Typography>
-          {progress < 100 ? (
-            <LinearProgress variant="determinate" value={progress} />
+      <DiagnosisProgress open={uploading} progress={progress} />
+
+      <Dialog open={!!error} onClose={() => setError(null)} maxWidth="xs" fullWidth>
+        <DialogTitle sx={{ fontWeight: 800 }}>{error?.title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ color: 'text.secondary' }}>{error?.message}</DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={() => setError(null)} color="inherit">
+            閉じる
+          </Button>
+          {error?.retryable ? (
+            <Button variant="contained" onClick={handleRetry}>
+              もう一度送信
+            </Button>
           ) : (
-            <LinearProgress variant="indeterminate" />
+            <Button variant="contained" onClick={handleRetake}>
+              撮り直す
+            </Button>
           )}
-        </Stack>
-      </Backdrop>
+        </DialogActions>
+      </Dialog>
     </>
   );
 });
 
 ImageCaptureUploader.displayName = 'ImageCaptureUploader';
+
+// バックエンドのステータスに応じてユーザー向けの案内を組み立てる
+const toErrorState = (err: unknown): ErrorState => {
+  const status = axios.isAxiosError(err) ? err.response?.status : undefined;
+  if (status === 400 || status === 422) {
+    return {
+      title: 'うまく読み取れませんでした',
+      message: '雑草がはっきり写るように、もう一度撮ってみてください。',
+      retryable: false,
+    };
+  }
+  if (status === 429) {
+    return {
+      title: '少し時間をおいてください',
+      message: 'アクセスが集中しています。しばらくしてからもう一度お試しください。',
+      retryable: true,
+    };
+  }
+  return {
+    title: '送信に失敗しました',
+    message: '通信環境を確認して、もう一度お試しください。',
+    retryable: true,
+  };
+};

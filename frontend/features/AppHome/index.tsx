@@ -2,7 +2,10 @@
 
 import { useRef } from 'react';
 import { RequireAuth } from '@/components/RequireAuth';
-import { ImageCaptureUploader } from '@/components/ImageCaptureUploader';
+import {
+  ImageCaptureUploader,
+  type ImageCaptureUploaderHandle,
+} from '@/components/ImageCaptureUploader';
 import { useAuthState } from '@/context/AuthContext';
 import { useRecentDiagnoses } from './hooks';
 import { AppHomePresenter } from './Presenter';
@@ -11,8 +14,8 @@ import { AppHomePresenter } from './Presenter';
 export const AppHome = (): React.JSX.Element => {
   const { user } = useAuthState();
   const { recent, loading } = useRecentDiagnoses();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const onDiagnose = () => inputRef.current?.click();
+  const uploaderRef = useRef<ImageCaptureUploaderHandle>(null);
+  const onDiagnose = () => uploaderRef.current?.open();
 
   return (
     <RequireAuth>
@@ -22,7 +25,7 @@ export const AppHome = (): React.JSX.Element => {
         loading={loading}
         onDiagnose={onDiagnose}
       />
-      <ImageCaptureUploader ref={inputRef} />
+      <ImageCaptureUploader ref={uploaderRef} />
     </RequireAuth>
   );
 };
