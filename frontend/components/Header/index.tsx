@@ -19,7 +19,15 @@ export const Header = (): JSX.Element => {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          bgcolor: 'background.paper',
+          color: 'text.primary',
+          borderBottom: '1px solid rgba(43, 43, 39, 0.08)',
+        }}
+      >
         <Toolbar>
           <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
             <Link
@@ -30,15 +38,16 @@ export const Header = (): JSX.Element => {
                 alignItems: 'center',
                 gap: 8,
                 textDecoration: 'none',
+                color: 'inherit',
               }}
             >
               <Logo />
               <span
                 className={logoFont.className}
                 style={{
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.25em',
-                  textShadow: '0 0 6px rgba(0, 0, 0, 0.25)',
+                  fontSize: '1rem',
+                  letterSpacing: '0.18em',
+                  color: '#557a3e',
                 }}
               >
                 雑草レンズ
@@ -48,19 +57,26 @@ export const Header = (): JSX.Element => {
           {showAuth ? (
             user ? (
               <Link
-                style={{ display: 'flex', alignItems: 'center', gap: 2, color: '#fff' }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  color: '#557a3e',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                }}
                 href="/mypage"
               >
                 <AccountCircleIcon />
                 {user.name}
               </Link>
             ) : (
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <Button LinkComponent={Link} color="inherit" variant="outlined" href="/login">
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <Button LinkComponent={Link} color="primary" variant="text" href="/login">
                   ログイン
                 </Button>
-                <Button LinkComponent={Link} color="inherit" variant="outlined" href="/signup">
-                  新規登録
+                <Button LinkComponent={Link} color="primary" variant="contained" href="/signup">
+                  無料ではじめる
                 </Button>
               </Box>
             )
