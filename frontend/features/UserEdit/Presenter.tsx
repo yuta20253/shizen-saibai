@@ -113,7 +113,8 @@ export const UserEditPresenter = ({
             type={showConfirm ? 'text' : 'password'}
             {...register('password_confirmation', {
               minLength: { value: 8, message: '8文字以上で入力してください' },
-              validate: value => !value || value === newPassword || '新しいパスワードと一致しません',
+              validate: value =>
+                !value || value === newPassword || '新しいパスワードと一致しません',
             })}
             slotProps={{ input: toggle(showConfirm, setShowConfirm).input }}
             error={!!errors.password_confirmation}

@@ -33,7 +33,12 @@ export const DiagnosisStory = ({ diagnosis, demo = false }: Props): React.JSX.El
   <Box>
     {demo && (
       <Box sx={{ textAlign: 'center', mb: 2 }}>
-        <Chip color="secondary" variant="filled" label="サンプル診断" sx={{ color: '#fff', bgcolor: 'secondary.dark' }} />
+        <Chip
+          color="secondary"
+          variant="filled"
+          label="サンプル診断"
+          sx={{ color: '#fff', bgcolor: 'secondary.dark' }}
+        />
       </Box>
     )}
 
@@ -63,7 +68,10 @@ export const DiagnosisStory = ({ diagnosis, demo = false }: Props): React.JSX.El
         <SoilChip
           label={
             <>
-              <TermTooltip term="pH" description="土の酸性・アルカリ性の度合い。多くの野菜は中性〜弱酸性を好みます。" />
+              <TermTooltip
+                term="pH"
+                description="土の酸性・アルカリ性の度合い。多くの野菜は中性〜弱酸性を好みます。"
+              />
               ：{phLabel(diagnosis.soil_type)}
             </>
           }
@@ -71,7 +79,10 @@ export const DiagnosisStory = ({ diagnosis, demo = false }: Props): React.JSX.El
         <SoilChip
           label={
             <>
-              <TermTooltip term="水はけ" description="雨や水が土にたまらず流れる度合い。良いほど根が腐りにくくなります。" />
+              <TermTooltip
+                term="水はけ"
+                description="雨や水が土にたまらず流れる度合い。良いほど根が腐りにくくなります。"
+              />
               ：{diagnosis.soil_drainage ?? '不明'}
             </>
           }
@@ -79,7 +90,10 @@ export const DiagnosisStory = ({ diagnosis, demo = false }: Props): React.JSX.El
         <SoilChip
           label={
             <>
-              <TermTooltip term="肥沃度" description="土に養分がどれくらい含まれているか。高いほど作物が育ちやすい傾向です。" />
+              <TermTooltip
+                term="肥沃度"
+                description="土に養分がどれくらい含まれているか。高いほど作物が育ちやすい傾向です。"
+              />
               ：{diagnosis.soil_fertility}
             </>
           }

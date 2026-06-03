@@ -68,12 +68,7 @@ export const DiagnosisFeedback = ({ diagnosisId }: Props): React.JSX.Element => 
         この診断は役に立ちましたか？
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center', my: 1.5 }}>
-        <Rating
-          value={rating}
-          size="large"
-          onChange={(_, v) => setRating(v)}
-          aria-label="評価"
-        />
+        <Rating value={rating} size="large" onChange={(_, v) => setRating(v)} aria-label="評価" />
       </Box>
       <TextField
         fullWidth

@@ -39,9 +39,7 @@ export const BottomNav = (): JSX.Element | null => {
   const uploaderRef = useRef<ImageCaptureUploaderHandle>(null);
 
   const hidden =
-    !user ||
-    HIDE_PATHS.includes(pathname) ||
-    HIDE_PREFIXES.some(p => pathname.startsWith(p));
+    !user || HIDE_PATHS.includes(pathname) || HIDE_PREFIXES.some(p => pathname.startsWith(p));
   if (hidden) return null;
 
   const triggerDiagnose = () => uploaderRef.current?.open();

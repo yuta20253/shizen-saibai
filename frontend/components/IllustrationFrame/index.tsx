@@ -56,11 +56,7 @@ export const IllustrationFrame = ({
           onError={() => setErrored(true)}
         />
       ) : (
-        <Box
-          aria-label={alt}
-          role="img"
-          sx={{ fontSize: '3rem', lineHeight: 1, opacity: 0.8 }}
-        >
+        <Box aria-label={alt} role="img" sx={{ fontSize: '3rem', lineHeight: 1, opacity: 0.8 }}>
           {fallback}
         </Box>
       )}

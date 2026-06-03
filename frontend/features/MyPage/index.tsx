@@ -22,11 +22,7 @@ export const MyPageContent = (): React.JSX.Element => {
 
   return (
     <RequireAuth>
-      <MyPagePresenter
-        name={user?.name ?? ''}
-        email={user?.email ?? ''}
-        onLogout={handleLogout}
-      />
+      <MyPagePresenter name={user?.name ?? ''} email={user?.email ?? ''} onLogout={handleLogout} />
     </RequireAuth>
   );
 };

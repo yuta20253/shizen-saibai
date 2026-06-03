@@ -32,7 +32,12 @@ const TIPS = [
 export const HIDE_GUIDE_KEY = 'hideCaptureGuide';
 
 /** カメラ起動の前に出す撮影ガイド。コツを示し、カメラ/アルバムを選べる。 */
-export const CaptureGuide = ({ open, onClose, onPickCamera, onPickAlbum }: Props): React.JSX.Element => {
+export const CaptureGuide = ({
+  open,
+  onClose,
+  onPickCamera,
+  onPickAlbum,
+}: Props): React.JSX.Element => {
   const [dontShow, setDontShow] = useState(false);
 
   const applyHide = () => {

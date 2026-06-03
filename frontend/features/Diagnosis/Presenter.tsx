@@ -39,7 +39,15 @@ export const DiagnosisPresenter = ({
 
   if (notFound || !diagnosis) {
     return (
-      <Box sx={{ minHeight: '60vh', display: 'grid', placeItems: 'center', textAlign: 'center', px: 3 }}>
+      <Box
+        sx={{
+          minHeight: '60vh',
+          display: 'grid',
+          placeItems: 'center',
+          textAlign: 'center',
+          px: 3,
+        }}
+      >
         <Box>
           <Typography variant="h6" sx={{ fontWeight: 800, mb: 1 }}>
             診断結果が見つかりませんでした

@@ -51,12 +51,20 @@ export const AppHomePresenter = ({
     </Box>
 
     {/* 直近の診断 */}
-    <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mt: 4, mb: 1.5 }}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+      sx={{ mt: 4, mb: 1.5 }}
+    >
       <Typography variant="subtitle1" sx={{ fontWeight: 800 }}>
         さいきんの診断
       </Typography>
       {recent.length > 0 && (
-        <Link href="/mypage/diagnoses" style={{ textDecoration: 'none', color: '#557a3e', fontWeight: 700 }}>
+        <Link
+          href="/mypage/diagnoses"
+          style={{ textDecoration: 'none', color: '#557a3e', fontWeight: 700 }}
+        >
           すべて見る
         </Link>
       )}

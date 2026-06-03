@@ -1,6 +1,14 @@
 'use client';
 
-import { Box, Skeleton, Stack, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import {
+  Box,
+  Skeleton,
+  Stack,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@mui/material';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import PhotoCameraRoundedIcon from '@mui/icons-material/PhotoCameraRounded';
 import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
@@ -88,13 +96,25 @@ export const LandingPresenter = ({ demo, loading, error }: Props): React.JSX.Ele
     {/* ④ あなたにできること */}
     <Section title="雑草レンズでできること">
       <Stack spacing={2}>
-        <InfoCard icon={<PaymentsRoundedIcon fontSize="inherit" />} title="無料で何度でも" horizontal>
+        <InfoCard
+          icon={<PaymentsRoundedIcon fontSize="inherit" />}
+          title="無料で何度でも"
+          horizontal
+        >
           気になる雑草を見つけるたびに、何回でも診断できます。
         </InfoCard>
-        <InfoCard icon={<PhotoCameraRoundedIcon fontSize="inherit" />} title="写真1枚でOK" horizontal>
+        <InfoCard
+          icon={<PhotoCameraRoundedIcon fontSize="inherit" />}
+          title="写真1枚でOK"
+          horizontal
+        >
           むずかしい知識や道具はいりません。スマホひとつで完結します。
         </InfoCard>
-        <InfoCard icon={<EmojiNatureRoundedIcon fontSize="inherit" />} title="失敗しにくい野菜選び" horizontal>
+        <InfoCard
+          icon={<EmojiNatureRoundedIcon fontSize="inherit" />}
+          title="失敗しにくい野菜選び"
+          horizontal
+        >
           土に合う野菜が分かるから、初めてでも育てやすい品種を選べます。
         </InfoCard>
       </Stack>
@@ -117,9 +137,18 @@ export const LandingPresenter = ({ demo, loading, error }: Props): React.JSX.Ele
     {/* ⑥ FAQ */}
     <Section title="よくある質問">
       <Stack spacing={1.5}>
-        <Faq q="本当に無料ですか？" a="はい。診断は無料で、何度でもご利用いただけます。クレジットカードの登録も不要です。" />
-        <Faq q="どんな雑草でもいいですか？" a="畑やお庭でよく見かける雑草に対応しています。1種類が画面いっぱいに写るように撮ると、より正確に判定できます。" />
-        <Faq q="診断は当たりますか？" a="雑草は土の状態を示す手がかりです。AIがそれをもとに推定するため、目安としてお使いください。" />
+        <Faq
+          q="本当に無料ですか？"
+          a="はい。診断は無料で、何度でもご利用いただけます。クレジットカードの登録も不要です。"
+        />
+        <Faq
+          q="どんな雑草でもいいですか？"
+          a="畑やお庭でよく見かける雑草に対応しています。1種類が画面いっぱいに写るように撮ると、より正確に判定できます。"
+        />
+        <Faq
+          q="診断は当たりますか？"
+          a="雑草は土の状態を示す手がかりです。AIがそれをもとに推定するため、目安としてお使いください。"
+        />
         <Faq q="かんたんにやめられますか？" a="はい。マイページからいつでも退会できます。" />
       </Stack>
     </Section>
@@ -156,7 +185,12 @@ const DemoCard = ({ demo, loading, error }: Props): React.JSX.Element => {
           boxShadow: '0 6px 20px rgba(43,43,39,0.08)',
         }}
       >
-        <IllustrationFrame src={null} alt="雑草から野菜を提案するイメージ" ratio="16 / 9" fallback="🌿→🥕" />
+        <IllustrationFrame
+          src={null}
+          alt="雑草から野菜を提案するイメージ"
+          ratio="16 / 9"
+          fallback="🌿→🥕"
+        />
         <Typography variant="body2" sx={{ mt: 1.5, fontWeight: 700 }}>
           雑草を撮ると、育てやすい野菜が分かります
         </Typography>
@@ -175,7 +209,12 @@ const DemoCard = ({ demo, loading, error }: Props): React.JSX.Element => {
     >
       <Stack direction="row" alignItems="center" spacing={1.5}>
         <Box sx={{ width: 72, flexShrink: 0 }}>
-          <IllustrationFrame src={demo.image_url} alt={demo.weed_name} ratio="1 / 1" fallback="🌿" />
+          <IllustrationFrame
+            src={demo.image_url}
+            alt={demo.weed_name}
+            ratio="1 / 1"
+            fallback="🌿"
+          />
         </Box>
         <Box>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>

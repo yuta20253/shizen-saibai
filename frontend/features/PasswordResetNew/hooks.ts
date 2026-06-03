@@ -67,7 +67,9 @@ export const useSubmit = ({ email, token, setErrorMessage }: SubmitProps) => {
       router.push('/login?reset=done');
     } catch (e) {
       console.error('パスワード更新に失敗', e);
-      setErrorMessage('パスワードの更新に失敗しました。リンクの有効期限が切れている可能性があります。');
+      setErrorMessage(
+        'パスワードの更新に失敗しました。リンクの有効期限が切れている可能性があります。'
+      );
     }
   };
 

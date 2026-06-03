@@ -42,10 +42,7 @@ export const Section = ({
         </Typography>
       )}
       {subtitle && (
-        <Typography
-          variant="body1"
-          sx={{ color: 'text.secondary', textAlign: 'center', mb: 3 }}
-        >
+        <Typography variant="body1" sx={{ color: 'text.secondary', textAlign: 'center', mb: 3 }}>
           {subtitle}
         </Typography>
       )}

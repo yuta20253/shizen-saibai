@@ -25,7 +25,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               <Header />
               {/* 下部タブバー分の余白を確保（pb） */}
-              <Box component="main" sx={{ flexGrow: 1, pb: 'calc(72px + env(safe-area-inset-bottom))' }}>
+              <Box
+                component="main"
+                sx={{ flexGrow: 1, pb: 'calc(72px + env(safe-area-inset-bottom))' }}
+              >
                 {children}
               </Box>
               <BottomNav />
