@@ -23,7 +23,9 @@ Rails.application.routes.draw do
 
       resource :profile, only: [:show, :update], controller: :users
       # 診断履歴（マイページ）
-      resources :histories, only: [:index, :show]
+      resources :histories, only: [:index, :show, :destroy]
+      # 診断結果へのフィードバック
+      resources :feedbacks, only: [:create]
       # 画像アップロード・診断結果（雑草→土壌→野菜）
       resource :diagnosis, only: [:create]
       # 未ログイン向けサンプル診断（公開・読み取り専用）

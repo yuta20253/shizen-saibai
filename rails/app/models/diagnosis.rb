@@ -4,5 +4,7 @@ class Diagnosis < ApplicationRecord
   belongs_to :weed
   belongs_to :soil
 
+  has_many :feedbacks, dependent: :destroy
+
   has_one_attached :image
 end
