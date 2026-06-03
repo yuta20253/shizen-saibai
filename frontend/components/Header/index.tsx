@@ -28,30 +28,33 @@ export const Header = (): JSX.Element => {
           borderBottom: '1px solid rgba(43, 43, 39, 0.08)',
         }}
       >
-        <Toolbar>
-          <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
+        <Toolbar sx={{ gap: 1, px: { xs: 1.5, sm: 3 } }}>
+          <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center', minWidth: 0 }}>
             <Link
               href="/"
               aria-label="ホーム"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 8,
+                gap: 6,
                 textDecoration: 'none',
                 color: 'inherit',
+                whiteSpace: 'nowrap',
               }}
             >
               <Logo />
-              <span
+              <Box
+                component="span"
                 className={logoFont.className}
-                style={{
-                  fontSize: '1rem',
-                  letterSpacing: '0.18em',
+                sx={{
+                  fontSize: { xs: '0.95rem', sm: '1rem' },
+                  letterSpacing: '0.12em',
                   color: '#557a3e',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 雑草レンズ
-              </span>
+              </Box>
             </Link>
           </Box>
           {showAuth ? (
@@ -64,6 +67,7 @@ export const Header = (): JSX.Element => {
                   color: '#557a3e',
                   textDecoration: 'none',
                   fontWeight: 700,
+                  whiteSpace: 'nowrap',
                 }}
                 href="/mypage"
               >
@@ -71,11 +75,32 @@ export const Header = (): JSX.Element => {
                 {user.name}
               </Link>
             ) : (
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                <Button LinkComponent={Link} color="primary" variant="text" href="/login">
+              <Box sx={{ display: 'flex', gap: { xs: 0.5, sm: 1 }, flexShrink: 0 }}>
+                <Button
+                  LinkComponent={Link}
+                  color="primary"
+                  variant="text"
+                  href="/login"
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    px: { xs: 1, sm: 2 },
+                    minWidth: 'auto',
+                    fontSize: { xs: '0.85rem', sm: '1rem' },
+                  }}
+                >
                   ログイン
                 </Button>
-                <Button LinkComponent={Link} color="primary" variant="contained" href="/signup">
+                <Button
+                  LinkComponent={Link}
+                  color="primary"
+                  variant="contained"
+                  href="/signup"
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    px: { xs: 1.75, sm: 3 },
+                    fontSize: { xs: '0.85rem', sm: '1rem' },
+                  }}
+                >
                   無料ではじめる
                 </Button>
               </Box>
