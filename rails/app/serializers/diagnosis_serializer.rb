@@ -3,7 +3,8 @@ class DiagnosisSerializer < ActiveModel::Serializer
              :soil_description, :recommended_vegetable, :vegetable_difficulty, :vegetable_season, :vegetable_description, :vegetable_image_url, :result
 
   def diagnosed_at
-    object.created_at.iso8601
+    # 未保存（デモ用）の場合は created_at が nil のため現在時刻で代替する
+    (object.created_at || Time.current).iso8601
   end
 
   def image_url

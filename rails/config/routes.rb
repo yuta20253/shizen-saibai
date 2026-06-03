@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       resources :histories, only: [:index, :show]
       # 画像アップロード・診断結果（雑草→土壌→野菜）
       resource :diagnosis, only: [:create]
+      # 未ログイン向けサンプル診断（公開・読み取り専用）
+      get "demo_diagnosis", to: "demo_diagnoses#show"
       # 野菜詳細情報
       resources :vegetables, only: [:show]
       # 管理者用：知識ベース管理
