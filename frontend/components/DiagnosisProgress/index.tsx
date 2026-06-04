@@ -14,8 +14,8 @@ type Props = {
  */
 export const DiagnosisProgress = ({ open, progress }: Props): React.JSX.Element => {
   const uploading = progress < 100;
-  const message = uploading ? `写真を送っています… ${progress}%` : 'AIが土を読んでいます…';
-  const sub = uploading ? 'もう少しお待ちください' : 'おすすめの野菜を選んでいます';
+  const message = uploading ? `写真を送っています… ${progress}%` : 'AIが雑草を判定しています…';
+  const sub = uploading ? 'もう少しお待ちください' : '土のようすからおすすめの野菜を選んでいます';
 
   return (
     <Backdrop

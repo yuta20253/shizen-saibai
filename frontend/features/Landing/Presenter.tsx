@@ -81,7 +81,7 @@ export const LandingPresenter = ({ demo, loading, error }: Props): React.JSX.Ele
         <StepCard
           n={2}
           icon={<SpaRoundedIcon fontSize="inherit" />}
-          title="AIが土を読む"
+          title="AIが雑草を判定"
           body="雑草の種類から、土の性質（酸性度・水はけ・肥沃度）を推定します。"
         />
         <StepCard
