@@ -17,7 +17,7 @@ class Api::V1::HistoriesController < Api::V1::BaseController
 
   def destroy
     diagnosis = current_user.diagnoses.find(params[:id])
-    diagnosis.destroy
+    diagnosis.destroy!
     head :no_content
   rescue ActiveRecord::RecordNotFound
     render json: { error: "診断結果が見つかりません。" }, status: :not_found

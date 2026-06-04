@@ -14,10 +14,10 @@ class Api::V1::DemoDiagnosesController < ApplicationController
 
     weed = Weed.find_by(name: weed_name)
     vegetable = Vegetable.find_by(name: vegetable_name)
-    soil = Soil.where(pH_level: soil_data[:pH_level])
-               .where(drainage: soil_data[:drainage])
-               .where(fertility: soil_data[:fertility])
-               .first
+    soil = Soil.where(pH_level: soil_data[:pH_level]).
+             where(drainage: soil_data[:drainage]).
+             where(fertility: soil_data[:fertility]).
+             first
     return render_not_found if weed.nil? || vegetable.nil? || soil.nil?
 
     diagnosis = Diagnosis.new(
