@@ -14,7 +14,7 @@ import {
   type ImageCaptureUploaderHandle,
 } from '@/components/ImageCaptureUploader';
 
-const HIDE_PATHS = ['/login', '/signup', '/mypage/edit', '/mypage/delete'];
+const HIDE_PATHS = ['/login', '/signup', '/mypage/delete'];
 const HIDE_PREFIXES = ['/password'];
 
 type Item = {
