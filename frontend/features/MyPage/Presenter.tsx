@@ -54,7 +54,7 @@ export const MyPagePresenter = ({ name, email, onLogout }: Props): React.JSX.Ele
     <List sx={{ mt: 3, bgcolor: 'background.paper', borderRadius: 4, overflow: 'hidden', p: 0 }}>
       <Row icon={<HistoryRoundedIcon />} label="診断のりれき" href="/mypage/diagnoses" />
       <Divider component="li" />
-      <Row icon={<EditRoundedIcon />} label="プロフィール・パスワードを編集" href="/mypage/edit" />
+      <Row icon={<EditRoundedIcon />} label="プロフィールを編集" href="/mypage/edit" />
       <Divider component="li" />
       <Row icon={<LogoutRoundedIcon />} label="ログアウト" onClick={onLogout} />
     </List>

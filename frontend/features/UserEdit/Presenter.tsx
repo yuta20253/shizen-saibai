@@ -41,7 +41,7 @@ export const UserEditPresenter = ({
   return (
     <Box sx={{ maxWidth: 480, mx: 'auto', px: 2.5, py: 4 }}>
       <Typography variant="h5" component="h1" sx={{ fontWeight: 800, textAlign: 'center', mb: 3 }}>
-        プロフィール・パスワードの編集
+        プロフィールを編集
       </Typography>
 
       {errorMessage && (
