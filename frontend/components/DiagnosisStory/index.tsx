@@ -135,43 +135,51 @@ export const DiagnosisStory = ({ diagnosis, demo = false }: Props): React.JSX.El
     </StoryStep>
 
     {/* 提案理由 */}
-    <Box sx={{ mt: 3, position: 'relative' }}>
-      <Accordion defaultExpanded={!demo} disabled={demo}>
-        <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
-          <Typography sx={{ fontWeight: 700 }}>なぜこの野菜がおすすめ？</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {diagnosis.result || '理由を準備中です。'}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      {demo && (
+    {demo ? (
+      // デモ: 理由は伏せて登録へ誘導（ぼかし背景＋CTAを縦に積む）
+      <Box
+        sx={{
+          mt: 3,
+          borderRadius: 4,
+          border: '1px solid rgba(43,43,39,0.08)',
+          bgcolor: 'rgba(106,153,78,0.06)',
+          p: 3,
+          textAlign: 'center',
+        }}
+      >
         <Box
+          aria-hidden
           sx={{
-            position: 'absolute',
-            inset: 0,
-            borderRadius: 4,
-            backdropFilter: 'blur(5px)',
-            bgcolor: 'rgba(252,251,247,0.55)',
-            display: 'grid',
-            placeItems: 'center',
-            textAlign: 'center',
-            p: 2,
+            color: 'text.secondary',
+            filter: 'blur(4px)',
+            userSelect: 'none',
+            mb: 2,
           }}
         >
-          <Box>
-            <Typography variant="body2" sx={{ fontWeight: 700, mb: 1.5 }}>
-              登録すると、あなたの畑の「おすすめ理由」まで見られます
-            </Typography>
-            <PrimaryCta href="/signup" fullWidth={false}>
-              無料ではじめる
-            </PrimaryCta>
-          </Box>
+          <Typography sx={{ fontWeight: 700 }}>なぜこの野菜がおすすめ？</Typography>
+          <Typography variant="body2">中性の土壌と適度な肥沃度で◯◯◯◯◯◯に適しています……</Typography>
         </Box>
-      )}
-    </Box>
+        <Typography variant="body2" sx={{ fontWeight: 700, mb: 1.5 }}>
+          登録すると、あなたの畑の「おすすめ理由」まで見られます
+        </Typography>
+        <PrimaryCta href="/signup" fullWidth={false}>
+          無料ではじめる
+        </PrimaryCta>
+      </Box>
+    ) : (
+      <Box sx={{ mt: 3 }}>
+        <Accordion defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
+            <Typography sx={{ fontWeight: 700 }}>なぜこの野菜がおすすめ？</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              {diagnosis.result || '理由を準備中です。'}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </Box>
+    )}
 
     {/* 信頼度の注記 */}
     <Stack
