@@ -41,7 +41,7 @@ export const UserEditPresenter = ({
   return (
     <Box sx={{ maxWidth: 480, mx: 'auto', px: 2.5, py: 4 }}>
       <Typography variant="h5" component="h1" sx={{ fontWeight: 800, textAlign: 'center', mb: 3 }}>
-        プロフィールを編集
+        プロフィール・パスワードの編集
       </Typography>
 
       {errorMessage && (
@@ -82,7 +82,7 @@ export const UserEditPresenter = ({
         <Box sx={{ mb: 2 }}>
           <TextField
             fullWidth
-            label="これまでのパスワード"
+            label="現在のパスワード"
             type={showCurrent ? 'text' : 'password'}
             {...register('current_password', {
               required: 'パスワードを入力してください',
@@ -90,13 +90,17 @@ export const UserEditPresenter = ({
             })}
             slotProps={{ input: toggle(showCurrent, setShowCurrent).input }}
             error={!!errors.current_password}
-            helperText={errors.current_password?.message}
+            helperText={errors.current_password?.message ?? '変更を保存するために必要です'}
           />
         </Box>
+
+        <Typography variant="subtitle2" sx={{ fontWeight: 800, mt: 3, mb: 1 }}>
+          パスワードを変更する場合のみ入力
+        </Typography>
         <Box sx={{ mb: 2 }}>
           <TextField
             fullWidth
-            label="新しいパスワード（変更する場合）"
+            label="新しいパスワード"
             type={showNew ? 'text' : 'password'}
             {...register('password', {
               minLength: { value: 8, message: '8文字以上で入力してください' },

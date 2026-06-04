@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import PersonOffRoundedIcon from '@mui/icons-material/PersonOffRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
@@ -55,9 +54,7 @@ export const MyPagePresenter = ({ name, email, onLogout }: Props): React.JSX.Ele
     <List sx={{ mt: 3, bgcolor: 'background.paper', borderRadius: 4, overflow: 'hidden', p: 0 }}>
       <Row icon={<HistoryRoundedIcon />} label="診断のりれき" href="/mypage/diagnoses" />
       <Divider component="li" />
-      <Row icon={<EditRoundedIcon />} label="プロフィールを編集" href="/mypage/edit" />
-      <Divider component="li" />
-      <Row icon={<LockResetRoundedIcon />} label="パスワードを変更" href="/password/reset" />
+      <Row icon={<EditRoundedIcon />} label="プロフィール・パスワードを編集" href="/mypage/edit" />
       <Divider component="li" />
       <Row icon={<LogoutRoundedIcon />} label="ログアウト" onClick={onLogout} />
     </List>
