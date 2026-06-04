@@ -19,48 +19,89 @@ export const Header = (): JSX.Element => {
 
   return (
     <>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          bgcolor: 'background.paper',
+          color: 'text.primary',
+          borderBottom: '1px solid rgba(43, 43, 39, 0.08)',
+        }}
+      >
+        <Toolbar sx={{ gap: 1, px: { xs: 1.5, sm: 3 } }}>
+          <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center', minWidth: 0 }}>
             <Link
               href="/"
               aria-label="ホーム"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 8,
+                gap: 6,
                 textDecoration: 'none',
+                color: 'inherit',
+                whiteSpace: 'nowrap',
               }}
             >
               <Logo />
-              <span
+              <Box
+                component="span"
                 className={logoFont.className}
-                style={{
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.25em',
-                  textShadow: '0 0 6px rgba(0, 0, 0, 0.25)',
+                sx={{
+                  fontSize: { xs: '0.95rem', sm: '1rem' },
+                  letterSpacing: '0.12em',
+                  color: '#557a3e',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 雑草レンズ
-              </span>
+              </Box>
             </Link>
           </Box>
           {showAuth ? (
             user ? (
               <Link
-                style={{ display: 'flex', alignItems: 'center', gap: 2, color: '#fff' }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  color: '#557a3e',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                }}
                 href="/mypage"
               >
                 <AccountCircleIcon />
                 {user.name}
               </Link>
             ) : (
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <Button LinkComponent={Link} color="inherit" variant="outlined" href="/login">
+              <Box sx={{ display: 'flex', gap: { xs: 0.5, sm: 1 }, flexShrink: 0 }}>
+                <Button
+                  LinkComponent={Link}
+                  color="primary"
+                  variant="text"
+                  href="/login"
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    px: { xs: 1, sm: 2 },
+                    minWidth: 'auto',
+                    fontSize: { xs: '0.85rem', sm: '1rem' },
+                  }}
+                >
                   ログイン
                 </Button>
-                <Button LinkComponent={Link} color="inherit" variant="outlined" href="/signup">
-                  新規登録
+                <Button
+                  LinkComponent={Link}
+                  color="primary"
+                  variant="contained"
+                  href="/signup"
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    px: { xs: 1.75, sm: 3 },
+                    fontSize: { xs: '0.85rem', sm: '1rem' },
+                  }}
+                >
+                  無料ではじめる
                 </Button>
               </Box>
             )

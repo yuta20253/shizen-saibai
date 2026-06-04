@@ -27,12 +27,14 @@ export const ImagePreviewDialog = ({
           bgcolor: 'background.paper',
           boxShadow: 24,
           p: 3,
-          borderRadius: 2,
+          borderRadius: 4,
           textAlign: 'center',
-          width: 320,
+          width: 'min(360px, calc(100vw - 32px))',
         }}
       >
-        <Typography variant="subtitle1">この写真をアップロードしますか？</Typography>
+        <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+          この写真をアップロードしますか？
+        </Typography>
         {previewUrl && (
           <Box
             component="img"
@@ -41,11 +43,21 @@ export const ImagePreviewDialog = ({
             sx={{ width: '100%', borderRadius: 2, mt: 2 }}
           />
         )}
-        <Stack direction="row" spacing={2} justifyContent="center" mt={2}>
-          <Button variant="outlined" onClick={onClose}>
+        <Stack direction="row" spacing={1.5} mt={2}>
+          <Button
+            variant="outlined"
+            onClick={onClose}
+            fullWidth
+            sx={{ whiteSpace: 'nowrap', px: 1 }}
+          >
             キャンセル
           </Button>
-          <Button variant="contained" onClick={onConfirm}>
+          <Button
+            variant="contained"
+            onClick={onConfirm}
+            fullWidth
+            sx={{ whiteSpace: 'nowrap', px: 1 }}
+          >
             アップロード
           </Button>
         </Stack>
