@@ -85,11 +85,12 @@ jobs:
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml up -d --remove-orphans
 
-            # Let's Encrypt 証明書を更新する。
-            # certbot renew は冪等で、有効期限が近くない場合はスキップされる。
-            # nginx の webroot(/.well-known/acme-challenge/) を利用した HTTP-01 認証で更新し、
-            # 更新後に nginx をリロードして新しい証明書を読み込ませる。
-            docker compose -f docker-compose.prod.yml --profile cert run --rm certbot-renew || true
+            # デプロイ直後に証明書を1回更新し、nginx に反映させる（保険的な即時反映）。
+            # 平常時は certbot-renew サービスが12時間ごとに自動更新し、更新時のみ
+            # --deploy-hook で nginx をリロードするため、通常はこの処理は不要（renew はスキップされる）。
+            # ここでは newer な証明書があれば確実に読ませるため、renew 後に無条件で reload する。
+            docker compose -f docker-compose.prod.yml exec -T certbot-renew \
+              certbot renew --webroot -w /var/www/certbot || true
             docker compose -f docker-compose.prod.yml exec -T nginx nginx -s reload || true
 
             docker compose -f docker-compose.prod.yml ps || true
