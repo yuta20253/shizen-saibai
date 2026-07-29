@@ -85,6 +85,22 @@ jobs:
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml up -d --remove-orphans
 
+            # デプロイ直後に証明書を1回更新する（保険的な即時反映）。
+            # 平常時は certbot-renew サービスが12時間ごとに自動更新し、更新時のみ
+            # --deploy-hook で nginx をリロードするため、通常この renew はスキップされる。
+            # 証明書ファイルが実際に更新されたときだけ nginx を reload し、無駄な reload を避ける。
+            CERT=/etc/letsencrypt/live/zasso-lens.com/fullchain.pem
+            BEFORE=$(docker compose -f docker-compose.prod.yml exec -T certbot-renew stat -c %Y "$CERT" 2>/dev/null || echo 0)
+            docker compose -f docker-compose.prod.yml exec -T certbot-renew \
+              certbot renew --webroot -w /var/www/certbot || true
+            AFTER=$(docker compose -f docker-compose.prod.yml exec -T certbot-renew stat -c %Y "$CERT" 2>/dev/null || echo 0)
+            if [ "$AFTER" != "$BEFORE" ]; then
+              echo "certificate was renewed; reloading nginx"
+              docker compose -f docker-compose.prod.yml exec -T nginx nginx -s reload || true
+            else
+              echo "certificate not renewed; skipping nginx reload"
+            fi
+
             docker compose -f docker-compose.prod.yml ps || true
             docker compose -f docker-compose.prod.yml logs --tail=200 nginx || true
             docker compose -f docker-compose.prod.yml logs --tail=200 rails || true
