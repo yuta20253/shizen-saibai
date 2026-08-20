@@ -11,7 +11,7 @@ RUN npm config set ignore-scripts true && npm ci
 
 # 設定ファイルをコピー
 COPY tsconfig.json ./
-COPY next.config.ts ./
+COPY next.config.js ./
 COPY next-env.d.ts ./
 
 # ソースコードをコピー
@@ -45,7 +45,7 @@ RUN npm config set ignore-scripts true \
 # ビルド成果物のみコピー
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.ts ./next.config.ts
+COPY --from=builder /app/next.config.js ./next.config.js
 
 # 所有者を変更し、read-onlyにする
 RUN chown -R nextjs:nodejs /app
